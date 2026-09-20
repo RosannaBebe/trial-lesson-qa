@@ -1,0 +1,1708 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>体验课 上线前验收表</title>
+  <style>
+    :root {
+      --bg: #f6f4ef;
+      --paper: #fffdf8;
+      --ink: #1f1b16;
+      --muted: #5c564c;
+      --line: #e4ddd0;
+      --head: #2d2924;
+      --accent: #8a4b1f;
+      --ok: #2a4336;
+      --ok-bg: #eef4f0;
+      --warn-bg: #fff4e5;
+      --warn-ink: #6a3e00;
+      --bad-bg: #f8ecec;
+      --bad-ink: #6b2a2a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--bg);
+      font: 14px/1.55 "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", sans-serif;
+    }
+    .wrap { width: 100%; margin: 0 auto; padding: 24px 20px 80px; }
+    h1 { margin: 0 0 6px; font-size: 24px; letter-spacing: -0.02em; }
+    .meta { color: var(--muted); margin: 0 0 16px; }
+    .bar {
+      position: sticky; top: 0; z-index: 5;
+      background: var(--bg);
+      padding: 10px 0 12px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 16px;
+    }
+    .tabs { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .level-tabs { margin: 0 0 10px; }
+    .level-tabs .tab { min-width: 118px; font-weight: 600; }
+    .tab, button, .file-btn {
+      border: 1px solid var(--line);
+      background: var(--paper);
+      color: var(--ink);
+      padding: 6px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      font: inherit;
+    }
+    .tab.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+    .stats { display: flex; gap: 16px; flex-wrap: wrap; align-items: baseline; }
+    .stats b { font-size: 22px; }
+    .ok { color: var(--ok); }
+    .bad { color: var(--bad-ink); }
+    .warn { color: var(--warn-ink); }
+    nav { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; }
+    nav a {
+      color: var(--accent); text-decoration: none;
+      border: 1px solid var(--line); background: var(--paper);
+      padding: 4px 10px; border-radius: 999px; font-size: 13px;
+    }
+    .note, .callout {
+      padding: 12px 14px; border-radius: 8px; margin: 0 0 14px;
+    }
+    .note { background: var(--ok-bg); color: var(--ok); }
+    .callout.warn { background: var(--warn-bg); color: var(--warn-ink); }
+    .callout.bad { background: var(--bad-bg); color: var(--bad-ink); }
+    h2 { margin: 28px 0 8px; font-size: 18px; }
+    .lead { color: var(--muted); margin: 0 0 10px; }
+    .table-wrap {
+      overflow-x: auto;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    table.spec {
+      width: 3360px;
+      min-width: 3360px;
+      max-width: none;
+      table-layout: fixed;
+      border-collapse: collapse;
+    }
+    table.spec th, table.spec td {
+      vertical-align: top;
+      text-align: left;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+      word-break: normal;
+      overflow-wrap: break-word;
+      white-space: normal;
+    }
+    table.spec th:last-child, table.spec td:last-child { border-right: 0; }
+    table.spec th {
+      background: #f3eee4;
+      color: var(--head);
+      font-size: 13px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    table.spec tr:last-child td { border-bottom: 0; }
+    table.spec td:first-child { white-space: nowrap; font-weight: 600; }
+    table.spec select { width: 100%; max-width: 180px; }
+    table.spec code {
+      font-family: ui-monospace, Menlo, monospace;
+      font-size: 12px;
+      background: #f0ebe2;
+      padding: 0 4px;
+      border-radius: 3px;
+      word-break: break-all;
+    }
+    .cell { display: block; }
+    .cell p { margin: 0 0 10px; }
+    .check {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .check input { width: 16px; height: 16px; accent-color: var(--ok); }
+    .choice { display: flex; flex-wrap: wrap; gap: 8px 14px; margin: 0 0 8px; }
+    .cell textarea.fail-note,
+    td textarea.fail-note {
+      width: 100%;
+      min-height: 72px;
+      margin-top: 4px;
+      resize: vertical;
+    }
+    .media {
+      width: 100%;
+      min-height: 88px;
+      border: 1px dashed var(--line);
+      border-radius: 6px;
+      overflow: hidden;
+      background: #faf7f1;
+    }
+    .media img, .media video { display: block; width: 100%; max-height: 140px; object-fit: contain; background: #111; }
+    .media .empty { padding: 22px 8px; text-align: center; color: var(--muted); font-size: 12px; }
+    .media-actions { display: flex; gap: 6px; margin: 8px 0; flex-wrap: wrap; }
+    .media-actions button, .file-btn { font-size: 12px; padding: 3px 8px; border-radius: 6px; }
+    table.global {
+      width: 100%;
+      min-width: 0;
+      table-layout: auto;
+      border-collapse: collapse;
+    }
+    table.global th, table.global td {
+      vertical-align: top;
+      text-align: left;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
+      word-break: normal;
+      overflow-wrap: break-word;
+    }
+    table.global th {
+      background: #f3eee4;
+      color: var(--head);
+      font-size: 13px;
+      font-weight: 600;
+    }
+    table.global td:first-child { font-weight: 600; white-space: nowrap; width: 140px; }
+    table.global td:last-child { width: 280px; }
+    .compare { overflow-x: auto; }
+    .compare table { width: 100%; min-width: 860px; border-collapse: collapse; }
+    .compare th, .compare td {
+      vertical-align: top; text-align: left; padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+    }
+    .compare th { background: #f3eee4; }
+    textarea, input[type="text"], input[type="number"] {
+      font: inherit; padding: 6px 8px;
+      border: 1px solid var(--line); border-radius: 6px; background: #fff;
+    }
+    .compare textarea { width: 100%; }
+    .name-row { display: flex; gap: 8px; align-items: center; }
+    .name-row input { width: 160px; }
+    select {
+      font: inherit; padding: 5px 8px;
+      border: 1px solid var(--line); border-radius: 6px; background: #fff;
+    }
+    footer { margin-top: 24px; color: var(--muted); font-size: 12px; }
+    .hidden { display: none; }
+    .fill-banner {
+      background: #eef4f0;
+      color: var(--ok);
+      padding: 10px 14px;
+      border-radius: 8px;
+      margin: 0 0 12px;
+    }
+    body.fill-mode .owner-only { display: none !important; }
+    body.fill-mode .media-actions { display: none !important; }
+    .modal-mask {
+      position: fixed; inset: 0; background: rgba(31, 27, 22, 0.35);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 20; padding: 20px;
+    }
+    .modal {
+      width: min(520px, 100%);
+      background: var(--paper);
+      border-radius: 12px;
+      padding: 20px 22px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+    }
+    .modal h3 { margin: 0 0 10px; font-size: 18px; }
+    .modal .actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 14px; flex-wrap: wrap; }
+    .share-link { width: 100%; }
+    @media print {
+      .bar, nav, .media-actions, .file-btn { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>体验课 上线前验收表</h1>
+    <p class="fill-banner" id="fill-banner" hidden>你正在填写分享版验收表。可以打分和写备注，但不能改课件图。</p>
+    <nav class="tabs level-tabs" id="level-tabs" aria-label="体验课 Level"></nav>
+    <p class="callout warn" id="course-note" hidden></p>
+
+    <div class="bar">
+      <div class="tabs" id="tabs">
+        <button class="tab active" data-view="old" type="button">V1 验收</button>
+        <button class="tab" data-view="neu" type="button">V2 验收</button>
+        <button class="tab" data-view="compare" type="button">版本对比与发布</button>
+        <span class="name-row" id="nameRow">
+          <input id="verName" type="text" placeholder="版本名称" />
+        </span>
+      </div>
+      <div class="stats" id="topStats"></div>
+      <div class="tabs owner-only">
+        <button type="button" id="shareBtn">分享</button>
+        <button type="button" id="settingsBtn">分享设置</button>
+      </div>
+    </div>
+
+    <div class="modal-mask hidden" id="modal-mask">
+      <div class="modal" id="modal"></div>
+    </div>
+
+    <div id="workView">
+      <section id="global">
+        <h2>全局打分</h2>
+        <p class="lead">整节课只打一次，不按 template 拆。默认不选。选「未达成」必须写下原因。</p>
+        <div class="table-wrap">
+          <table class="global">
+            <thead>
+              <tr><th>项目</th><th>怎么判</th><th>判定</th></tr>
+            </thead>
+            <tbody id="global-items"></tbody>
+          </table>
+        </div>
+      </section>
+      <nav id="section-nav"></nav>
+      <div class="note">
+        全局项各 1 分。格子用单选：达成 / 未达成，默认都不选。选未达成会出现备注框，请写下原因。每一行的课件、开口、口型、回应、不重复、动作、TTS、Dino、退出、金币各 1 分；环节耗时：2 分钟以内 1 分，超过 2 分钟 0.5 分，超过 5 分钟 0 分。惊喜瞬间有则 +1 分，惊吓瞬间有则 −1 分。
+      </div>
+      <div id="sections"></div>
+    </div>
+
+    <div id="compareView" class="hidden">
+      <p class="lead" id="compare-course"></p>
+      <div id="publishBox"></div>
+      <h2>全局打分对比</h2>
+      <p class="lead">整节课项，V1 / V2 分开看。</p>
+      <div class="table-wrap compare">
+        <table>
+          <thead>
+            <tr>
+              <th>项目</th><th>满分</th><th id="globalOldHead">V1</th><th id="globalNeuHead">V2</th><th>差值</th><th>判定</th>
+            </tr>
+          </thead>
+          <tbody id="globalCompare"></tbody>
+        </table>
+      </div>
+      <h2>上线红线</h2>
+      <p class="lead">破一条就不能发，和总分无关。默认是未测；没跑到的场景必须保持未测，不能勾通过。</p>
+      <div class="table-wrap compare">
+        <table>
+          <thead>
+            <tr>
+              <th>红线</th><th>怎么算破</th><th id="redOldHead">V1</th><th id="redNeuHead">V2</th>
+            </tr>
+          </thead>
+          <tbody id="redlineTable"></tbody>
+        </table>
+      </div>
+      <h2>总分与发布门禁</h2>
+      <div class="table-wrap compare">
+        <table>
+          <thead>
+            <tr>
+              <th>版本</th><th>已得分</th><th>满分</th><th>完成度</th><th>对比结论</th>
+            </tr>
+          </thead>
+          <tbody id="scoreSummary"></tbody>
+        </table>
+      </div>
+      <p class="lead" style="margin-top:10px">上线分数线（可选）：V2 达到该分、高于 V1、且红线全过才算过。不填则不卡分数线。</p>
+      <div class="name-row" style="max-width:320px;margin-bottom:18px">
+        <input id="threshold" type="number" min="0" step="0.5" placeholder="上线分数线，可空" />
+      </div>
+
+      <h2>按课程段落对比</h2>
+      <p class="lead">看 V2 相对 V1，哪一段更好、哪一段不足。</p>
+      <div class="table-wrap compare">
+        <table>
+          <thead>
+            <tr>
+              <th>段落</th><th>满分</th><th id="secOldHead">V1</th><th id="secNeuHead">V2</th><th>差值</th><th>判定</th><th>验证备注</th>
+            </tr>
+          </thead>
+          <tbody id="sectionCompare"></tbody>
+        </table>
+      </div>
+
+      <h2>按验收列对比</h2>
+      <p class="lead">同一列在全书上的得分，用来看开口、口型、回应、重复、耗时、Dino、金币、惊喜、惊吓等哪一类变好或变差。惊喜有则 +1，惊吓有则 −1。</p>
+      <div class="table-wrap compare">
+        <table>
+          <thead>
+            <tr>
+              <th>验收列</th><th>满分</th><th id="fieldOldHead">V1</th><th id="fieldNeuHead">V2</th><th>差值</th><th>判定</th>
+            </tr>
+          </thead>
+          <tbody id="fieldCompare"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <footer>文件：课程治理 / L1_732_V2_上线验收.html · L1–L4 各自保存 V1 / V2 勾选与课件</footer>
+  </div>
+
+  <script>
+    const EXIT_SPEC = "逻辑侧需要抛正确的[NEXT_STEP]/[TEMPLATE_FINISH]";
+    const LIP_SPEC = "口型与当前老师说话匹配。嘴动和当句对不上则选未达成并写原因。默认不选。";
+    const REPLY_SPEC = "老师对学生的话有回应，且回应合理。没接住或答非所问则选未达成并写原因。学生本页未开口则保持不选。";
+    const REPEAT_SPEC = "老师不出现同一问题重复问大于等于3次的情况。同一问 ≥3 次则选未达成并写原因。默认不选。";
+    const DURATION_SPEC = "该环节耗时在 2 分钟以内得满分；超过 2 分钟得一半分；超过 5 分钟得 0 分。未测不选。";
+    const SURPRISE_SPEC = "这个环节让你眼前一亮，更喜欢这个课程了。有则选达成，加 1 分。没有选未达成或保持不选。";
+    const SCARE_SPEC = "这个环节吓到了你，让你想立即退出。有则选达成，扣 1 分。没有选未达成或保持不选。";
+    const FIELDS = [
+      { key: "media", label: "课件" },
+      { key: "talk", label: "老师开口" },
+      { key: "lip", label: "口型匹配" },
+      { key: "reply", label: "回应合理" },
+      { key: "repeat", label: "不出现对话重复现象" },
+      { key: "duration", label: "环节耗时", type: "duration" },
+      { key: "action", label: "老师动作" },
+      { key: "tts", label: "TTS" },
+      { key: "dino", label: "Dino" },
+      { key: "exit", label: "退出 / 收口" },
+      { key: "coin", label: "金币" },
+    ];
+    const OBSERVE = [
+      { key: "surprise", label: "惊喜瞬间", better: "more" },
+      { key: "scare", label: "惊吓瞬间", better: "less" },
+    ];
+
+    const L1_SECTIONS = [
+      { id: "s1", title: "1. 导入 + 外层视频", rows: ["1a", "1b", "1c", "2"] },
+      { id: "s2", title: "2. Apple 环 → 宝箱 1", rows: ["3", "4", "5", "6"] },
+      { id: "s3", title: "3. Bread 环", rows: ["7", "8", "9"] },
+      { id: "s4", title: "4. Juice 环 → 宝箱 2", rows: ["10", "11", "12", "13"] },
+      { id: "s5", title: "5. 句子段", rows: ["14", "15", "16"] },
+      { id: "s6", title: "6. 收尾 → 完课", rows: ["17", "18", "19", "20"] },
+    ];
+
+    const L1_ROWS = {
+      "1a": { name: "导入 · pre-video", tid: "lead-in-template_l1l2", talk: "进入后立刻一句：Hi hi {name}! I'm {teacher}! 只问 1 次。任意语音（Hi / Okay / 本地语）都算过。", action: "问候 + [TEACHER_LISTEN]；有语音或 3–4 秒无语音都打 [NEXT_STEP]。禁止再问 Are you happy。", tts: "问候句完整播完，嘴动有声，音色=本课老师。", dino: "默认不介入。若点帮助：示范 1 次 Hi 后立刻 BACK_TO_TEACHER，并带已解决。禁止循环纠正 Hi Max / Hi Matt。Dino 不能拦住翻页。", exit: EXIT_SPEC, coin: "用户有效 say hi 后出现 banner 与金币奖励" },
+      "1b": { name: "导入 · 内嵌视频", tid: "lead-in-template_l1l2", talk: "播放中老师不插话。", action: "播内嵌视频。首帧 2 秒未到：重载一次，仍失败则跳过进 post-video。", tts: "本拍无老师 TTS，只播内嵌视频音。", dino: "不介入", exit: EXIT_SPEC, coin: "无" },
+      "1c": { name: "导入 · post-video", tid: "lead-in-template_l1l2", talk: "视频结束后 1 句短问：Do you like the food Chef Boo cooks? 禁止长段叙述后再追问。只问 1 次，最多等 3 秒。", action: "学生只要开口，就在回复学生后自然过渡到 [TEMPLATE_FINISH]。", tts: "问句完整播完；回复学生的 TTS 播完再 [TEMPLATE_FINISH]。", dino: "最多 1 轮对话，然后无论学生是否回应都交还给老师。", exit: EXIT_SPEC, coin: "无" },
+      "2": { name: "视频", tid: "play-video-template", talk: "老师不在片中插话。", action: "视频加载失败，屏幕上需要出现手动点击的重新加载按钮。", tts: "本页无老师 TTS，只播故事视频音。", dino: "不介入", exit: EXIT_SPEC, coin: "无" },
+      "3": { name: "教 apple", tid: "word_teach_image_l1l2#1", talk: "进入后固定首句：Boo holds up an APPLE! Wow! An apple! Do you like apples? 只说 1 次。本页老师最多 3 轮。", action: "首句后 [TEACHER_BITE_APPLE][TEACHER_LISTEN]。学生说出任何像 apple 的音：鼓掌 [TEACHER_APPLAUD]，再说交接句后 [TEMPLATE_FINISH]。第 3 轮无论是否说对都必须结束。", tts: "首句与咬苹果对齐；交接句完整播完。跟读召唤降调，禁止 Can you say apple?", dino: "仅帮助按钮。解释或带读 1 次后交还老师，带已解决。不替代老师打结束标签。", exit: EXIT_SPEC, coin: "无" },
+      "4": { name: "泡 apple", tid: "word_practice_bubble_image#1", talk: "进入后立刻邀请戳 apple 泡泡，不新开教学问答。", action: "指向泡泡；学生点中目标泡泡给短反馈。点完本页目标数打 [TEMPLATE_FINISH]。", tts: "邀请戳泡泡的 TTS 完整播完再等操作。", dino: "学生不会点时，Dino 最多指一次怎么点，然后交还。", exit: EXIT_SPEC, coin: "答题完成获得金币，不答题不获得金币" },
+      "5": { name: "测 apple", tid: "word_practice_oral_assessment#1", talk: "进入后邀请说 apple。最多再听 2 次。", action: "[TEACHER_LISTEN]。宽认 apple / appo / apo。对了鼓掌后结束；2 次未过也示范一次后 [TEMPLATE_FINISH]。", tts: "邀请说 apple 的 TTS 完整；示范音必须是 apple。", dino: "最多带读 1 次，立刻交还。禁止把测评变成多轮纠音。", exit: EXIT_SPEC, coin: "答题完成获得金币，不答题不获得金币" },
+      "6": { name: "宝箱 1", tid: "reward-chest-step1-template", talk: "短祝贺，不提问、不等开口。", action: "无", tts: "短祝贺 TTS 完整播完，不打断开箱。", dino: "不介入", exit: EXIT_SPEC, coin: "打开礼盒，获得相框，如果用户不选择 5s 后自动打开" },
+      "7": { name: "教 bread", tid: "word_teach_image_l1l2#2", talk: "首句固定：And now. BREAD! Wow! Yummy bread! Do you like bread? 最多 4 轮。", action: "[TEACHER_BREAK_BREAD][TEACHER_LISTEN]。说对后交接 B 的发音后 [TEMPLATE_FINISH]。", tts: "首句与掰面包对齐；交接句完整播完。跟读召唤降调，禁止 Can you say bread?", dino: "同教 apple", exit: EXIT_SPEC, coin: "无" },
+      "8": { name: "泡 bread", tid: "word_practice_bubble_image#2", talk: "邀请戳 bread 泡泡。", action: "同泡 apple，目标换成 bread。", tts: "邀请戳 bread 泡泡的 TTS 完整播完。", dino: "最多指 1 次", exit: EXIT_SPEC, coin: "答题完成获得金币，不答题不获得金币" },
+      "9": { name: "测 bread", tid: "word_practice_oral_assessment#2", talk: "邀请说 bread。宽认 bread / bred / bwed。最多再听 2 次。", action: "[TEACHER_LISTEN]，对或超时都 [TEMPLATE_FINISH]。", tts: "邀请说 bread 的 TTS 完整；示范音必须是 bread。", dino: "带读 1 次后交还", exit: EXIT_SPEC, coin: "答题完成获得金币，不答题不获得金币" },
+      "10": { name: "教 juice", tid: "word_teach_image_l1l2#3", talk: "首句固定：Now Boo shakes the JUICE! Wow! Juice! Do you like juice? 最多 4 轮。", action: "[TEACHER_DRINK_JUICE][TEACHER_LISTEN]。结束句 Glug glug 后再喝一口，然后 [TEMPLATE_FINISH]。", tts: "首句与喝果汁对齐；结束句 Glug glug 完整播完。跟读召唤降调。", dino: "同教 apple", exit: EXIT_SPEC, coin: "无" },
+      "11": { name: "泡 juice", tid: "word_practice_bubble_image#3", talk: "邀请戳 juice 泡泡。", action: "同前两轮泡泡。", tts: "邀请戳 juice 泡泡的 TTS 完整播完。", dino: "最多指 1 次", exit: EXIT_SPEC, coin: "答题完成获得金币，不答题不获得金币" },
+      "12": { name: "测 juice", tid: "word_practice_oral_assessment#3", talk: "邀请说 juice。宽认 juice / joos / jus。最多再听 2 次。", action: "对或超时都结束。", tts: "邀请说 juice 的 TTS 完整；示范音必须是 juice。", dino: "带读 1 次后交还", exit: EXIT_SPEC, coin: "答题完成获得金币，不答题不获得金币" },
+      "13": { name: "宝箱 2", tid: "reward-chest-step2-template", talk: "短祝贺，不等开口。", action: "无", tts: "短祝贺 TTS 完整播完，不打断开箱。", dino: "不介入", exit: EXIT_SPEC, coin: "打开龙蛋，获得奖励，如果用户不选择 5s 后自动打开" },
+      "14": { name: "句子教学", tid: "sentence_teach_explain_trail_l1", talk: "{name}! Boo bites the bread! Munch munch! Boo says: I like bread! Do you like bread? 最多 4 轮。Yes / No 都先接住，再请孩子扮演 Boo，不能把 No 判失败。", action: "[TEACHER_LISTEN]；说对或半对后 [TEACHER_APPLAUD]。本页结束标签是 [NEXT_STEP]。完整句、like+bread、I like that、任意明显尝试，最迟第 4 轮都要结束。", tts: "首句完整播完。I like bread 陈述降调，禁止 Can you say I like bread?", dino: "解释或示范 1 次后交还，带 sentence_resolved=true。禁止助教变成第二道口语门槛。", exit: EXIT_SPEC, coin: "无" },
+      "15": { name: "听选图", tid: "practice_listen_choose_image", talk: "老师出题：听音，选对应图。只跟本题，不新教单词。", action: "播放音频；学生点图。对了短反馈后 [TEMPLATE_FINISH]。错 1 次给再听，再错也结束。", tts: "题干音频完整播完再等点选。", dino: "最多提示 1 次点哪一类，然后交还。", exit: EXIT_SPEC, coin: "无" },
+      "16": { name: "句子口语", tid: "sentence_practice_oral_assessment", talk: "邀请说 I like bread. 最多再听 2 次。", action: "[TEACHER_LISTEN]。宽认 like + bread。对或超时都结束。", tts: "邀请说 I like bread 的 TTS 完整；示范音必须是目标句。", dino: "带读 1 次后交还", exit: EXIT_SPEC, coin: "无" },
+      "17": { name: "收尾视频", tid: "wrapup_summary_video_trail", talk: "若本页含老师收口：先一句 Did you like cooking with Chef Boo? 只问 1 次。任意回答后不再提问。然后播歌曲视频，片中不插话。", action: "收口第二轮必须带 [TEACHER_POINT_TO_SCREEN][NEXT_STEP] 开歌。缺 [NEXT_STEP] 会卡死。视频首帧 2 秒未到则重载或跳过进拍照。", tts: "收口问句和交接句 TTS 完整播完；歌曲走视频音，不是老师 TTS。", dino: "不介入", exit: EXIT_SPEC, coin: "无" },
+      "18": { name: "拍照", tid: "photo_time_l1l2", talk: "短邀请拍照。拒绝权限或失败时告诉可以跳过。", action: "调起拍照。成功给短祝贺；失败/拒权限走跳过。", tts: "邀请拍照和可跳过提示的 TTS 完整播完。", dino: "不介入", exit: EXIT_SPEC, coin: "无（拍照本身不发教学金币）" },
+      "19": { name: "宝箱 3", tid: "reward-chest-step3-template", talk: "短祝贺，不等开口。", action: "无", tts: "短祝贺 TTS 完整播完，不打断开箱。", dino: "不介入", exit: EXIT_SPEC, coin: "打开宝箱，获得金币，如果用户不选择 5s 后自动打开" },
+      "20": { name: "完课", tid: "结束态，不是教学 template", talk: "老师不再开新问题。", action: "无", tts: "本页不新播教学 TTS。", dino: "不介入", exit: EXIT_SPEC, coin: "不在本页新发；结算已发金币。" },
+    };
+
+    const L1_V1_SECTIONS = [
+      { id: "v1s1", title: "1. 热身 → 视频", rows: ["v1-1", "v1-2", "v1-3a", "v1-3b", "v1-3c", "v1-4"] },
+      { id: "v1s2", title: "2. 单词段 → 宝箱 1", rows: ["v1-5", "v1-6", "v1-7", "v1-8", "v1-9", "v1-10", "v1-11", "v1-12"] },
+      { id: "v1s3", title: "3. 句子段 → 宝箱 2", rows: ["v1-13", "v1-14", "v1-15", "v1-16"] },
+      { id: "v1s4", title: "4. 收尾 → 完课", rows: ["v1-17", "v1-18", "v1-19", "v1-20"] },
+    ];
+
+    const L1_V1_ROWS = {
+      "v1-1": { name: "热身", tid: "warm-up-template_l1l2", talk: "按当页热身逐字稿开口。同一问题不得重复问 ≥3 次。", action: "按当页热身动作。", tts: "热身句完整播完，嘴动有声，音色=本课老师。", dino: "Dino 最多进 1 轮，然后交还老师。", exit: EXIT_SPEC, coin: "本页无金币。" },
+      "v1-2": { name: "奖励地图", tid: "reward-chest-intro", talk: "短介绍奖励地图，按当页稿；不另开闲聊。", action: "展示奖励地图。", tts: "介绍句完整播完，不叠视频音。", dino: "不介入", exit: EXIT_SPEC, coin: "本页只介绍奖励，不发教学金币。" },
+      "v1-3a": Object.assign({}, L1_ROWS["1a"]),
+      "v1-3b": Object.assign({}, L1_ROWS["1b"]),
+      "v1-3c": Object.assign({}, L1_ROWS["1c"]),
+      "v1-4": Object.assign({}, L1_ROWS["2"]),
+      "v1-5": Object.assign({}, L1_ROWS["3"], { name: "教词 1" }),
+      "v1-6": { name: "点听 1", tid: "practice_tap_to_hear#1", talk: "邀请点图听音，不新开教学问答。", action: "学生点图播放目标词。点完本页目标数打结束标签。", tts: "点击后播放目标词 TTS。", dino: "最多指一次怎么点，然后交还。", exit: EXIT_SPEC, coin: "答题完成获得金币，不答题不获得金币" },
+      "v1-7": Object.assign({}, L1_ROWS["7"], { name: "教词 2" }),
+      "v1-8": { name: "点听 2", tid: "practice_tap_to_hear#2", talk: "邀请点图听音，不新开教学问答。", action: "学生点图播放目标词。点完本页目标数打结束标签。", tts: "点击后播放目标词 TTS。", dino: "最多指一次怎么点，然后交还。", exit: EXIT_SPEC, coin: "答题完成获得金币，不答题不获得金币" },
+      "v1-9": Object.assign({}, L1_ROWS["10"], { name: "教词 3" }),
+      "v1-10": Object.assign({}, L1_ROWS["4"], { name: "戳泡泡", tid: "word_practice_bubble_image" }),
+      "v1-11": Object.assign({}, L1_ROWS["5"], { name: "单词口测", tid: "word_practice_oral_assessment" }),
+      "v1-12": Object.assign({}, L1_ROWS["6"]),
+      "v1-13": Object.assign({}, L1_ROWS["14"]),
+      "v1-14": Object.assign({}, L1_ROWS["15"], { name: "听音选图" }),
+      "v1-15": Object.assign({}, L1_ROWS["16"]),
+      "v1-16": Object.assign({}, L1_ROWS["13"]),
+      "v1-17": Object.assign({}, L1_ROWS["17"]),
+      "v1-18": Object.assign({}, L1_ROWS["18"]),
+      "v1-19": Object.assign({}, L1_ROWS["19"]),
+      "v1-20": Object.assign({}, L1_ROWS["20"]),
+    };
+
+    const STORE = "trial-qa-levels-v1";
+    const STORE_LEGACY = "l1-732-v2-qa-v1";
+    const DB_NAME = "l1-732-v2-qa";
+    const GH_OWNER = "RosannaBebe";
+    const GH_REPO = "trial-lesson-qa";
+    const TOKEN_KEY = "trial-qa-github-token";
+    const SHARE_ID = new URLSearchParams(location.search).get("share") || "";
+    const FILL_MODE = !!SHARE_ID;
+    const SHARE_STORE_PREFIX = "trial-qa-share-fill-";
+    const LEVEL_IDS = ["L1", "L2", "L3", "L4"];
+
+    function commonRow(name, tid, nextName, extra) {
+      return Object.assign({
+        name,
+        tid,
+        talk: "按当页逐字稿开口；老师最多 4 轮必须结束。未测不勾。",
+        action: "按当页设计做动作，没有就标无。",
+        tts: "孩子该听的句子走 TTS；老师开口不叠 TTS。",
+        dino: "Dino 最多进 1 轮；无论孩子回不回应，一轮后交还老师。",
+        exit: EXIT_SPEC,
+        coin: "本页无金币。",
+      }, extra || {});
+    }
+
+    function buildFunnel(steps, extras, groups) {
+      const rows = {};
+      steps.forEach((step, i) => {
+        const next = steps[i + 1]
+          ? (steps[i + 1].name + "（" + steps[i + 1].tid + "）")
+          : "完课弹窗";
+        rows[step.id] = commonRow(step.name, step.tid, next, extras[step.id]);
+      });
+      return { sections: groups, rows };
+    }
+
+    const PRACTICE = {
+      talk: "按当页题干开口，不新教内容。",
+      action: "学生作答。对了短反馈后结束；错 1 次给再试，再错也结束。",
+      coin: "答题完成后才给金币，未答完不发。",
+    };
+    const CHEST = {
+      talk: "短祝贺，不等开口。",
+      action: "无",
+      dino: "不介入",
+      coin: "打开宝箱获得金币；用户不选则 5 秒后自动打开。",
+    };
+    const VIDEO = {
+      talk: "片中不插话。",
+      action: "播视频。2 秒无首帧必须出手动重载按钮。",
+      tts: "本页走视频音，不叠老师 TTS。",
+      dino: "不介入",
+      coin: "无",
+    };
+    const COMPLETE = {
+      name: "完课",
+      tid: "结束态，不是教学 template",
+      talk: "老师不再开新问题。",
+      action: "无",
+      tts: "本页不新播教学 TTS。",
+      dino: "不介入",
+      exit: EXIT_SPEC,
+      coin: "不在本页新发；结算已发金币。",
+    };
+    const WORD_TEACH = {
+      talk: "按当页目标词稿教；最多 3 轮必须结束。",
+      action: "指图、听、跟说。第 3 轮必须打结束标签。",
+      coin: "无",
+    };
+
+    const L2_STEPS = [
+      { id: "1", name: "热身", tid: "warm-up-template_l1l2" },
+      { id: "2", name: "奖励介绍", tid: "reward-chest-intro" },
+      { id: "3", name: "故事导入", tid: "lead-in-template_l1l2" },
+      { id: "4", name: "视频", tid: "play-video-template" },
+      { id: "5", name: "单词教学", tid: "word_teach_image_l1l2" },
+      { id: "6", name: "气泡练习", tid: "word_practice_bubble_image" },
+      { id: "7", name: "选词练习", tid: "word_practice_img_select_word" },
+      { id: "8", name: "单词口测", tid: "word_practice_oral_assessment" },
+      { id: "9", name: "奖励箱 1", tid: "reward-chest-step1-template" },
+      { id: "10", name: "句型教学", tid: "sentence_teach_explain_trail_l1" },
+      { id: "11", name: "句子排序", tid: "sentence_word_order" },
+      { id: "12", name: "句子口测", tid: "sentence_practice_oral_assessment" },
+      { id: "13", name: "奖励箱 2", tid: "reward-chest-step2-template" },
+      { id: "14", name: "总结视频", tid: "wrapup_summary_video_trail" },
+      { id: "15", name: "拍照", tid: "photo_time_l1l2" },
+      { id: "16", name: "奖励箱 3", tid: "reward-chest-step3-template" },
+      { id: "17", name: "完课", tid: "结束态，不是教学 template" },
+    ];
+    const L2_BUILT = buildFunnel(L2_STEPS, {
+      "4": VIDEO,
+      "5": WORD_TEACH,
+      "6": PRACTICE,
+      "7": PRACTICE,
+      "8": PRACTICE,
+      "9": CHEST,
+      "11": PRACTICE,
+      "12": PRACTICE,
+      "13": CHEST,
+      "14": VIDEO,
+      "15": { talk: "短邀请拍照。拒绝权限或失败时告诉可以跳过。", action: "调起拍照；失败/拒权限必须能跳过。", dino: "不介入", coin: "无（拍照本身不发教学金币）" },
+      "16": CHEST,
+      "17": COMPLETE,
+    }, [
+      { id: "s1", title: "1. 热身 → 视频", rows: ["1", "2", "3", "4"] },
+      { id: "s2", title: "2. 单词环 → 宝箱 1", rows: ["5", "6", "7", "8", "9"] },
+      { id: "s3", title: "3. 句子段 → 宝箱 2", rows: ["10", "11", "12", "13"] },
+      { id: "s4", title: "4. 收尾 → 完课", rows: ["14", "15", "16", "17"] },
+    ]);
+
+    const L34_STEPS = [
+      { id: "1", name: "热身", tid: "warm-up-template_l3l4" },
+      { id: "2", name: "奖励介绍", tid: "reward-chest-intro" },
+      { id: "3", name: "故事导入", tid: "lead-in-template" },
+      { id: "4", name: "视频", tid: "play-video-template" },
+      { id: "5", name: "单词教学", tid: "word_teach_image_l3l4" },
+      { id: "6", name: "气泡练习", tid: "word_practice_bubble_image" },
+      { id: "7", name: "选词练习", tid: "word_practice_img_select_word" },
+      { id: "8", name: "单词口测", tid: "word_practice_oral_assessment" },
+      { id: "9", name: "奖励箱 1", tid: "reward-chest-step1-template" },
+      { id: "10", name: "句型教学", tid: "sentence_teach_explain_trail" },
+      { id: "11", name: "句子练习", tid: "sentence_word_order" },
+      { id: "12", name: "句子口测", tid: "sentence_practice_oral_assessment" },
+      { id: "13", name: "奖励箱 2", tid: "reward-chest-step2-template" },
+      { id: "14", name: "总结视频", tid: "wrapup_summary_video_trail" },
+      { id: "15", name: "拍照", tid: "photo_time" },
+      { id: "16", name: "奖励箱 3", tid: "reward-chest-step3-template" },
+      { id: "17", name: "完课", tid: "结束态，不是教学 template" },
+    ];
+    const L34_EXTRAS = {
+      "4": VIDEO,
+      "5": WORD_TEACH,
+      "6": PRACTICE,
+      "7": PRACTICE,
+      "8": PRACTICE,
+      "9": CHEST,
+      "11": PRACTICE,
+      "12": PRACTICE,
+      "13": CHEST,
+      "14": VIDEO,
+      "15": { talk: "短邀请拍照。拒绝权限或失败时告诉可以跳过。", action: "调起拍照；失败/拒权限必须能跳过。", dino: "不介入", coin: "无（拍照本身不发教学金币）" },
+      "16": CHEST,
+      "17": COMPLETE,
+    };
+    const L34_GROUPS = [
+      { id: "s1", title: "1. 热身 → 视频", rows: ["1", "2", "3", "4"] },
+      { id: "s2", title: "2. 单词环 → 宝箱 1", rows: ["5", "6", "7", "8", "9"] },
+      { id: "s3", title: "3. 句子段 → 宝箱 2", rows: ["10", "11", "12", "13"] },
+      { id: "s4", title: "4. 收尾 → 完课", rows: ["14", "15", "16", "17"] },
+    ];
+    const L3_BUILT = buildFunnel(L34_STEPS, L34_EXTRAS, L34_GROUPS);
+    const L4_BUILT = buildFunnel(L34_STEPS, L34_EXTRAS, L34_GROUPS);
+
+    const COURSES = {
+      L1: {
+        id: "L1",
+        short: "L1 体验课",
+        name: "Chef Boo Food",
+        lessonId: "732",
+        sn: "TRIAL-LV1-UN1-LS0",
+        note: "",
+        packs: {
+          old: {
+            notes: {
+              v1s1: "V1 漏斗：热身 → 奖励地图 → 导入三拍 → 视频。导入按 pre-video / 内嵌视频 / post-video 分开验收。",
+            },
+            sections: L1_V1_SECTIONS,
+            rows: L1_V1_ROWS,
+          },
+          neu: {
+            notes: {
+              s1: "当前风险：pre-video 把开口当硬门槛；短回答后继续要第二轮；Dino 循环要 Hi Max；post-video 打不出 TEMPLATE_FINISH。这些直接判 1a–1c 不通过。",
+              s5: "当前风险：Intro 与「说 I like bread」契约不一致；精确复述卡住；结束标签发出后未进听选图。",
+            },
+            sections: L1_SECTIONS,
+            rows: L1_ROWS,
+          },
+        },
+      },
+      L2: {
+        id: "L2",
+        short: "L2 体验课",
+        name: "Farm Animals",
+        lessonId: "1615",
+        sn: "TRIAL-LV2-UN1-LS0",
+        note: "L2 按线上漏斗列了 template。开口逐字稿尚未按页锁定，按当页稿验收；Dino、金币、宝箱、完课弹窗规则已按 L1 红线对齐。",
+        notes: {},
+        sections: L2_BUILT.sections,
+        rows: L2_BUILT.rows,
+      },
+      L3: {
+        id: "L3",
+        short: "L3 体验课",
+        name: "Unicorn Adventure",
+        lessonId: "734",
+        sn: "TRIAL-LV3-UN1-LS0",
+        note: "L3 先按 L3/L4 体验课骨架列出 template。当页逐字稿和实际 ID 若有出入，以课件为准，后续再锁分镜。",
+        notes: {},
+        sections: L3_BUILT.sections,
+        rows: L3_BUILT.rows,
+      },
+      L4: {
+        id: "L4",
+        short: "L4 体验课",
+        name: "Magic Shop",
+        lessonId: "733",
+        sn: "TRIAL-LV4-UN1-LS0",
+        note: "L4 先按 L3/L4 体验课骨架列出 template。当页逐字稿和实际 ID 若有出入，以课件为准，后续再锁分镜。",
+        notes: {},
+        sections: L4_BUILT.sections,
+        rows: L4_BUILT.rows,
+      },
+    };
+
+    const GLOBALS = [
+      {
+        key: "pace",
+        title: "课堂节奏",
+        how: "老师是否会被学生带偏。达成：整节课守住当页目标；学生跑题、闲聊、加问时，简短接住后立刻拉回，不另开一轮闲聊。被带去闲聊、反复纠结、离开当页目标则选未达成并写原因。默认不选。",
+      },
+    ];
+
+    const REDLINES = [
+      { key: "stuck", title: "页卡死", how: "某一页卡死，走不到下一页。" },
+      { key: "judge", title: "误判并误奖", how: "把无回应或「不会」判成正确，或因此发了成功奖励。" },
+      { key: "content", title: "教学内容错", how: "目标词图文或示范句明确错了。" },
+      { key: "handoff", title: "结束标签空跳", how: "结束标签已发出，下一页没有出现。" },
+    ];
+    const blankRedlines = () => ({ stuck: "untested", judge: "untested", content: "untested", handoff: "untested" });
+    const blankLevel = () => ({
+      threshold: "",
+      versions: {
+        old: { label: "V1", checks: {}, notes: {}, cellNotes: {}, globalNotes: {}, redlines: blankRedlines(), globals: {} },
+        neu: { label: "V2", checks: {}, notes: {}, cellNotes: {}, globalNotes: {}, redlines: blankRedlines(), globals: {} },
+      },
+    });
+    const defaultState = () => ({
+      level: "L1",
+      view: "old",
+      radioDefaultFixed: true,
+      levels: {
+        L1: blankLevel(),
+        L2: blankLevel(),
+        L3: blankLevel(),
+        L4: blankLevel(),
+      },
+    });
+
+    let state = loadState();
+    let db = null;
+    const mediaCache = {
+      L1: { old: {}, neu: {} },
+      L2: { old: {}, neu: {} },
+      L3: { old: {}, neu: {} },
+      L4: { old: {}, neu: {} },
+    };
+
+    function course() {
+      return COURSES[state.level] || COURSES.L1;
+    }
+    function cur() {
+      if (!state.levels[state.level]) state.levels[state.level] = blankLevel();
+      return state.levels[state.level];
+    }
+    function activeStore() {
+      return FILL_MODE ? SHARE_STORE_PREFIX + SHARE_ID : STORE;
+    }
+    function packOf(ver) {
+      const item = course();
+      if (item.packs && item.packs[ver]) return item.packs[ver];
+      return { sections: item.sections || [], rows: item.rows || {}, notes: item.notes || {} };
+    }
+    function activeVer() { return state.view === "neu" ? "neu" : "old"; }
+    function pack() { return packOf(activeVer()); }
+    function sections() { return pack().sections; }
+    function rows() { return pack().rows; }
+    function rowIds() { return Object.keys(rows()); }
+    function rowIdsOf(ver) { return Object.keys(packOf(ver).rows); }
+    function markStatus(val) {
+      if (val === "pass") return "pass";
+      if (val === "fail") return "fail";
+      return "";
+    }
+
+    function migrateChecks(raw) {
+      const out = {};
+      Object.entries(raw || {}).forEach(([key, val]) => {
+        if (key.endsWith(":duration")) {
+          out[key] = val;
+          return;
+        }
+        const status = markStatus(val);
+        if (status) out[key] = status;
+      });
+      return out;
+    }
+
+    function migrateGlobals(raw) {
+      const out = {};
+      Object.entries(raw || {}).forEach(([key, val]) => {
+        const status = markStatus(val);
+        if (status) out[key] = status;
+      });
+      return out;
+    }
+
+    function globalScore(ver) {
+      return GLOBALS.filter((item) => markStatus((cur().versions[ver].globals || {})[item.key]) === "pass").length;
+    }
+    function scoreKeys() {
+      return FIELDS.map((f) => f.key).concat(["surprise", "scare"]);
+    }
+    function maxScoreOf(ver) {
+      const n = rowIdsOf(ver).length;
+      return n * FIELDS.length + GLOBALS.length + n;
+    }
+    function maxScore() {
+      return maxScoreOf(activeVer());
+    }
+    function slot(ver) { return mediaCache[state.level][ver]; }
+
+    function renameLegacy(label, from, to) {
+      return !label || label === from ? to : label;
+    }
+
+    function normalizeLevel(raw) {
+      const base = blankLevel();
+      if (!raw) return base;
+      return {
+        threshold: raw.threshold || "",
+        versions: {
+          old: {
+            ...base.versions.old,
+            ...(raw.versions || {}).old,
+            label: renameLegacy(((raw.versions || {}).old || {}).label, "旧版本", "V1"),
+            redlines: { ...blankRedlines(), ...(((raw.versions || {}).old || {}).redlines || {}) },
+            globals: migrateGlobals(((raw.versions || {}).old || {}).globals),
+            checks: migrateChecks(((raw.versions || {}).old || {}).checks),
+            cellNotes: { ...(((raw.versions || {}).old || {}).cellNotes || {}) },
+            globalNotes: { ...(((raw.versions || {}).old || {}).globalNotes || {}) },
+          },
+          neu: {
+            ...base.versions.neu,
+            ...(raw.versions || {}).neu,
+            label: renameLegacy(((raw.versions || {}).neu || {}).label, "新版本", "V2"),
+            redlines: { ...blankRedlines(), ...(((raw.versions || {}).neu || {}).redlines || {}) },
+            globals: migrateGlobals(((raw.versions || {}).neu || {}).globals),
+            checks: migrateChecks(((raw.versions || {}).neu || {}).checks),
+            cellNotes: { ...(((raw.versions || {}).neu || {}).cellNotes || {}) },
+            globalNotes: { ...(((raw.versions || {}).neu || {}).globalNotes || {}) },
+          },
+        },
+      };
+    }
+
+    function loadState() {
+      try {
+        const rawNew = localStorage.getItem(activeStore());
+        if (rawNew) {
+          const parsed = JSON.parse(rawNew);
+          const next = defaultState();
+          next.level = COURSES[parsed.level] ? parsed.level : "L1";
+          next.view = parsed.view || "old";
+          LEVEL_IDS.forEach((id) => {
+            next.levels[id] = normalizeLevel((parsed.levels || {})[id]);
+          });
+          if (!parsed.radioDefaultFixed) {
+            LEVEL_IDS.forEach((id) => {
+              ["old", "neu"].forEach((ver) => {
+                const globals = next.levels[id].versions[ver].globals || {};
+                Object.keys(globals).forEach((key) => {
+                  if (globals[key] === "pass" || globals[key] === true) delete globals[key];
+                });
+              });
+            });
+          }
+          return next;
+        }
+        const rawOld = FILL_MODE ? null : localStorage.getItem(STORE_LEGACY);
+        if (rawOld) {
+          const parsed = JSON.parse(rawOld);
+          const next = defaultState();
+          next.view = parsed.view || "old";
+          next.levels.L1 = normalizeLevel(parsed);
+          return next;
+        }
+        return defaultState();
+      } catch (e) {
+        return defaultState();
+      }
+    }
+
+    function saveState() {
+      localStorage.setItem(activeStore(), JSON.stringify({
+        level: state.level,
+        view: state.view,
+        radioDefaultFixed: true,
+        levels: state.levels,
+      }));
+    }
+
+    function openDb() {
+      return new Promise((resolve, reject) => {
+        const req = indexedDB.open(DB_NAME, 1);
+        req.onupgradeneeded = () => {
+          req.result.createObjectStore("media");
+        };
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => reject(req.error);
+      });
+    }
+
+    function mediaKey(ver, rowId) {
+      return state.level + ":" + ver + ":" + rowId;
+    }
+
+    function getMedia(ver, rowId) {
+      return new Promise((resolve) => {
+        if (!db) return resolve(null);
+        const store = db.transaction("media", "readonly").objectStore("media");
+        const req = store.get(mediaKey(ver, rowId));
+        req.onsuccess = () => {
+          if (req.result || state.level !== "L1") return resolve(req.result || null);
+          const legacy = store.get(ver + ":" + rowId);
+          legacy.onsuccess = () => resolve(legacy.result || null);
+          legacy.onerror = () => resolve(null);
+        };
+        req.onerror = () => resolve(null);
+      });
+    }
+
+    function setMedia(ver, rowId, rec) {
+      return new Promise((resolve) => {
+        const tx = db.transaction("media", "readwrite");
+        tx.objectStore("media").put(rec, mediaKey(ver, rowId));
+        tx.oncomplete = () => resolve();
+        tx.onerror = () => resolve();
+      });
+    }
+
+    function delMedia(ver, rowId) {
+      return new Promise((resolve) => {
+        const tx = db.transaction("media", "readwrite");
+        tx.objectStore("media").delete(mediaKey(ver, rowId));
+        tx.oncomplete = () => resolve();
+        tx.onerror = () => resolve();
+      });
+    }
+
+    function cellScore(checks, rowId, key) {
+      const val = checks[rowId + ":" + key];
+      if (key === "duration") {
+        if (val === "ok") return 1;
+        if (val === "half") return 0.5;
+        return 0;
+      }
+      if (key === "scare") return markStatus(val) === "pass" ? -1 : 0;
+      return markStatus(val) === "pass" ? 1 : 0;
+    }
+
+    function fmtScore(n) {
+      return String(Math.round(n * 10) / 10);
+    }
+
+    function scoreOf(ver, ids, fieldKeys) {
+      const checks = cur().versions[ver].checks;
+      let n = 0;
+      (ids || rowIdsOf(ver)).forEach((rowId) => {
+        (fieldKeys || scoreKeys()).forEach((key) => {
+          n += cellScore(checks, rowId, key);
+        });
+      });
+      if (!ids && !fieldKeys) n += globalScore(ver);
+      return n;
+    }
+
+    function verdict(oldScore, newScore) {
+      if (newScore > oldScore) return { text: "V2 更好", cls: "ok" };
+      if (newScore < oldScore) return { text: "V2 不足", cls: "bad" };
+      return { text: "持平", cls: "warn" };
+    }
+
+    function redlineStatus(ver, key) {
+      return (cur().versions[ver].redlines || {})[key] || "untested";
+    }
+
+    function redlinePassed(ver) {
+      return REDLINES.every((item) => redlineStatus(ver, item.key) === "pass");
+    }
+
+    function redlineBlocks(ver) {
+      return REDLINES.filter((item) => redlineStatus(ver, item.key) !== "pass").map((item) => {
+        const status = redlineStatus(ver, item.key);
+        return item.title + (status === "fail" ? "不通过" : "未测");
+      });
+    }
+
+    function canPublish() {
+      const oldScore = scoreOf("old");
+      const newScore = scoreOf("neu");
+      const line = Number(cur().threshold);
+      const beatOld = newScore > oldScore;
+      const beatLine = !cur().threshold || newScore >= line;
+      const redOk = redlinePassed("neu");
+      const blocks = [];
+      if (!beatOld) blocks.push("V2 总分没有高于 V1");
+      if (!beatLine) blocks.push("V2 未达到上线分数线 " + cur().threshold);
+      if (newScore <= 0) blocks.push("V2 还没有验收分数");
+      if (!redOk) blocks.push("红线未清：" + redlineBlocks("neu").join("、"));
+      return {
+        oldScore,
+        newScore,
+        beatOld,
+        beatLine,
+        redOk,
+        ok: beatOld && beatLine && newScore > 0 && redOk,
+        blocks,
+      };
+    }
+
+    function escapeHtml(text) {
+      return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+    }
+
+    function rich(text) {
+      return escapeHtml(text).replace(/\[([A-Z0-9_]+)\]/g, "<code>[$1]</code>");
+    }
+
+    function radioPair(prefix, status, attrs) {
+      const passOn = status === "pass" ? "checked" : "";
+      const failOn = status === "fail" ? "checked" : "";
+      return `<div class="choice">
+        <label class="check"><input type="radio" name="${prefix}-pass" ${attrs} value="pass" autocomplete="off" ${passOn} />达成</label>
+        <label class="check"><input type="radio" name="${prefix}-fail" ${attrs} value="fail" autocomplete="off" ${failOn} />未达成</label>
+      </div>`;
+    }
+
+    function radioCell(ver, rowId, key, html) {
+      const status = markStatus(cur().versions[ver].checks[rowId + ":" + key]);
+      const note = ((cur().versions[ver].cellNotes || {})[rowId + ":" + key] || "");
+      const prefix = escapeHtml("qa-" + ver + "-" + rowId + "-" + key);
+      const attrs = `data-row="${rowId}" data-field="${key}"`;
+      return `<div class="cell">
+        <p>${html}</p>
+        ${radioPair(prefix, status, attrs)}
+        <textarea class="fail-note" data-cell-note="${rowId}" data-field="${key}" rows="3" placeholder="未达成原因" ${status === "fail" ? "" : "hidden"}>${escapeHtml(note)}</textarea>
+      </div>`;
+    }
+
+    function durationCell(ver, rowId) {
+      const val = cur().versions[ver].checks[rowId + ":duration"] || "";
+      const opt = (value, label) =>
+        `<option value="${value}" ${val === value ? "selected" : ""}>${label}</option>`;
+      return `<div class="cell"><p>${rich(DURATION_SPEC)}</p><select data-row="${rowId}" data-field="duration">
+        ${opt("", "未测")}
+        ${opt("ok", "≤2 分钟 · 1 分")}
+        ${opt("half", "超过 2 分钟 · 0.5 分")}
+        ${opt("fail", "超过 5 分钟 · 0 分")}
+      </select></div>`;
+    }
+
+    function mediaCell(ver, rowId) {
+      const rec = slot(ver)[rowId];
+      let preview = `<div class="empty">放入图或视频</div>`;
+      if (rec && rec.url) {
+        if ((rec.type || "").startsWith("video/")) {
+          preview = `<video src="${rec.url}" controls></video>`;
+        } else {
+          preview = `<img src="${rec.url}" alt="${escapeHtml(rec.name || "课件")}" />`;
+        }
+      }
+      return `<div>
+        <div class="media">${preview}</div>
+        <div class="media-actions owner-only">
+          <label class="file-btn">上传<input type="file" accept="image/*,video/*" data-upload="${rowId}" hidden /></label>
+          ${rec ? `<button type="button" data-clear="${rowId}">清除</button>` : ""}
+        </div>
+        ${radioCell(ver, rowId, "media", rec ? escapeHtml(rec.name || "已放入课件") : "尚未放入课件")}
+      </div>`;
+    }
+
+    function renderSections() {
+      const ver = state.view === "neu" ? "neu" : "old";
+      const notes = pack().notes || {};
+      document.getElementById("section-nav").innerHTML =
+        `<a href="#global">全局打分</a>` +
+        sections().map((sec) => `<a href="#${sec.id}">${escapeHtml(sec.title)}</a>`).join("");
+      document.getElementById("sections").innerHTML = sections().map((sec) => {
+        const rowsHtml = sec.rows.map((id) => {
+          const row = rows()[id];
+          if (!row) return "";
+          return `<tr>
+            <td>${id}</td>
+            <td>${escapeHtml(row.name)}</td>
+            <td><code>${escapeHtml(row.tid)}</code></td>
+            <td>${mediaCell(ver, id)}</td>
+            <td>${radioCell(ver, id, "talk", rich(row.talk))}</td>
+            <td>${radioCell(ver, id, "lip", rich(LIP_SPEC))}</td>
+            <td>${radioCell(ver, id, "reply", rich(REPLY_SPEC))}</td>
+            <td>${radioCell(ver, id, "repeat", rich(REPEAT_SPEC))}</td>
+            <td>${durationCell(ver, id)}</td>
+            <td>${radioCell(ver, id, "action", rich(row.action))}</td>
+            <td>${radioCell(ver, id, "tts", rich(row.tts))}</td>
+            <td>${radioCell(ver, id, "dino", rich(row.dino))}</td>
+            <td>${radioCell(ver, id, "exit", rich(EXIT_SPEC))}</td>
+            <td>${radioCell(ver, id, "coin", rich(row.coin))}</td>
+            <td>${radioCell(ver, id, "surprise", rich(SURPRISE_SPEC))}</td>
+            <td>${radioCell(ver, id, "scare", rich(SCARE_SPEC))}</td>
+          </tr>`;
+        }).join("");
+        return `<section>
+          <h2 id="${sec.id}">${sec.title}</h2>
+          ${notes[sec.id] ? `<div class="callout warn">${notes[sec.id]}</div>` : ""}
+          <div class="table-wrap"><table class="spec">
+            <colgroup>
+              <col style="width:56px" />
+              <col style="width:140px" />
+              <col style="width:220px" />
+              <col style="width:200px" />
+              <col style="width:260px" />
+              <col style="width:220px" />
+              <col style="width:220px" />
+              <col style="width:220px" />
+              <col style="width:220px" />
+              <col style="width:240px" />
+              <col style="width:220px" />
+              <col style="width:220px" />
+              <col style="width:240px" />
+              <col style="width:200px" />
+              <col style="width:220px" />
+              <col style="width:220px" />
+            </colgroup>
+            <thead><tr>
+              <th>序</th><th>Template</th><th>ID</th><th>课件</th>
+              <th>老师开口</th><th>口型匹配</th><th>回应合理</th><th>不出现对话重复现象</th><th>环节耗时</th>
+              <th>老师动作</th><th>TTS</th><th>Dino</th><th>退出 / 收口</th><th>金币</th>
+              <th>惊喜瞬间</th><th>惊吓瞬间</th>
+            </tr></thead>
+            <tbody>${rowsHtml}</tbody>
+          </table></div>
+        </section>`;
+      }).join("");
+    }
+
+    function renderGlobals() {
+      const ver = state.view === "neu" ? "neu" : "old";
+      const marks = cur().versions[ver].globals || {};
+      const notes = cur().versions[ver].globalNotes || {};
+      document.getElementById("global-items").innerHTML = GLOBALS.map((item, i) => {
+        const status = markStatus(marks[item.key]);
+        const note = notes[item.key] || "";
+        const prefix = escapeHtml("qa-" + ver + "-global-" + item.key);
+        return `<tr>
+          <td>${i + 1}. ${escapeHtml(item.title)}</td>
+          <td>${escapeHtml(item.how)}</td>
+          <td>
+            ${radioPair(prefix, status, `data-global="${item.key}"`)}
+            <textarea class="fail-note" data-global-note="${item.key}" rows="3" placeholder="未达成原因" ${status === "fail" ? "" : "hidden"}>${escapeHtml(note)}</textarea>
+          </td>
+        </tr>`;
+      }).join("");
+    }
+
+    function renderTop() {
+      const viewing = state.view === "compare" ? null : (state.view === "neu" ? "neu" : "old");
+      if (!viewing) {
+        const pub = canPublish();
+        document.getElementById("topStats").innerHTML =
+          `<span>旧 ${fmtScore(pub.oldScore)}/${fmtScore(maxScoreOf("old"))}</span><span>新 ${fmtScore(pub.newScore)}/${fmtScore(maxScoreOf("neu"))}</span><span class="${pub.ok ? "ok" : "bad"}">${pub.ok ? "可发布" : "不可发布"}</span>`;
+        return;
+      }
+      const got = scoreOf(viewing);
+      document.getElementById("topStats").innerHTML =
+        `<span><b>${fmtScore(got)}</b> / ${fmtScore(maxScore())} 分</span><span>${cur().versions[viewing].label}</span>`;
+    }
+
+    function renderCompare() {
+      const oldScore = scoreOf("old");
+      const newScore = scoreOf("neu");
+      const pub = canPublish();
+      const item = course();
+      document.getElementById("compare-course").textContent =
+        "当前对比：" + item.short + " · " + item.name + " · V1 vs V2";
+      const oldName = escapeHtml(cur().versions.old.label);
+      const newName = escapeHtml(cur().versions.neu.label);
+      const oldMax = maxScoreOf("old");
+      const newMax = maxScoreOf("neu");
+      document.getElementById("scoreSummary").innerHTML = `
+        <tr><td>${oldName}</td><td>${fmtScore(oldScore)}</td><td>${fmtScore(oldMax)}</td><td>${oldMax ? Math.round(oldScore / oldMax * 100) : 0}%</td><td>对照基准</td></tr>
+        <tr><td>${newName}</td><td>${fmtScore(newScore)}</td><td>${fmtScore(newMax)}</td><td>${newMax ? Math.round(newScore / newMax * 100) : 0}%</td><td class="${verdict(oldScore, newScore).cls}">${verdict(oldScore, newScore).text} ${newScore - oldScore >= 0 ? "+" : ""}${fmtScore(newScore - oldScore)}</td></tr>
+      `;
+      document.getElementById("publishBox").innerHTML = pub.ok
+        ? `<div class="note"><b>可以发布 ${newName}。</b> ${newName} ${fmtScore(newScore)} 分高于 ${oldName} ${fmtScore(oldScore)} 分，且四条红线全部通过${cur().threshold ? "，并达到上线分数线 " + cur().threshold : ""}。</div>`
+        : `<div class="callout bad"><b>${newName} 还不能发布。</b> ${pub.blocks.join("；")}。当前 ${newName} ${fmtScore(newScore)} 分，${oldName} ${fmtScore(oldScore)} 分。</div>`;
+
+      ["redOldHead", "secOldHead", "fieldOldHead", "globalOldHead"].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = cur().versions.old.label || "V1";
+      });
+      ["redNeuHead", "secNeuHead", "fieldNeuHead", "globalNeuHead"].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = cur().versions.neu.label || "V2";
+      });
+
+      document.getElementById("globalCompare").innerHTML = GLOBALS.map((item) => {
+        const o = markStatus((cur().versions.old.globals || {})[item.key]) === "pass" ? 1 : 0;
+        const n = markStatus((cur().versions.neu.globals || {})[item.key]) === "pass" ? 1 : 0;
+        const v = verdict(o, n);
+        return `<tr>
+          <td>${escapeHtml(item.title)}</td><td>1</td><td>${o}</td><td>${n}</td>
+          <td>${n - o >= 0 ? "+" : ""}${n - o}</td>
+          <td class="${v.cls}">${v.text}</td>
+        </tr>`;
+      }).join("");
+
+      document.getElementById("redlineTable").innerHTML = REDLINES.map((item) => {
+        const opt = (ver) => {
+          const cur = redlineStatus(ver, item.key);
+          return ["untested", "pass", "fail"].map((value) => {
+            const label = value === "pass" ? "通过" : value === "fail" ? "不通过" : "未测";
+            return `<option value="${value}" ${cur === value ? "selected" : ""}>${label}</option>`;
+          }).join("");
+        };
+        return `<tr>
+          <td>${item.title}</td>
+          <td>${item.how}</td>
+          <td><select data-redline="${item.key}" data-ver="old">${opt("old")}</select></td>
+          <td><select data-redline="${item.key}" data-ver="neu">${opt("neu")}</select></td>
+        </tr>`;
+      }).join("");
+
+      const oldSecs = packOf("old").sections.map((sec) => {
+        const max = sec.rows.length * FIELDS.length + sec.rows.length;
+        const o = scoreOf("old", sec.rows);
+        const note = cur().versions.old.notes[sec.id] || "";
+        return `<tr>
+          <td>${oldName} · ${sec.title}</td><td>${fmtScore(max)}</td><td>${fmtScore(o)}</td><td>—</td>
+          <td>—</td>
+          <td class="warn">V1 独有流程</td>
+          <td><textarea data-note="${sec.id}" data-note-ver="old" rows="2" placeholder="这段 V1 备注">${escapeHtml(note)}</textarea></td>
+        </tr>`;
+      });
+      const neuSecs = packOf("neu").sections.map((sec) => {
+        const max = sec.rows.length * FIELDS.length + sec.rows.length;
+        const n = scoreOf("neu", sec.rows);
+        const note = cur().versions.neu.notes[sec.id] || "";
+        return `<tr>
+          <td>${newName} · ${sec.title}</td><td>${fmtScore(max)}</td><td>—</td><td>${fmtScore(n)}</td>
+          <td>—</td>
+          <td class="warn">V2 独有流程</td>
+          <td><textarea data-note="${sec.id}" data-note-ver="neu" rows="2" placeholder="这段 V2 好在哪、不足在哪">${escapeHtml(note)}</textarea></td>
+        </tr>`;
+      });
+      document.getElementById("sectionCompare").innerHTML = course().packs
+        ? oldSecs.concat(neuSecs).join("")
+        : packOf("old").sections.map((sec) => {
+          const max = sec.rows.length * FIELDS.length + sec.rows.length;
+          const o = scoreOf("old", sec.rows);
+          const n = scoreOf("neu", sec.rows);
+          const v = verdict(o, n);
+          const note = cur().versions.neu.notes[sec.id] || "";
+          return `<tr>
+            <td>${sec.title}</td><td>${fmtScore(max)}</td><td>${fmtScore(o)}</td><td>${fmtScore(n)}</td>
+            <td>${n - o >= 0 ? "+" : ""}${fmtScore(n - o)}</td>
+            <td class="${v.cls}">${v.text}</td>
+            <td><textarea data-note="${sec.id}" data-note-ver="neu" rows="2" placeholder="这段 V2 好在哪、不足在哪">${escapeHtml(note)}</textarea></td>
+          </tr>`;
+        }).join("");
+
+      const oldIds = rowIdsOf("old");
+      const neuIds = rowIdsOf("neu");
+      const fieldRows = FIELDS.map((field) => {
+        const o = scoreOf("old", oldIds, [field.key]);
+        const n = scoreOf("neu", neuIds, [field.key]);
+        const v = verdict(o, n);
+        return `<tr>
+          <td>${field.label}</td><td>${oldIds.length} / ${neuIds.length}</td><td>${fmtScore(o)}</td><td>${fmtScore(n)}</td>
+          <td>${n - o >= 0 ? "+" : ""}${fmtScore(n - o)}</td>
+          <td class="${v.cls}">${v.text}</td>
+        </tr>`;
+      });
+      const observeRows = OBSERVE.map((item) => {
+        const max = item.key === "scare" ? 0 : Math.max(oldIds.length, neuIds.length);
+        const o = scoreOf("old", oldIds, [item.key]);
+        const n = scoreOf("neu", neuIds, [item.key]);
+        const v = verdict(o, n);
+        return `<tr>
+          <td>${item.label}${item.key === "scare" ? "（有则 −1）" : "（有则 +1）"}</td><td>${fmtScore(max)}</td><td>${fmtScore(o)}</td><td>${fmtScore(n)}</td>
+          <td>${n - o >= 0 ? "+" : ""}${fmtScore(n - o)}</td>
+          <td class="${v.cls}">${v.text}</td>
+        </tr>`;
+      });
+      document.getElementById("fieldCompare").innerHTML = fieldRows.concat(observeRows).join("");
+    }
+
+    function renderLevelTabs() {
+      document.getElementById("level-tabs").innerHTML = LEVEL_IDS.map((id) => {
+        const item = COURSES[id];
+        return `<button type="button" class="tab${state.level === id ? " active" : ""}" data-level="${id}">${item.short}</button>`;
+      }).join("");
+    }
+
+    function renderCourseMeta() {
+      const note = document.getElementById("course-note");
+      const item = course();
+      if (item.note) {
+        note.hidden = false;
+        note.textContent = item.note;
+      } else {
+        note.hidden = true;
+        note.textContent = "";
+      }
+    }
+
+    function applyView() {
+      const compare = state.view === "compare";
+      document.getElementById("workView").classList.toggle("hidden", compare);
+      document.getElementById("compareView").classList.toggle("hidden", !compare);
+      document.getElementById("nameRow").classList.toggle("hidden", compare);
+      renderLevelTabs();
+      renderCourseMeta();
+      document.querySelectorAll("#tabs .tab").forEach((btn) => {
+        btn.classList.toggle("active", btn.dataset.view === state.view);
+      });
+      if (!compare) {
+        const ver = state.view === "neu" ? "neu" : "old";
+        document.getElementById("verName").value = cur().versions[ver].label;
+        renderGlobals();
+        renderSections();
+      } else {
+        document.getElementById("threshold").value = cur().threshold;
+        renderCompare();
+      }
+      renderTop();
+      requestAnimationFrame(() => {
+        document.querySelectorAll(".choice").forEach((box) => {
+          const radios = [...box.querySelectorAll("input[type=radio]")];
+          if (!radios.length) return;
+          const sample = radios[0];
+          const ver = state.view === "neu" ? "neu" : "old";
+          let status = "";
+          if (sample.dataset.global) {
+            status = markStatus((cur().versions[ver].globals || {})[sample.dataset.global]);
+          } else if (sample.dataset.row) {
+            status = markStatus(cur().versions[ver].checks[sample.dataset.row + ":" + sample.dataset.field]);
+          }
+          radios.forEach((el) => { el.checked = !!status && el.value === status; });
+        });
+      });
+    }
+
+    async function hydrateMedia() {
+      const ver = state.view === "neu" ? "neu" : "old";
+      await Promise.all(rowIds().map(async (rowId) => {
+        if (slot(ver)[rowId]) return;
+        const rec = await getMedia(ver, rowId);
+        if (rec && rec.blob) {
+          slot(ver)[rowId] = {
+            url: URL.createObjectURL(rec.blob),
+            type: rec.type,
+            name: rec.name,
+          };
+        }
+      }));
+    }
+
+    async function onUpload(rowId, file) {
+      if (FILL_MODE) return;
+      const ver = state.view === "neu" ? "neu" : "old";
+      await setMedia(ver, rowId, { blob: file, type: file.type, name: file.name });
+      if (slot(ver)[rowId] && slot(ver)[rowId].url) {
+        URL.revokeObjectURL(slot(ver)[rowId].url);
+      }
+      slot(ver)[rowId] = { url: URL.createObjectURL(file), type: file.type, name: file.name };
+      applyView();
+    }
+
+    async function onClear(rowId) {
+      if (FILL_MODE) return;
+      const ver = state.view === "neu" ? "neu" : "old";
+      await delMedia(ver, rowId);
+      if (slot(ver)[rowId] && slot(ver)[rowId].url) {
+        URL.revokeObjectURL(slot(ver)[rowId].url);
+      }
+      delete slot(ver)[rowId];
+      applyView();
+    }
+
+    function closeModal() {
+      document.getElementById("modal-mask").classList.add("hidden");
+    }
+
+    function openModal(html) {
+      document.getElementById("modal").innerHTML = html;
+      document.getElementById("modal-mask").classList.remove("hidden");
+    }
+
+    function pagesBaseUrl() {
+      if (location.protocol === "http:" || location.protocol === "https:") {
+        const u = new URL(location.href);
+        u.search = "";
+        u.hash = "";
+        return u.href.replace(/index\.html$/, "");
+      }
+      return "https://rosannabebe.github.io/trial-lesson-qa/";
+    }
+
+    function githubHeaders(token) {
+      return {
+        Authorization: "Bearer " + token,
+        Accept: "application/vnd.github+json",
+      };
+    }
+
+    function shareFileName(level, ver, rowId, ext) {
+      return [level, ver, rowId].join("__").replace(/[^A-Za-z0-9._-]/g, "_") + ext;
+    }
+
+    function blobToBase64(blob) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(String(reader.result).split(",")[1] || "");
+        reader.onerror = () => reject(reader.error);
+        reader.readAsDataURL(blob);
+      });
+    }
+
+    function compressImage(blob) {
+      if (!blob || !String(blob.type || "").startsWith("image/")) {
+        return Promise.resolve(blob);
+      }
+      return new Promise((resolve) => {
+        const img = new Image();
+        const url = URL.createObjectURL(blob);
+        img.onload = () => {
+          const max = 1280;
+          const scale = Math.min(1, max / img.width, max / img.height);
+          const canvas = document.createElement("canvas");
+          canvas.width = Math.max(1, Math.round(img.width * scale));
+          canvas.height = Math.max(1, Math.round(img.height * scale));
+          canvas.getContext("2d").drawImage(img, 0, 0, canvas.width, canvas.height);
+          canvas.toBlob((out) => {
+            URL.revokeObjectURL(url);
+            resolve(out || blob);
+          }, "image/jpeg", 0.72);
+        };
+        img.onerror = () => {
+          URL.revokeObjectURL(url);
+          resolve(blob);
+        };
+        img.src = url;
+      });
+    }
+
+    async function githubPut(path, contentB64, message) {
+      const token = localStorage.getItem(TOKEN_KEY);
+      if (!token) throw new Error("NO_TOKEN");
+      const api = "https://api.github.com/repos/" + GH_OWNER + "/" + GH_REPO + "/contents/" + path;
+      const existing = await fetch(api, { headers: githubHeaders(token) });
+      let sha;
+      if (existing.ok) {
+        const body = await existing.json();
+        sha = body.sha;
+      }
+      const res = await fetch(api, {
+        method: "PUT",
+        headers: githubHeaders(token),
+        body: JSON.stringify({ message: message, content: contentB64, sha: sha }),
+      });
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(text || "GitHub 上传失败");
+      }
+    }
+
+    async function collectShareMedia() {
+      const items = [];
+      const prevLevel = state.level;
+      const prevView = state.view;
+      for (let i = 0; i < LEVEL_IDS.length; i++) {
+        state.level = LEVEL_IDS[i];
+        const vers = ["old", "neu"];
+        for (let j = 0; j < vers.length; j++) {
+          const ver = vers[j];
+          const ids = rowIdsOf(ver);
+          for (let k = 0; k < ids.length; k++) {
+            const rowId = ids[k];
+            const rec = await getMedia(ver, rowId);
+            if (rec && rec.blob) {
+              items.push({
+                level: LEVEL_IDS[i],
+                ver: ver,
+                rowId: rowId,
+                blob: rec.blob,
+                type: rec.type,
+                name: rec.name,
+              });
+            }
+          }
+        }
+      }
+      state.level = prevLevel;
+      state.view = prevView;
+      return items;
+    }
+
+    async function loadShareSnapshot() {
+      const url = "https://raw.githubusercontent.com/" + GH_OWNER + "/" + GH_REPO + "/main/shares/" + SHARE_ID + "/manifest.json";
+      const res = await fetch(url);
+      if (!res.ok) throw new Error("分享链接还没生效，或课件还在发布中。请稍后再打开。");
+      const manifest = await res.json();
+      (manifest.media || []).forEach((item) => {
+        if (!mediaCache[item.level]) mediaCache[item.level] = { old: {}, neu: {} };
+        mediaCache[item.level][item.ver][item.rowId] = {
+          url: "https://raw.githubusercontent.com/" + GH_OWNER + "/" + GH_REPO + "/main/shares/" + SHARE_ID + "/" + item.file,
+          type: item.type,
+          name: item.name,
+        };
+      });
+    }
+
+    function showSettings(extra) {
+      const token = localStorage.getItem(TOKEN_KEY) || "";
+      openModal(`
+        <h3>分享设置</h3>
+        <p class="lead">分享会把课件图发到 GitHub 仓库，生成填写链接。Token 只存在这台电脑，不会写进表格。</p>
+        ${extra ? `<p class="callout warn">${escapeHtml(extra)}</p>` : ""}
+        <p class="lead">GitHub Token 需要 repo 权限。账号：${GH_OWNER} / 仓库：${GH_REPO}</p>
+        <input id="tokenInput" class="share-link" type="password" placeholder="粘贴 GitHub Token" value="${escapeHtml(token)}" />
+        <div class="actions">
+          <button type="button" data-close-modal>取消</button>
+          <button type="button" id="saveTokenBtn">保存</button>
+        </div>
+      `);
+    }
+
+    async function createShare() {
+      const token = localStorage.getItem(TOKEN_KEY);
+      if (!token) {
+        showSettings("先保存 GitHub Token，才能生成给别人用的链接。");
+        return;
+      }
+      openModal(`<h3>正在生成分享链接</h3><p class="lead">正在打包并上传课件图，请稍候。</p>`);
+      try {
+        const items = await collectShareMedia();
+        const id = Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+        const media = [];
+        for (let i = 0; i < items.length; i++) {
+          const item = items[i];
+          let blob = item.blob;
+          let type = item.type || "application/octet-stream";
+          let ext = ".bin";
+          if (String(type).startsWith("image/")) {
+            blob = await compressImage(blob);
+            type = blob.type || "image/jpeg";
+            ext = ".jpg";
+          } else if (String(type).startsWith("video/")) {
+            if (blob.size > 3 * 1024 * 1024) continue;
+            ext = ".mp4";
+          } else {
+            continue;
+          }
+          const file = shareFileName(item.level, item.ver, item.rowId, ext);
+          const b64 = await blobToBase64(blob);
+          await githubPut("shares/" + id + "/" + file, b64, "Add share media " + id);
+          media.push({
+            level: item.level,
+            ver: item.ver,
+            rowId: item.rowId,
+            file: file,
+            type: type,
+            name: item.name || file,
+          });
+        }
+        const manifest = { id: id, createdAt: new Date().toISOString(), media: media };
+        await githubPut(
+          "shares/" + id + "/manifest.json",
+          btoa(unescape(encodeURIComponent(JSON.stringify(manifest, null, 2)))),
+          "Add share manifest " + id
+        );
+        const link = pagesBaseUrl() + "?share=" + id;
+        openModal(`
+          <h3>分享链接已生成</h3>
+          <p class="lead">别人打开后可以打分，但不能改课件图。刚发布时 GitHub 可能要等 1 分钟才看得到图。</p>
+          <input class="share-link" id="shareLinkInput" readonly value="${escapeHtml(link)}" />
+          <div class="actions">
+            <button type="button" data-close-modal>关闭</button>
+            <button type="button" id="copyShareBtn">复制链接</button>
+          </div>
+        `);
+      } catch (err) {
+        const msg = String(err && err.message || err);
+        if (msg === "NO_TOKEN") showSettings("先保存 GitHub Token。");
+        else openModal(`<h3>分享失败</h3><p class="callout bad">${escapeHtml(msg)}</p><div class="actions"><button type="button" data-close-modal>关闭</button></div>`);
+      }
+    }
+
+    document.body.addEventListener("click", (e) => {
+      if (e.target.id === "shareBtn") {
+        createShare();
+        return;
+      }
+      if (e.target.id === "settingsBtn") {
+        showSettings();
+        return;
+      }
+      if (e.target.id === "saveTokenBtn") {
+        const value = (document.getElementById("tokenInput") || {}).value || "";
+        if (value) localStorage.setItem(TOKEN_KEY, value.trim());
+        else localStorage.removeItem(TOKEN_KEY);
+        closeModal();
+        return;
+      }
+      if (e.target.id === "copyShareBtn") {
+        const input = document.getElementById("shareLinkInput");
+        if (input) {
+          input.select();
+          navigator.clipboard.writeText(input.value).catch(() => document.execCommand("copy"));
+        }
+        return;
+      }
+      if (e.target.closest("[data-close-modal]") || e.target.id === "modal-mask") {
+        if (e.target.id === "modal-mask" || e.target.closest("[data-close-modal]")) closeModal();
+        return;
+      }
+      const levelTab = e.target.closest("[data-level]");
+      if (levelTab) {
+        state.level = levelTab.dataset.level;
+        saveState();
+        if (state.view !== "compare") hydrateMedia().then(applyView);
+        else applyView();
+        return;
+      }
+      const tab = e.target.closest("#tabs [data-view]");
+      if (tab) {
+        state.view = tab.dataset.view;
+        saveState();
+        if (state.view !== "compare") hydrateMedia().then(applyView);
+        else applyView();
+        return;
+      }
+      const clear = e.target.closest("[data-clear]");
+      if (clear) onClear(clear.dataset.clear);
+    });
+
+    function exclusiveCheck(radio) {
+      const box = radio.closest(".choice");
+      if (!box) return;
+      box.querySelectorAll("input[type=radio]").forEach((el) => {
+        if (el !== radio) el.checked = false;
+      });
+    }
+
+    function setRadioMark(radio, value) {
+      const ver = state.view === "neu" ? "neu" : "old";
+      if (radio.dataset.global) {
+        if (!cur().versions[ver].globals) cur().versions[ver].globals = {};
+        if (value) cur().versions[ver].globals[radio.dataset.global] = value;
+        else delete cur().versions[ver].globals[radio.dataset.global];
+        const ta = radio.closest("td") && radio.closest("td").querySelector("textarea.fail-note");
+        if (ta) ta.hidden = value !== "fail";
+      } else {
+        const key = radio.dataset.row + ":" + radio.dataset.field;
+        if (value) cur().versions[ver].checks[key] = value;
+        else delete cur().versions[ver].checks[key];
+        const cell = radio.closest(".cell");
+        const ta = cell && cell.querySelector("textarea.fail-note");
+        if (ta) ta.hidden = value !== "fail";
+      }
+      saveState();
+      renderTop();
+    }
+
+    document.body.addEventListener("mousedown", (e) => {
+      const radio = e.target.closest("input[type=radio][data-row], input[type=radio][data-global]");
+      if (radio) radio.dataset.prechecked = radio.checked ? "1" : "0";
+    });
+
+    document.body.addEventListener("click", (e) => {
+      const radio = e.target.closest("input[type=radio][data-row], input[type=radio][data-global]");
+      if (!radio) return;
+      if (radio.dataset.prechecked === "1") {
+        radio.checked = false;
+        setRadioMark(radio, "");
+        return;
+      }
+      exclusiveCheck(radio);
+      setRadioMark(radio, radio.value);
+    });
+
+    document.body.addEventListener("change", (e) => {
+      const duration = e.target.closest("select[data-field='duration']");
+      if (duration) {
+        const ver = state.view === "neu" ? "neu" : "old";
+        cur().versions[ver].checks[duration.dataset.row + ":duration"] = duration.value;
+        saveState();
+        renderTop();
+        return;
+      }
+      const upload = e.target.closest("input[data-upload]");
+      if (upload && upload.files[0]) onUpload(upload.dataset.upload, upload.files[0]);
+      const red = e.target.closest("select[data-redline]");
+      if (red) {
+        cur().versions[red.dataset.ver].redlines[red.dataset.redline] = red.value;
+        saveState();
+        renderCompare();
+        renderTop();
+      }
+    });
+
+    document.body.addEventListener("input", (e) => {
+      if (e.target.id === "verName") {
+        const ver = state.view === "neu" ? "neu" : "old";
+        cur().versions[ver].label = e.target.value || (ver === "neu" ? "V2" : "V1");
+        saveState();
+        renderTop();
+      }
+      if (e.target.id === "threshold") {
+        cur().threshold = e.target.value;
+        saveState();
+        renderCompare();
+        renderTop();
+      }
+      const cellNote = e.target.closest("textarea[data-cell-note]");
+      if (cellNote) {
+        const ver = state.view === "neu" ? "neu" : "old";
+        if (!cur().versions[ver].cellNotes) cur().versions[ver].cellNotes = {};
+        cur().versions[ver].cellNotes[cellNote.dataset.cellNote + ":" + cellNote.dataset.field] = cellNote.value;
+        saveState();
+        return;
+      }
+      const globalNote = e.target.closest("textarea[data-global-note]");
+      if (globalNote) {
+        const ver = state.view === "neu" ? "neu" : "old";
+        if (!cur().versions[ver].globalNotes) cur().versions[ver].globalNotes = {};
+        cur().versions[ver].globalNotes[globalNote.dataset.globalNote] = globalNote.value;
+        saveState();
+        return;
+      }
+      const note = e.target.closest("textarea[data-note]");
+      if (note) {
+        const ver = note.dataset.noteVer || "neu";
+        if (!cur().versions[ver].notes) cur().versions[ver].notes = {};
+        cur().versions[ver].notes[note.dataset.note] = note.value;
+        saveState();
+      }
+    });
+
+    document.body.classList.toggle("fill-mode", FILL_MODE);
+    if (FILL_MODE) {
+      const banner = document.getElementById("fill-banner");
+      if (banner) banner.hidden = false;
+    }
+
+    Promise.resolve()
+      .then(() => FILL_MODE ? loadShareSnapshot() : null)
+      .catch((err) => {
+        const banner = document.getElementById("fill-banner");
+        if (banner) {
+          banner.hidden = false;
+          banner.className = "callout bad";
+          banner.textContent = err.message || "分享内容加载失败";
+        }
+      })
+      .then(() => openDb())
+      .then((opened) => {
+        db = opened;
+        return FILL_MODE ? null : hydrateMedia();
+      })
+      .catch(() => null)
+      .finally(applyView);
+  </script>
+</body>
+</html>
