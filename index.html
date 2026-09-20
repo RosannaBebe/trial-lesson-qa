@@ -309,19 +309,6 @@
         <input id="threshold" type="number" min="0" step="0.5" placeholder="上线分数线，可空" />
       </div>
 
-      <h2>按课程段落对比</h2>
-      <p class="lead">看 V2 相对 V1，哪一段更好、哪一段不足。</p>
-      <div class="table-wrap compare">
-        <table>
-          <thead>
-            <tr>
-              <th>段落</th><th>满分</th><th id="secOldHead">V1</th><th id="secNeuHead">V2</th><th>差值</th><th>判定</th><th>验证备注</th>
-            </tr>
-          </thead>
-          <tbody id="sectionCompare"></tbody>
-        </table>
-      </div>
-
       <h2>按验收列对比</h2>
       <p class="lead">同一列在全书上的得分，用来看开口、口型、回应、重复、耗时、Dino、金币、惊喜、惊吓等哪一类变好或变差。惊喜有则 +1，惊吓有则 −1。</p>
       <div class="table-wrap compare">
@@ -1128,11 +1115,11 @@
         ? `<div class="note"><b>可以发布 ${newName}。</b> ${newName} ${fmtScore(newScore)} 分高于 ${oldName} ${fmtScore(oldScore)} 分，且四条红线全部通过${cur().threshold ? "，并达到上线分数线 " + cur().threshold : ""}。</div>`
         : `<div class="callout bad"><b>${newName} 还不能发布。</b> ${pub.blocks.join("；")}。当前 ${newName} ${fmtScore(newScore)} 分，${oldName} ${fmtScore(oldScore)} 分。</div>`;
 
-      ["redOldHead", "secOldHead", "fieldOldHead", "globalOldHead"].forEach((id) => {
+      ["redOldHead", "fieldOldHead", "globalOldHead"].forEach((id) => {
         const el = document.getElementById(id);
         if (el) el.textContent = cur().versions.old.label || "V1";
       });
-      ["redNeuHead", "secNeuHead", "fieldNeuHead", "globalNeuHead"].forEach((id) => {
+      ["redNeuHead", "fieldNeuHead", "globalNeuHead"].forEach((id) => {
         const el = document.getElementById(id);
         if (el) el.textContent = cur().versions.neu.label || "V2";
       });
@@ -1163,44 +1150,6 @@
           <td><select data-redline="${item.key}" data-ver="neu">${opt("neu")}</select></td>
         </tr>`;
       }).join("");
-
-      const oldSecs = packOf("old").sections.map((sec) => {
-        const max = sec.rows.length * FIELDS.length + sec.rows.length;
-        const o = scoreOf("old", sec.rows);
-        const note = cur().versions.old.notes[sec.id] || "";
-        return `<tr>
-          <td>${oldName} · ${sec.title}</td><td>${fmtScore(max)}</td><td>${fmtScore(o)}</td><td>—</td>
-          <td>—</td>
-          <td class="warn">V1 独有流程</td>
-          <td><textarea data-note="${sec.id}" data-note-ver="old" rows="2" placeholder="这段 V1 备注">${escapeHtml(note)}</textarea></td>
-        </tr>`;
-      });
-      const neuSecs = packOf("neu").sections.map((sec) => {
-        const max = sec.rows.length * FIELDS.length + sec.rows.length;
-        const n = scoreOf("neu", sec.rows);
-        const note = cur().versions.neu.notes[sec.id] || "";
-        return `<tr>
-          <td>${newName} · ${sec.title}</td><td>${fmtScore(max)}</td><td>—</td><td>${fmtScore(n)}</td>
-          <td>—</td>
-          <td class="warn">V2 独有流程</td>
-          <td><textarea data-note="${sec.id}" data-note-ver="neu" rows="2" placeholder="这段 V2 好在哪、不足在哪">${escapeHtml(note)}</textarea></td>
-        </tr>`;
-      });
-      document.getElementById("sectionCompare").innerHTML = course().packs
-        ? oldSecs.concat(neuSecs).join("")
-        : packOf("old").sections.map((sec) => {
-          const max = sec.rows.length * FIELDS.length + sec.rows.length;
-          const o = scoreOf("old", sec.rows);
-          const n = scoreOf("neu", sec.rows);
-          const v = verdict(o, n);
-          const note = cur().versions.neu.notes[sec.id] || "";
-          return `<tr>
-            <td>${sec.title}</td><td>${fmtScore(max)}</td><td>${fmtScore(o)}</td><td>${fmtScore(n)}</td>
-            <td>${n - o >= 0 ? "+" : ""}${fmtScore(n - o)}</td>
-            <td class="${v.cls}">${v.text}</td>
-            <td><textarea data-note="${sec.id}" data-note-ver="neu" rows="2" placeholder="这段 V2 好在哪、不足在哪">${escapeHtml(note)}</textarea></td>
-          </tr>`;
-        }).join("");
 
       const oldIds = rowIdsOf("old");
       const neuIds = rowIdsOf("neu");
