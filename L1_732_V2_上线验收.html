@@ -203,6 +203,7 @@
       display: flex; align-items: center; justify-content: center;
       z-index: 20; padding: 20px;
     }
+    .modal-mask.hidden { display: none; }
     .modal {
       width: min(520px, 100%);
       background: var(--paper);
@@ -241,7 +242,7 @@
       </div>
     </div>
 
-    <div class="modal-mask hidden" id="modal-mask">
+    <div class="modal-mask hidden" id="modal-mask" hidden>
       <div class="modal" id="modal"></div>
     </div>
 
@@ -1321,12 +1322,16 @@
     }
 
     function closeModal() {
-      document.getElementById("modal-mask").classList.add("hidden");
+      const mask = document.getElementById("modal-mask");
+      mask.classList.add("hidden");
+      mask.hidden = true;
     }
 
     function openModal(html) {
       document.getElementById("modal").innerHTML = html;
-      document.getElementById("modal-mask").classList.remove("hidden");
+      const mask = document.getElementById("modal-mask");
+      mask.classList.remove("hidden");
+      mask.hidden = false;
     }
 
     function pagesBaseUrl() {
