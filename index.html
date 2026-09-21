@@ -81,8 +81,8 @@
       border-radius: 8px;
     }
     table.spec {
-      width: 2920px;
-      min-width: 2920px;
+      width: 2976px;
+      min-width: 2976px;
       max-width: none;
       table-layout: fixed;
       border-collapse: collapse;
@@ -583,6 +583,7 @@
     "fieldCompareLead": "同一列在全书上的得分，用来看开口、口型、回应、重复、耗时、Dino、金币等哪一类变好或变差。",
     "colField": "验收列",
     "footer": "文件：课程治理 / 体验课上线前验收表 · L1–L4 各自保存 V1 / V2 勾选与课件",
+    "colNo": "序号",
     "colSeq": "序",
     "colTemplate": "Template",
     "colId": "ID",
@@ -657,7 +658,8 @@
     "fieldCompareLead": "The same column across the lesson — talk, lip sync, response, repeats, duration, Dino, coins, and so on.",
     "colField": "Column",
     "footer": "Course governance / trial lesson QA · L1–L4 each keep their own V1 / V2 checks and courseware",
-    "colSeq": "No.",
+    "colNo": "#",
+    "colSeq": "Key",
     "colTemplate": "Template",
     "colId": "ID",
     "points": "pts",
@@ -1428,6 +1430,7 @@
     function renderSections() {
       const ver = state.view === "neu" ? "neu" : "old";
       const notes = pack().notes || {};
+      let seq = 0;
       document.getElementById("section-nav").innerHTML =
         `<a href="#global">${escapeHtml(t("globalScore"))}</a>` +
         sections().map((sec) => `<a href="#${sec.id}">${escapeHtml(loc(sec.title))}</a>`).join("");
@@ -1435,7 +1438,9 @@
         const rowsHtml = sec.rows.map((id) => {
           const row = rows()[id];
           if (!row) return "";
+          seq += 1;
           return `<tr>
+            <td>${seq}</td>
             <td>${id}</td>
             <td>${escapeHtml(loc(row.name))}</td>
             <td><code>${escapeHtml(loc(row.tid))}</code></td>
@@ -1458,6 +1463,7 @@
           <div class="table-wrap"><table class="spec">
             <colgroup>
               <col style="width:56px" />
+              <col style="width:56px" />
               <col style="width:140px" />
               <col style="width:220px" />
               <col style="width:200px" />
@@ -1473,7 +1479,7 @@
               <col style="width:200px" />
             </colgroup>
             <thead><tr>
-              <th>${t("colSeq")}</th><th>${t("colTemplate")}</th><th>${t("colId")}</th><th>${loc("课件")}</th>
+              <th>${t("colNo")}</th><th>${t("colSeq")}</th><th>${t("colTemplate")}</th><th>${t("colId")}</th><th>${loc("课件")}</th>
               <th>${loc("老师开口")}</th><th>${loc("口型匹配")}</th><th>${loc("回应合理")}</th><th>${loc("不出现对话重复现象")}</th><th>${loc("环节耗时")}</th>
               <th>${loc("老师动作")}</th><th>TTS</th><th>Dino</th><th>${loc("退出 / 收口")}</th><th>${loc("金币")}</th>
             </tr></thead>
