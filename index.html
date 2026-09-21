@@ -198,6 +198,7 @@
     }
     body.fill-mode .owner-only { display: none !important; }
     body.fill-mode .media-actions { display: none !important; }
+    #langBtnZh, #langBtnEn { min-width: 52px; }
     .modal-mask {
       position: fixed; inset: 0; background: rgba(31, 27, 22, 0.35);
       display: flex; align-items: center; justify-content: center;
@@ -221,24 +222,26 @@
 </head>
 <body>
   <div class="wrap">
-    <h1>体验课 上线前验收表</h1>
-    <p class="fill-banner" id="fill-banner" hidden>你正在填写分享版验收表。可以打分和写备注，但不能改课件图。</p>
+    <h1 data-i18n="title">体验课 上线前验收表</h1>
+    <p class="fill-banner" id="fill-banner" hidden data-i18n="fillBanner">你正在填写分享版验收表。可以打分和写备注，但不能改课件图。</p>
     <nav class="tabs level-tabs" id="level-tabs" aria-label="体验课 Level"></nav>
     <p class="callout warn" id="course-note" hidden></p>
 
     <div class="bar">
       <div class="tabs" id="tabs">
-        <button class="tab active" data-view="old" type="button">V1 验收</button>
-        <button class="tab" data-view="neu" type="button">V2 验收</button>
-        <button class="tab" data-view="compare" type="button">版本对比与发布</button>
+        <button class="tab active" data-view="old" type="button" data-i18n="viewV1">V1 验收</button>
+        <button class="tab" data-view="neu" type="button" data-i18n="viewV2">V2 验收</button>
+        <button class="tab" data-view="compare" type="button" data-i18n="viewCompare">版本对比与发布</button>
         <span class="name-row" id="nameRow">
-          <input id="verName" type="text" placeholder="版本名称" />
+          <input id="verName" type="text" data-i18n-placeholder="verName" placeholder="版本名称" />
         </span>
       </div>
       <div class="stats" id="topStats"></div>
-      <div class="tabs owner-only">
-        <button type="button" id="shareBtn">分享</button>
-        <button type="button" id="settingsBtn">分享设置</button>
+      <div class="tabs">
+        <button type="button" class="tab" id="langBtnZh" data-lang="zh">中文</button>
+        <button type="button" class="tab" id="langBtnEn" data-lang="en">EN</button>
+        <button type="button" id="shareBtn" class="owner-only" data-i18n="share">分享</button>
+        <button type="button" id="settingsBtn" class="owner-only" data-i18n="settings">分享设置</button>
       </div>
     </div>
 
@@ -248,19 +251,19 @@
 
     <div id="workView">
       <section id="global">
-        <h2>全局打分</h2>
-        <p class="lead">整节课只打一次，不按 template 拆。默认不选。选「未达成」必须写下原因。</p>
+        <h2 data-i18n="globalScore">全局打分</h2>
+        <p class="lead" data-i18n="globalLead">整节课只打一次，不按 template 拆。默认不选。选「未达成」必须写下原因。</p>
         <div class="table-wrap">
           <table class="global">
             <thead>
-              <tr><th>项目</th><th>怎么判</th><th>判定</th></tr>
+              <tr><th data-i18n="colItem">项目</th><th data-i18n="colHow">怎么判</th><th data-i18n="colVerdict">判定</th></tr>
             </thead>
             <tbody id="global-items"></tbody>
           </table>
         </div>
       </section>
       <nav id="section-nav"></nav>
-      <div class="note">
+      <div class="note" data-i18n="scoreNote">
         全局项各 1 分。格子用单选：达成 / 未达成，默认都不选。选未达成会出现备注框，请写下原因。每一行的课件、开口、口型、回应、不重复、动作、TTS、Dino、退出、金币各 1 分；环节耗时：2 分钟以内 1 分，超过 2 分钟 0.5 分，超过 5 分钟 0 分。
       </div>
       <div id="sections"></div>
@@ -269,53 +272,53 @@
     <div id="compareView" class="hidden">
       <p class="lead" id="compare-course"></p>
       <div id="publishBox"></div>
-      <h2>全局打分对比</h2>
-      <p class="lead">整节课项，V1 / V2 分开看。</p>
+      <h2 data-i18n="compareGlobal">全局打分对比</h2>
+      <p class="lead" data-i18n="compareGlobalLead">整节课项，V1 / V2 分开看。</p>
       <div class="table-wrap compare">
         <table>
           <thead>
             <tr>
-              <th>项目</th><th>满分</th><th id="globalOldHead">V1</th><th id="globalNeuHead">V2</th><th>差值</th><th>判定</th>
+              <th data-i18n="colItem">项目</th><th data-i18n="colMax">满分</th><th id="globalOldHead">V1</th><th id="globalNeuHead">V2</th><th data-i18n="colDelta">差值</th><th data-i18n="colVerdict">判定</th>
             </tr>
           </thead>
           <tbody id="globalCompare"></tbody>
         </table>
       </div>
-      <h2>上线红线</h2>
-      <p class="lead">破一条就不能发，和总分无关。默认是未测；没跑到的场景必须保持未测，不能勾通过。</p>
+      <h2 data-i18n="redlines">上线红线</h2>
+      <p class="lead" data-i18n="redlinesLead">破一条就不能发，和总分无关。默认是未测；没跑到的场景必须保持未测，不能勾通过。</p>
       <div class="table-wrap compare">
         <table>
           <thead>
             <tr>
-              <th>红线</th><th>怎么算破</th><th id="redOldHead">V1</th><th id="redNeuHead">V2</th>
+              <th data-i18n="colRed">红线</th><th data-i18n="colHowBroken">怎么算破</th><th id="redOldHead">V1</th><th id="redNeuHead">V2</th>
             </tr>
           </thead>
           <tbody id="redlineTable"></tbody>
         </table>
       </div>
-      <h2>总分与发布门禁</h2>
+      <h2 data-i18n="scoreGate">总分与发布门禁</h2>
       <div class="table-wrap compare">
         <table>
           <thead>
             <tr>
-              <th>版本</th><th>已得分</th><th>满分</th><th>完成度</th><th>对比结论</th>
+              <th data-i18n="colVersion">版本</th><th data-i18n="colScored">已得分</th><th data-i18n="colMax">满分</th><th data-i18n="colDone">完成度</th><th data-i18n="colResult">对比结论</th>
             </tr>
           </thead>
           <tbody id="scoreSummary"></tbody>
         </table>
       </div>
-      <p class="lead" style="margin-top:10px">上线分数线（可选）：V2 达到该分、高于 V1、且红线全过才算过。不填则不卡分数线。</p>
+      <p class="lead" style="margin-top:10px" data-i18n="thresholdLead">上线分数线（可选）：V2 达到该分、高于 V1、且红线全过才算过。不填则不卡分数线。</p>
       <div class="name-row" style="max-width:320px;margin-bottom:18px">
-        <input id="threshold" type="number" min="0" step="0.5" placeholder="上线分数线，可空" />
+        <input id="threshold" type="number" min="0" step="0.5" data-i18n-placeholder="thresholdPh" placeholder="上线分数线，可空" />
       </div>
 
-      <h2>按验收列对比</h2>
-      <p class="lead">同一列在全书上的得分，用来看开口、口型、回应、重复、耗时、Dino、金币等哪一类变好或变差。</p>
+      <h2 data-i18n="fieldCompare">按验收列对比</h2>
+      <p class="lead" data-i18n="fieldCompareLead">同一列在全书上的得分，用来看开口、口型、回应、重复、耗时、Dino、金币等哪一类变好或变差。</p>
       <div class="table-wrap compare">
         <table>
           <thead>
             <tr>
-              <th>验收列</th><th>满分</th><th id="fieldOldHead">V1</th><th id="fieldNeuHead">V2</th><th>差值</th><th>判定</th>
+              <th data-i18n="colField">验收列</th><th data-i18n="colMax">满分</th><th id="fieldOldHead">V1</th><th id="fieldNeuHead">V2</th><th data-i18n="colDelta">差值</th><th data-i18n="colVerdict">判定</th>
             </tr>
           </thead>
           <tbody id="fieldCompare"></tbody>
@@ -323,10 +326,438 @@
       </div>
     </div>
 
-    <footer>文件：课程治理 / L1_732_V2_上线验收.html · L1–L4 各自保存 V1 / V2 勾选与课件</footer>
+    <footer data-i18n="footer">文件：课程治理 / 体验课上线前验收表 · L1–L4 各自保存 V1 / V2 勾选与课件</footer>
   </div>
 
   <script>
+
+    const LANG_KEY = "trial-qa-lang";
+    const PHRASE = {
+  "逻辑侧需要抛正确的[NEXT_STEP]/[TEMPLATE_FINISH]": "Logic must emit the correct [NEXT_STEP] / [TEMPLATE_FINISH].",
+  "口型与当前老师说话匹配。嘴动和当句对不上则选未达成并写原因。默认不选。": "Mouth movement matches the current teacher line. If it does not match, mark Not met and write why. Default: unselected.",
+  "老师对学生的话有回应，且回应合理。没接住或答非所问则选未达成并写原因。学生本页未开口则保持不选。": "The teacher responds to the student, and the response is appropriate. If they miss it or reply off-topic, mark Not met and write why. If the student did not speak on this page, leave unselected.",
+  "老师不出现同一问题重复问大于等于3次的情况。同一问 ≥3 次则选未达成并写原因。默认不选。": "The teacher does not ask the same question 3 or more times. Same question ≥3 times = Not met, and write why. Default: unselected.",
+  "该环节耗时在 2 分钟以内得满分；超过 2 分钟得一半分；超过 5 分钟得 0 分。未测不选。": "This beat scores full points within 2 minutes; half if over 2 minutes; 0 if over 5 minutes. Leave untested if not measured.",
+  "课件": "Courseware",
+  "老师开口": "Teacher talk",
+  "口型匹配": "Lip sync",
+  "回应合理": "Response quality",
+  "不出现对话重复现象": "No repeated questions",
+  "环节耗时": "Beat duration",
+  "老师动作": "Teacher action",
+  "退出 / 收口": "Exit / close",
+  "金币": "Coins",
+  "1. 导入 + 外层视频": "1. Lead-in + outer video",
+  "2. Apple 环 → 宝箱 1": "2. Apple loop → Chest 1",
+  "3. Bread 环": "3. Bread loop",
+  "4. Juice 环 → 宝箱 2": "4. Juice loop → Chest 2",
+  "5. 句子段": "5. Sentence block",
+  "6. 收尾 → 完课": "6. Wrap-up → Complete",
+  "导入 · pre-video": "Lead-in · pre-video",
+  "进入后立刻一句：Hi hi {name}! I'm {teacher}! 只问 1 次。任意语音（Hi / Okay / 本地语）都算过。": "Right after enter, one line: Hi hi {name}! I'm {teacher}! Ask once. Any speech (Hi / Okay / local language) counts.",
+  "问候 + [TEACHER_LISTEN]；有语音或 3–4 秒无语音都打 [NEXT_STEP]。禁止再问 Are you happy。": "Greeting + [TEACHER_LISTEN]; speech or 3–4s of silence both fire [NEXT_STEP]. Do not ask Are you happy again.",
+  "问候句完整播完，嘴动有声，音色=本课老师。": "Play the full greeting. Mouth moves with audio. Voice = this lesson’s teacher.",
+  "默认不介入。若点帮助：示范 1 次 Hi 后立刻 BACK_TO_TEACHER，并带已解决。禁止循环纠正 Hi Max / Hi Matt。Dino 不能拦住翻页。": "Stay out by default. If Help is tapped: model Hi once, then BACK_TO_TEACHER with resolved. Do not loop-correct Hi Max / Hi Matt. Dino must not block the page turn.",
+  "用户有效 say hi 后出现 banner 与金币奖励": "After a valid say-hi, show the banner and coin reward.",
+  "导入 · 内嵌视频": "Lead-in · embedded video",
+  "播放中老师不插话。": "Teacher does not talk over the video.",
+  "播内嵌视频。首帧 2 秒未到：重载一次，仍失败则跳过进 post-video。": "Play the embedded video. If the first frame is not up in 2s: reload once; if it still fails, skip to post-video.",
+  "本拍无老师 TTS，只播内嵌视频音。": "No teacher TTS on this beat. Play the embedded video audio only.",
+  "不介入": "Stay out",
+  "无": "None",
+  "导入 · post-video": "Lead-in · post-video",
+  "视频结束后 1 句短问：Do you like the food Chef Boo cooks? 禁止长段叙述后再追问。只问 1 次，最多等 3 秒。": "After the video, one short question: Do you like the food Chef Boo cooks? Do not narrate at length and then ask again. Ask once, wait 3 seconds at most.",
+  "学生只要开口，就在回复学生后自然过渡到 [TEMPLATE_FINISH]。": "If the student speaks at all, reply and then naturally go to [TEMPLATE_FINISH].",
+  "问句完整播完；回复学生的 TTS 播完再 [TEMPLATE_FINISH]。": "Play the full question. Finish the reply TTS before [TEMPLATE_FINISH].",
+  "最多 1 轮对话，然后无论学生是否回应都交还给老师。": "One Dino turn at most, then hand back to the teacher whether the student replies or not.",
+  "视频": "Video",
+  "老师不在片中插话。": "Teacher does not talk over the video.",
+  "视频加载失败，屏幕上需要出现手动点击的重新加载按钮。": "If the video fails to load, a manual reload button must appear on screen.",
+  "本页无老师 TTS，只播故事视频音。": "No teacher TTS on this page. Play the story video audio only.",
+  "教 apple": "Teach apple",
+  "进入后固定首句：Boo holds up an APPLE! Wow! An apple! Do you like apples? 只说 1 次。本页老师最多 3 轮。": "Fixed first line after enter: Boo holds up an APPLE! Wow! An apple! Do you like apples? Say it once. Teacher has 3 turns at most on this page.",
+  "首句后 [TEACHER_BITE_APPLE][TEACHER_LISTEN]。学生说出任何像 apple 的音：鼓掌 [TEACHER_APPLAUD]，再说交接句后 [TEMPLATE_FINISH]。第 3 轮无论是否说对都必须结束。": "After the first line, [TEACHER_BITE_APPLE][TEACHER_LISTEN]. Any apple-like sound: applaud [TEACHER_APPLAUD], say the handoff line, then [TEMPLATE_FINISH]. Turn 3 must end whether the answer is right or not.",
+  "首句与咬苹果对齐；交接句完整播完。跟读召唤降调，禁止 Can you say apple?": "Align the first line with the apple bite. Play the full handoff line. Follow-me prompt uses falling tone. Do not say Can you say apple?",
+  "仅帮助按钮。解释或带读 1 次后交还老师，带已解决。不替代老师打结束标签。": "Help button only. Explain or model once, then hand back with resolved. Dino must not fire the end tag instead of the teacher.",
+  "泡 apple": "Bubble apple",
+  "进入后立刻邀请戳 apple 泡泡，不新开教学问答。": "Invite the student to pop the apple bubble right away. Do not start a new teaching Q&A.",
+  "指向泡泡；学生点中目标泡泡给短反馈。点完本页目标数打 [TEMPLATE_FINISH]。": "Point to the bubbles. Short feedback when the student hits the target. Fire [TEMPLATE_FINISH] after the page quota.",
+  "邀请戳泡泡的 TTS 完整播完再等操作。": "Finish the pop-the-bubble TTS before waiting for a tap.",
+  "学生不会点时，Dino 最多指一次怎么点，然后交还。": "If the student does not tap, Dino may point once, then hand back.",
+  "答题完成获得金币，不答题不获得金币": "Coins only after the item is completed. No coins if unanswered.",
+  "测 apple": "Assess apple",
+  "进入后邀请说 apple。最多再听 2 次。": "Invite the student to say apple. Listen 2 more times at most.",
+  "[TEACHER_LISTEN]。宽认 apple / appo / apo。对了鼓掌后结束；2 次未过也示范一次后 [TEMPLATE_FINISH]。": "[TEACHER_LISTEN]. Accept apple / appo / apo. If correct, applaud and end. After 2 misses, model once and still [TEMPLATE_FINISH].",
+  "邀请说 apple 的 TTS 完整；示范音必须是 apple。": "Play the full say-apple TTS. The model audio must be apple.",
+  "最多带读 1 次，立刻交还。禁止把测评变成多轮纠音。": "Model once at most, then hand back immediately. Do not turn the assessment into multi-round pronunciation drill.",
+  "宝箱 1": "Chest 1",
+  "短祝贺，不提问、不等开口。": "Short praise. No question. Do not wait for speech.",
+  "短祝贺 TTS 完整播完，不打断开箱。": "Play the full short-praise TTS. Do not interrupt the chest open.",
+  "打开礼盒，获得相框，如果用户不选择 5s 后自动打开": "Open the gift box and get the frame. Auto-open after 5s if the user does not choose.",
+  "教 bread": "Teach bread",
+  "首句固定：And now. BREAD! Wow! Yummy bread! Do you like bread? 最多 4 轮。": "Fixed first line: And now. BREAD! Wow! Yummy bread! Do you like bread? 4 turns at most.",
+  "[TEACHER_BREAK_BREAD][TEACHER_LISTEN]。说对后交接 B 的发音后 [TEMPLATE_FINISH]。": "[TEACHER_BREAK_BREAD][TEACHER_LISTEN]. After a correct try, hand off the B sound, then [TEMPLATE_FINISH].",
+  "首句与掰面包对齐；交接句完整播完。跟读召唤降调，禁止 Can you say bread?": "Align the first line with breaking the bread. Play the full handoff line. Follow-me prompt uses falling tone. Do not say Can you say bread?",
+  "同教 apple": "Same as teach apple",
+  "泡 bread": "Bubble bread",
+  "邀请戳 bread 泡泡。": "Invite the student to pop the bread bubble.",
+  "同泡 apple，目标换成 bread。": "Same as bubble apple, target is bread.",
+  "邀请戳 bread 泡泡的 TTS 完整播完。": "Play the full pop-bread-bubble TTS.",
+  "最多指 1 次": "Point once at most",
+  "测 bread": "Assess bread",
+  "邀请说 bread。宽认 bread / bred / bwed。最多再听 2 次。": "Invite the student to say bread. Accept bread / bred / bwed. Listen 2 more times at most.",
+  "[TEACHER_LISTEN]，对或超时都 [TEMPLATE_FINISH]。": "[TEACHER_LISTEN]. Correct or timeout both go to [TEMPLATE_FINISH].",
+  "邀请说 bread 的 TTS 完整；示范音必须是 bread。": "Play the full say-bread TTS. The model audio must be bread.",
+  "带读 1 次后交还": "Model once, then hand back",
+  "教 juice": "Teach juice",
+  "首句固定：Now Boo shakes the JUICE! Wow! Juice! Do you like juice? 最多 4 轮。": "Fixed first line: Now Boo shakes the JUICE! Wow! Juice! Do you like juice? 4 turns at most.",
+  "[TEACHER_DRINK_JUICE][TEACHER_LISTEN]。结束句 Glug glug 后再喝一口，然后 [TEMPLATE_FINISH]。": "[TEACHER_DRINK_JUICE][TEACHER_LISTEN]. After the close line Glug glug, take one more sip, then [TEMPLATE_FINISH].",
+  "首句与喝果汁对齐；结束句 Glug glug 完整播完。跟读召唤降调。": "Align the first line with drinking juice. Play the full Glug glug close. Follow-me prompt uses falling tone.",
+  "泡 juice": "Bubble juice",
+  "邀请戳 juice 泡泡。": "Invite the student to pop the juice bubble.",
+  "同前两轮泡泡。": "Same as the previous two bubble rounds.",
+  "邀请戳 juice 泡泡的 TTS 完整播完。": "Play the full pop-juice-bubble TTS.",
+  "测 juice": "Assess juice",
+  "邀请说 juice。宽认 juice / joos / jus。最多再听 2 次。": "Invite the student to say juice. Accept juice / joos / jus. Listen 2 more times at most.",
+  "对或超时都结束。": "End on a correct answer or on timeout.",
+  "邀请说 juice 的 TTS 完整；示范音必须是 juice。": "Play the full say-juice TTS. The model audio must be juice.",
+  "宝箱 2": "Chest 2",
+  "短祝贺，不等开口。": "Short praise. Do not wait for speech.",
+  "打开龙蛋，获得奖励，如果用户不选择 5s 后自动打开": "Open the dragon egg and get the reward. Auto-open after 5s if the user does not choose.",
+  "句子教学": "Sentence teach",
+  "{name}! Boo bites the bread! Munch munch! Boo says: I like bread! Do you like bread? 最多 4 轮。Yes / No 都先接住，再请孩子扮演 Boo，不能把 No 判失败。": "{name}! Boo bites the bread! Munch munch! Boo says: I like bread! Do you like bread? 4 turns at most. Catch both Yes and No, then ask the child to play Boo. Do not mark No as a fail.",
+  "[TEACHER_LISTEN]；说对或半对后 [TEACHER_APPLAUD]。本页结束标签是 [NEXT_STEP]。完整句、like+bread、I like that、任意明显尝试，最迟第 4 轮都要结束。": "[TEACHER_LISTEN]; applaud [TEACHER_APPLAUD] after a full or partial hit. This page’s end tag is [NEXT_STEP]. A full sentence, like+bread, I like that, or any clear attempt must end by turn 4.",
+  "首句完整播完。I like bread 陈述降调，禁止 Can you say I like bread?": "Play the full first line. I like bread is a statement with falling tone. Do not say Can you say I like bread?",
+  "解释或示范 1 次后交还，带 sentence_resolved=true。禁止助教变成第二道口语门槛。": "Explain or model once, then hand back with sentence_resolved=true. Dino must not become a second speaking gate.",
+  "听选图": "Listen and choose",
+  "老师出题：听音，选对应图。只跟本题，不新教单词。": "Teacher prompt: listen and choose the matching picture. Stay on this item. Do not teach a new word.",
+  "播放音频；学生点图。对了短反馈后 [TEMPLATE_FINISH]。错 1 次给再听，再错也结束。": "Play the audio; the student taps a picture. Short feedback then [TEMPLATE_FINISH] if correct. One miss gets a replay; a second miss still ends.",
+  "题干音频完整播完再等点选。": "Finish the prompt audio before waiting for a tap.",
+  "最多提示 1 次点哪一类，然后交还。": "Hint the category once at most, then hand back.",
+  "句子口语": "Sentence oral",
+  "邀请说 I like bread. 最多再听 2 次。": "Invite the student to say I like bread. Listen 2 more times at most.",
+  "[TEACHER_LISTEN]。宽认 like + bread。对或超时都结束。": "[TEACHER_LISTEN]. Accept like + bread. End on a correct answer or on timeout.",
+  "邀请说 I like bread 的 TTS 完整；示范音必须是目标句。": "Play the full say-I-like-bread TTS. The model audio must be the target sentence.",
+  "收尾视频": "Wrap-up video",
+  "若本页含老师收口：先一句 Did you like cooking with Chef Boo? 只问 1 次。任意回答后不再提问。然后播歌曲视频，片中不插话。": "If this page has a teacher close: first ask Did you like cooking with Chef Boo? once. After any answer, stop asking. Then play the song video with no teacher talk-over.",
+  "收口第二轮必须带 [TEACHER_POINT_TO_SCREEN][NEXT_STEP] 开歌。缺 [NEXT_STEP] 会卡死。视频首帧 2 秒未到则重载或跳过进拍照。": "The second close turn must fire [TEACHER_POINT_TO_SCREEN][NEXT_STEP] to start the song. Missing [NEXT_STEP] will stall. If the first video frame is not up in 2s, reload or skip to photo.",
+  "收口问句和交接句 TTS 完整播完；歌曲走视频音，不是老师 TTS。": "Play the full close question and handoff TTS. The song uses video audio, not teacher TTS.",
+  "拍照": "Photo",
+  "短邀请拍照。拒绝权限或失败时告诉可以跳过。": "Short invite to take a photo. If permission is denied or it fails, say they can skip.",
+  "调起拍照。成功给短祝贺；失败/拒权限走跳过。": "Open the camera. Short praise on success; skip on failure or denied permission.",
+  "邀请拍照和可跳过提示的 TTS 完整播完。": "Play the full photo invite and skip-tip TTS.",
+  "无（拍照本身不发教学金币）": "None (the photo itself does not award teaching coins)",
+  "宝箱 3": "Chest 3",
+  "打开宝箱，获得金币，如果用户不选择 5s 后自动打开": "Open the chest and get coins. Auto-open after 5s if the user does not choose.",
+  "完课": "Lesson complete",
+  "结束态，不是教学 template": "End state, not a teaching template",
+  "老师不再开新问题。": "The teacher does not open a new question.",
+  "本页不新播教学 TTS。": "Do not play new teaching TTS on this page.",
+  "不在本页新发；结算已发金币。": "Do not award new coins here; settle coins already given.",
+  "1. 热身 → 视频": "1. Warm-up → Video",
+  "2. 单词段 → 宝箱 1": "2. Word block → Chest 1",
+  "3. 句子段 → 宝箱 2": "3. Sentence block → Chest 2",
+  "4. 收尾 → 完课": "4. Wrap-up → Complete",
+  "热身": "Warm-up",
+  "按当页热身逐字稿开口。同一问题不得重复问 ≥3 次。": "Follow this page’s warm-up script. Do not repeat the same question ≥3 times.",
+  "按当页热身动作。": "Do this page’s warm-up action.",
+  "热身句完整播完，嘴动有声，音色=本课老师。": "Play the full warm-up line. Mouth moves with audio. Voice = this lesson’s teacher.",
+  "Dino 最多进 1 轮，然后交还老师。": "Dino gets 1 turn at most, then hands back to the teacher.",
+  "本页无金币。": "No coins on this page.",
+  "奖励地图": "Reward map",
+  "短介绍奖励地图，按当页稿；不另开闲聊。": "Short intro of the reward map from this page’s script. Do not start extra chat.",
+  "展示奖励地图。": "Show the reward map.",
+  "介绍句完整播完，不叠视频音。": "Play the full intro line. Do not stack it on video audio.",
+  "本页只介绍奖励，不发教学金币。": "This page only introduces rewards. No teaching coins.",
+  "教词 1": "Teach word 1",
+  "点听 1": "Tap-to-hear 1",
+  "邀请点图听音，不新开教学问答。": "Invite a tap-to-hear. Do not start a new teaching Q&A.",
+  "学生点图播放目标词。点完本页目标数打结束标签。": "Tapping a picture plays the target word. Fire the end tag after the page quota.",
+  "点击后播放目标词 TTS。": "Play the target-word TTS after a tap.",
+  "最多指一次怎么点，然后交还。": "Point once at most, then hand back.",
+  "教词 2": "Teach word 2",
+  "点听 2": "Tap-to-hear 2",
+  "教词 3": "Teach word 3",
+  "戳泡泡": "Pop bubbles",
+  "单词口测": "Word oral",
+  "按当页逐字稿开口；老师最多 4 轮必须结束。未测不勾。": "Follow this page’s script. Teacher must end by turn 4. Leave untested if not measured.",
+  "按当页设计做动作，没有就标无。": "Do the action designed for this page. Mark None if there is none.",
+  "孩子该听的句子走 TTS；老师开口不叠 TTS。": "Lines the child should hear go through TTS. Teacher talk does not stack on TTS.",
+  "Dino 最多进 1 轮；无论孩子回不回应，一轮后交还老师。": "Dino gets 1 turn at most; hand back after that turn whether the child replies or not.",
+  "完课弹窗": "Completion popup",
+  "按当页题干开口，不新教内容。": "Speak the prompt on this page. Do not teach new content.",
+  "学生作答。对了短反馈后结束；错 1 次给再试，再错也结束。": "The student answers. Short feedback and end if correct. One miss gets a retry; a second miss still ends.",
+  "答题完成后才给金币，未答完不发。": "Coins only after the item is completed. Do not award them early.",
+  "打开宝箱获得金币；用户不选则 5 秒后自动打开。": "Open the chest for coins. Auto-open after 5s if the user does not choose.",
+  "片中不插话。": "Do not talk over the video.",
+  "播视频。2 秒无首帧必须出手动重载按钮。": "Play the video. If there is no first frame in 2s, a manual reload button must appear.",
+  "本页走视频音，不叠老师 TTS。": "This page uses video audio. Do not stack teacher TTS.",
+  "按当页目标词稿教；最多 3 轮必须结束。": "Teach from this page’s target-word script. Must end by turn 3.",
+  "指图、听、跟说。第 3 轮必须打结束标签。": "Point, listen, and repeat. Turn 3 must fire the end tag.",
+  "奖励介绍": "Reward intro",
+  "故事导入": "Story lead-in",
+  "单词教学": "Word teach",
+  "气泡练习": "Bubble practice",
+  "选词练习": "Word-select practice",
+  "奖励箱 1": "Reward chest 1",
+  "句型教学": "Pattern teach",
+  "句子排序": "Sentence order",
+  "句子口测": "Sentence oral",
+  "奖励箱 2": "Reward chest 2",
+  "总结视频": "Summary video",
+  "奖励箱 3": "Reward chest 3",
+  "调起拍照；失败/拒权限必须能跳过。": "Open the camera. Failure or denied permission must be skippable.",
+  "2. 单词环 → 宝箱 1": "2. Word loop → Chest 1",
+  "句子练习": "Sentence practice",
+  "L1 体验课": "L1 trial",
+  "V1 漏斗：热身 → 奖励地图 → 导入三拍 → 视频。导入按 pre-video / 内嵌视频 / post-video 分开验收。": "V1 funnel: warm-up → reward map → lead-in three beats → video. Score lead-in as pre-video / embedded video / post-video separately.",
+  "当前风险：pre-video 把开口当硬门槛；短回答后继续要第二轮；Dino 循环要 Hi Max；post-video 打不出 TEMPLATE_FINISH。这些直接判 1a–1c 不通过。": "Current risk: pre-video treats speech as a hard gate; a short answer still asks a second turn; Dino loops on Hi Max; post-video cannot fire TEMPLATE_FINISH. Mark 1a–1c as Not met.",
+  "当前风险：Intro 与「说 I like bread」契约不一致；精确复述卡住；结束标签发出后未进听选图。": "Current risk: Intro does not match the “say I like bread” contract; exact-repeat gets stuck; the end tag fires but listen-and-choose does not open.",
+  "L2 体验课": "L2 trial",
+  "L2 按线上漏斗列了 template。开口逐字稿尚未按页锁定，按当页稿验收；Dino、金币、宝箱、完课弹窗规则已按 L1 红线对齐。": "L2 lists templates from the live funnel. Page scripts are not locked yet — score against the current page script. Dino, coins, chests, and the completion popup follow the L1 red lines.",
+  "L3 体验课": "L3 trial",
+  "L3 先按 L3/L4 体验课骨架列出 template。当页逐字稿和实际 ID 若有出入，以课件为准，后续再锁分镜。": "L3 first lists templates from the L3/L4 trial skeleton. If the page script or IDs differ, follow the courseware and lock the shot list later.",
+  "L4 体验课": "L4 trial",
+  "L4 先按 L3/L4 体验课骨架列出 template。当页逐字稿和实际 ID 若有出入，以课件为准，后续再锁分镜。": "L4 first lists templates from the L3/L4 trial skeleton. If the page script or IDs differ, follow the courseware and lock the shot list later.",
+  "课堂节奏": "Class pacing",
+  "老师是否会被学生带偏。达成：整节课守住当页目标；学生跑题、闲聊、加问时，简短接住后立刻拉回，不另开一轮闲聊。被带去闲聊、反复纠结、离开当页目标则选未达成并写原因。默认不选。": "Does the student pull the teacher off-task? Met: stay on this page’s goal for the whole class; if the student goes off-topic, chats, or adds questions, catch it briefly and pull back — do not start a new chat. If they get pulled into chat, loop on a side point, or leave the page goal, mark Not met and write why. Default: unselected.",
+  "页卡死": "Page stuck",
+  "某一页卡死，走不到下一页。": "A page is stuck and cannot reach the next page.",
+  "误判并误奖": "False pass and false reward",
+  "把无回应或「不会」判成正确，或因此发了成功奖励。": "No response or “I don’t know” is marked correct, or a success reward is given because of that.",
+  "教学内容错": "Wrong teaching content",
+  "目标词图文或示范句明确错了。": "The target word art/text or the model sentence is clearly wrong.",
+  "结束标签空跳": "Empty end-tag jump",
+  "结束标签已发出，下一页没有出现。": "The end tag already fired, but the next page did not appear.",
+  "放入图或视频": "Add an image or video",
+  "上传": "Upload",
+  "清除": "Clear",
+  "已放入课件": "Courseware added",
+  "尚未放入课件": "No courseware yet",
+  "未测": "Untested",
+  "≤2 分钟 · 1 分": "≤2 min · 1 pt",
+  "超过 2 分钟 · 0.5 分": "Over 2 min · 0.5 pt",
+  "超过 5 分钟 · 0 分": "Over 5 min · 0 pt",
+  "达成": "Met",
+  "未达成": "Not met",
+  "未达成原因": "Why it was not met",
+  "通过": "Pass",
+  "不通过": "Fail",
+  "V2 更好": "V2 better",
+  "V2 不足": "V2 behind",
+  "持平": "Tie"
+};
+    const I18N = {
+  "zh": {
+    "title": "体验课 上线前验收表",
+    "fillBanner": "你正在填写分享版验收表。可以打分和写备注，但不能改课件图。",
+    "levelNav": "体验课 Level",
+    "viewV1": "V1 验收",
+    "viewV2": "V2 验收",
+    "viewCompare": "版本对比与发布",
+    "verName": "版本名称",
+    "share": "分享",
+    "settings": "分享设置",
+    "globalScore": "全局打分",
+    "globalLead": "整节课只打一次，不按 template 拆。默认不选。选「未达成」必须写下原因。",
+    "colItem": "项目",
+    "colHow": "怎么判",
+    "colVerdict": "判定",
+    "scoreNote": "全局项各 1 分。格子用单选：达成 / 未达成，默认都不选。选未达成会出现备注框，请写下原因。每一行的课件、开口、口型、回应、不重复、动作、TTS、Dino、退出、金币各 1 分；环节耗时：2 分钟以内 1 分，超过 2 分钟 0.5 分，超过 5 分钟 0 分。",
+    "compareGlobal": "全局打分对比",
+    "compareGlobalLead": "整节课项，V1 / V2 分开看。",
+    "colMax": "满分",
+    "colDelta": "差值",
+    "redlines": "上线红线",
+    "redlinesLead": "破一条就不能发，和总分无关。默认是未测；没跑到的场景必须保持未测，不能勾通过。",
+    "colRed": "红线",
+    "colHowBroken": "怎么算破",
+    "scoreGate": "总分与发布门禁",
+    "colVersion": "版本",
+    "colScored": "已得分",
+    "colDone": "完成度",
+    "colResult": "对比结论",
+    "thresholdLead": "上线分数线（可选）：V2 达到该分、高于 V1、且红线全过才算过。不填则不卡分数线。",
+    "thresholdPh": "上线分数线，可空",
+    "fieldCompare": "按验收列对比",
+    "fieldCompareLead": "同一列在全书上的得分，用来看开口、口型、回应、重复、耗时、Dino、金币等哪一类变好或变差。",
+    "colField": "验收列",
+    "footer": "文件：课程治理 / 体验课上线前验收表 · L1–L4 各自保存 V1 / V2 勾选与课件",
+    "colSeq": "序",
+    "colTemplate": "Template",
+    "colId": "ID",
+    "points": "分",
+    "canPublish": "可发布",
+    "cannotPublish": "不可发布",
+    "oldShort": "旧",
+    "newShort": "新",
+    "comparing": "当前对比：{course} · {name} · V1 vs V2",
+    "baseline": "对照基准",
+    "publishOk": "可以发布 {name}。",
+    "publishOkBody": "{neu} {neuScore} 分高于 {old} {oldScore} 分，且四条红线全部通过{extra}。",
+    "publishLine": "，并达到上线分数线 {n}",
+    "publishNo": "{name} 还不能发布。",
+    "publishNoBody": "{blocks}。当前 {neu} {neuScore} 分，{old} {oldScore} 分。",
+    "blockBeatOld": "V2 总分没有高于 V1",
+    "blockBeatLine": "V2 未达到上线分数线 {n}",
+    "blockNoScore": "V2 还没有验收分数",
+    "blockRed": "红线未清：{list}",
+    "settingsTitle": "分享设置",
+    "settingsLead": "分享会把课件图发到 GitHub 仓库，生成填写链接。Token 只存在这台电脑，不会写进表格。",
+    "settingsRepo": "GitHub Token 需要 repo 权限。账号：{owner} / 仓库：{repo}",
+    "tokenPh": "粘贴 GitHub Token",
+    "cancel": "取消",
+    "save": "保存",
+    "needToken": "先保存 GitHub Token，才能生成给别人用的链接。",
+    "needTokenShort": "先保存 GitHub Token。",
+    "sharingTitle": "正在生成分享链接",
+    "sharingLead": "正在打包并上传课件图，请稍候。",
+    "shareReady": "分享链接已生成",
+    "shareReadyLead": "别人打开后可以打分，但不能改课件图。刚发布时 GitHub 可能要等 1 分钟才看得到图。",
+    "close": "关闭",
+    "copyLink": "复制链接",
+    "shareFail": "分享失败",
+    "uploadFail": "GitHub 上传失败",
+    "shareNotReady": "分享链接还没生效，或课件还在发布中。请稍后再打开。",
+    "shareLoadFail": "分享内容加载失败",
+    "sep": "、"
+  },
+  "en": {
+    "title": "Trial lesson pre-launch QA",
+    "fillBanner": "You are filling a shared QA sheet. You can score and comment, but you cannot change courseware images.",
+    "levelNav": "Trial lesson level",
+    "viewV1": "V1 review",
+    "viewV2": "V2 review",
+    "viewCompare": "Compare & publish",
+    "verName": "Version name",
+    "share": "Share",
+    "settings": "Share settings",
+    "globalScore": "Whole-class score",
+    "globalLead": "Score once for the whole class, not per template. Default: unselected. If you mark Not met, you must write why.",
+    "colItem": "Item",
+    "colHow": "How to judge",
+    "colVerdict": "Result",
+    "scoreNote": "Each whole-class item is 1 point. Cells use Met / Not met and start unselected. Not met shows a note box — write why. On each row, courseware, talk, lip sync, response, no-repeat, action, TTS, Dino, exit, and coins are 1 point each. Duration: 1 point within 2 minutes, 0.5 over 2 minutes, 0 over 5 minutes.",
+    "compareGlobal": "Whole-class compare",
+    "compareGlobalLead": "Whole-class items, V1 and V2 separately.",
+    "colMax": "Max",
+    "colDelta": "Delta",
+    "redlines": "Launch red lines",
+    "redlinesLead": "One broken red line blocks launch, regardless of total score. Default is Untested. Scenes you did not run must stay Untested — do not mark Pass.",
+    "colRed": "Red line",
+    "colHowBroken": "What counts as broken",
+    "scoreGate": "Totals and launch gate",
+    "colVersion": "Version",
+    "colScored": "Score",
+    "colDone": "Done",
+    "colResult": "Verdict",
+    "thresholdLead": "Launch score line (optional): V2 must reach it, beat V1, and pass all red lines. Leave empty to skip the score line.",
+    "thresholdPh": "Launch score line, optional",
+    "fieldCompare": "Compare by column",
+    "fieldCompareLead": "The same column across the lesson — talk, lip sync, response, repeats, duration, Dino, coins, and so on.",
+    "colField": "Column",
+    "footer": "Course governance / trial lesson QA · L1–L4 each keep their own V1 / V2 checks and courseware",
+    "colSeq": "No.",
+    "colTemplate": "Template",
+    "colId": "ID",
+    "points": "pts",
+    "canPublish": "Ready",
+    "cannotPublish": "Not ready",
+    "oldShort": "Old",
+    "newShort": "New",
+    "comparing": "Comparing: {course} · {name} · V1 vs V2",
+    "baseline": "Baseline",
+    "publishOk": "{name} can publish.",
+    "publishOkBody": "{neu} {neuScore} beats {old} {oldScore}, and all four red lines passed{extra}.",
+    "publishLine": ", and reached the launch score line {n}",
+    "publishNo": "{name} cannot publish yet.",
+    "publishNoBody": "{blocks}. Now {neu} {neuScore}, {old} {oldScore}.",
+    "blockBeatOld": "V2 total is not higher than V1",
+    "blockBeatLine": "V2 has not reached the launch score line {n}",
+    "blockNoScore": "V2 has no QA score yet",
+    "blockRed": "Red lines still open: {list}",
+    "settingsTitle": "Share settings",
+    "settingsLead": "Share uploads courseware images to the GitHub repo and creates a fill-in link. The token stays on this computer and is not written into the sheet.",
+    "settingsRepo": "The GitHub token needs repo access. Account: {owner} / repo: {repo}",
+    "tokenPh": "Paste GitHub token",
+    "cancel": "Cancel",
+    "save": "Save",
+    "needToken": "Save a GitHub token first, then you can create a link for others.",
+    "needTokenShort": "Save a GitHub token first.",
+    "sharingTitle": "Creating share link",
+    "sharingLead": "Packing and uploading courseware images. Please wait.",
+    "shareReady": "Share link is ready",
+    "shareReadyLead": "Other people can score, but they cannot change courseware images. Images may take about 1 minute to appear after publish.",
+    "close": "Close",
+    "copyLink": "Copy link",
+    "shareFail": "Share failed",
+    "uploadFail": "GitHub upload failed",
+    "shareNotReady": "This share link is not live yet, or the courseware is still publishing. Try again in a minute.",
+    "shareLoadFail": "Could not load the shared sheet",
+    "sep": ", "
+  }
+};
+    function readLang() {
+      try {
+        const q = new URLSearchParams(location.search).get("lang");
+        if (q === "en" || q === "zh") return q;
+        const saved = localStorage.getItem(LANG_KEY);
+        if (saved === "en" || saved === "zh") return saved;
+      } catch (err) {}
+      return "zh";
+    }
+    let lang = readLang();
+    let shareError = "";
+    function t(key, vars) {
+      const table = (I18N[lang] && I18N[lang][key] != null) ? I18N[lang] : I18N.zh;
+      let s = table[key];
+      if (s == null) s = I18N.zh[key] != null ? I18N.zh[key] : key;
+      if (vars) {
+        Object.keys(vars).forEach((k) => {
+          s = String(s).split("{" + k + "}").join(String(vars[k]));
+        });
+      }
+      return s;
+    }
+    function loc(text) {
+      if (text == null) return "";
+      if (typeof text === "object") return (lang === "en" ? text.en : text.zh) || text.zh || text.en || "";
+      const raw = String(text);
+      if (lang !== "en") return raw;
+      if (Object.prototype.hasOwnProperty.call(PHRASE, raw)) return PHRASE[raw];
+      return raw;
+    }
+    function applyChrome() {
+      document.documentElement.lang = lang === "en" ? "en" : "zh-CN";
+      document.title = t("title");
+      document.querySelectorAll("[data-i18n]").forEach((el) => {
+        el.textContent = t(el.dataset.i18n);
+      });
+      document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+        el.placeholder = t(el.dataset.i18nPlaceholder);
+      });
+      const zhBtn = document.getElementById("langBtnZh");
+      const enBtn = document.getElementById("langBtnEn");
+      if (zhBtn) zhBtn.classList.toggle("active", lang === "zh");
+      if (enBtn) enBtn.classList.toggle("active", lang === "en");
+      const nav = document.getElementById("level-tabs");
+      if (nav) nav.setAttribute("aria-label", t("levelNav"));
+      const banner = document.getElementById("fill-banner");
+      if (banner && shareError) banner.textContent = t(shareError);
+      else if (banner && FILL_MODE) banner.textContent = t("fillBanner");
+    }
+    function setLang(next) {
+      if (next !== "en" && next !== "zh") return;
+      lang = next;
+      try { localStorage.setItem(LANG_KEY, next); } catch (err) {}
+      try {
+        const u = new URL(location.href);
+        u.searchParams.set("lang", next);
+        history.replaceState(null, "", u);
+      } catch (err) {}
+      applyChrome();
+      applyView();
+    }
     const EXIT_SPEC = "逻辑侧需要抛正确的[NEXT_STEP]/[TEMPLATE_FINISH]";
     const LIP_SPEC = "口型与当前老师说话匹配。嘴动和当句对不上则选未达成并写原因。默认不选。";
     const REPLY_SPEC = "老师对学生的话有回应，且回应合理。没接住或答非所问则选未达成并写原因。学生本页未开口则保持不选。";
@@ -887,9 +1318,9 @@
     }
 
     function verdict(oldScore, newScore) {
-      if (newScore > oldScore) return { text: "V2 更好", cls: "ok" };
-      if (newScore < oldScore) return { text: "V2 不足", cls: "bad" };
-      return { text: "持平", cls: "warn" };
+      if (newScore > oldScore) return { text: loc("V2 更好"), cls: "ok" };
+      if (newScore < oldScore) return { text: loc("V2 不足"), cls: "bad" };
+      return { text: loc("持平"), cls: "warn" };
     }
 
     function redlineStatus(ver, key) {
@@ -903,7 +1334,7 @@
     function redlineBlocks(ver) {
       return REDLINES.filter((item) => redlineStatus(ver, item.key) !== "pass").map((item) => {
         const status = redlineStatus(ver, item.key);
-        return item.title + (status === "fail" ? "不通过" : "未测");
+        return loc(item.title) + (lang === "en" ? ": " : "") + (status === "fail" ? loc("不通过") : loc("未测"));
       });
     }
 
@@ -915,10 +1346,10 @@
       const beatLine = !cur().threshold || newScore >= line;
       const redOk = redlinePassed("neu");
       const blocks = [];
-      if (!beatOld) blocks.push("V2 总分没有高于 V1");
-      if (!beatLine) blocks.push("V2 未达到上线分数线 " + cur().threshold);
-      if (newScore <= 0) blocks.push("V2 还没有验收分数");
-      if (!redOk) blocks.push("红线未清：" + redlineBlocks("neu").join("、"));
+      if (!beatOld) blocks.push(t("blockBeatOld"));
+      if (!beatLine) blocks.push(t("blockBeatLine", { n: cur().threshold }));
+      if (newScore <= 0) blocks.push(t("blockNoScore"));
+      if (!redOk) blocks.push(t("blockRed", { list: redlineBlocks("neu").join(t("sep")) }));
       return {
         oldScore,
         newScore,
@@ -945,8 +1376,8 @@
       const passOn = status === "pass" ? "checked" : "";
       const failOn = status === "fail" ? "checked" : "";
       return `<div class="choice">
-        <label class="check"><input type="radio" name="${prefix}-pass" ${attrs} value="pass" autocomplete="off" ${passOn} />达成</label>
-        <label class="check"><input type="radio" name="${prefix}-fail" ${attrs} value="fail" autocomplete="off" ${failOn} />未达成</label>
+        <label class="check"><input type="radio" name="${prefix}-pass" ${attrs} value="pass" autocomplete="off" ${passOn} />${loc("达成")}</label>
+        <label class="check"><input type="radio" name="${prefix}-fail" ${attrs} value="fail" autocomplete="off" ${failOn} />${loc("未达成")}</label>
       </div>`;
     }
 
@@ -958,7 +1389,7 @@
       return `<div class="cell">
         <p>${html}</p>
         ${radioPair(prefix, status, attrs)}
-        <textarea class="fail-note" data-cell-note="${rowId}" data-field="${key}" rows="3" placeholder="未达成原因" ${status === "fail" ? "" : "hidden"}>${escapeHtml(note)}</textarea>
+        <textarea class="fail-note" data-cell-note="${rowId}" data-field="${key}" rows="3" placeholder="${escapeHtml(loc("未达成原因"))}" ${status === "fail" ? "" : "hidden"}>${escapeHtml(note)}</textarea>
       </div>`;
     }
 
@@ -966,31 +1397,31 @@
       const val = cur().versions[ver].checks[rowId + ":duration"] || "";
       const opt = (value, label) =>
         `<option value="${value}" ${val === value ? "selected" : ""}>${label}</option>`;
-      return `<div class="cell"><p>${rich(DURATION_SPEC)}</p><select data-row="${rowId}" data-field="duration">
-        ${opt("", "未测")}
-        ${opt("ok", "≤2 分钟 · 1 分")}
-        ${opt("half", "超过 2 分钟 · 0.5 分")}
-        ${opt("fail", "超过 5 分钟 · 0 分")}
+      return `<div class="cell"><p>${rich(loc(DURATION_SPEC))}</p><select data-row="${rowId}" data-field="duration">
+        ${opt("", loc("未测"))}
+        ${opt("ok", loc("≤2 分钟 · 1 分"))}
+        ${opt("half", loc("超过 2 分钟 · 0.5 分"))}
+        ${opt("fail", loc("超过 5 分钟 · 0 分"))}
       </select></div>`;
     }
 
     function mediaCell(ver, rowId) {
       const rec = slot(ver)[rowId];
-      let preview = `<div class="empty">放入图或视频</div>`;
+      let preview = `<div class="empty">${loc("放入图或视频")}</div>`;
       if (rec && rec.url) {
         if ((rec.type || "").startsWith("video/")) {
           preview = `<video src="${rec.url}" controls></video>`;
         } else {
-          preview = `<img src="${rec.url}" alt="${escapeHtml(rec.name || "课件")}" />`;
+          preview = `<img src="${rec.url}" alt="${escapeHtml(rec.name || loc("课件"))}" />`;
         }
       }
       return `<div>
         <div class="media">${preview}</div>
         <div class="media-actions owner-only">
-          <label class="file-btn">上传<input type="file" accept="image/*,video/*" data-upload="${rowId}" hidden /></label>
-          ${rec ? `<button type="button" data-clear="${rowId}">清除</button>` : ""}
+          <label class="file-btn">${loc("上传")}<input type="file" accept="image/*,video/*" data-upload="${rowId}" hidden /></label>
+          ${rec ? `<button type="button" data-clear="${rowId}">${loc("清除")}</button>` : ""}
         </div>
-        ${radioCell(ver, rowId, "media", rec ? escapeHtml(rec.name || "已放入课件") : "尚未放入课件")}
+        ${radioCell(ver, rowId, "media", rec ? escapeHtml(rec.name || loc("已放入课件")) : loc("尚未放入课件"))}
       </div>`;
     }
 
@@ -998,32 +1429,32 @@
       const ver = state.view === "neu" ? "neu" : "old";
       const notes = pack().notes || {};
       document.getElementById("section-nav").innerHTML =
-        `<a href="#global">全局打分</a>` +
-        sections().map((sec) => `<a href="#${sec.id}">${escapeHtml(sec.title)}</a>`).join("");
+        `<a href="#global">${escapeHtml(t("globalScore"))}</a>` +
+        sections().map((sec) => `<a href="#${sec.id}">${escapeHtml(loc(sec.title))}</a>`).join("");
       document.getElementById("sections").innerHTML = sections().map((sec) => {
         const rowsHtml = sec.rows.map((id) => {
           const row = rows()[id];
           if (!row) return "";
           return `<tr>
             <td>${id}</td>
-            <td>${escapeHtml(row.name)}</td>
-            <td><code>${escapeHtml(row.tid)}</code></td>
+            <td>${escapeHtml(loc(row.name))}</td>
+            <td><code>${escapeHtml(loc(row.tid))}</code></td>
             <td>${mediaCell(ver, id)}</td>
-            <td>${radioCell(ver, id, "talk", rich(row.talk))}</td>
-            <td>${radioCell(ver, id, "lip", rich(LIP_SPEC))}</td>
-            <td>${radioCell(ver, id, "reply", rich(REPLY_SPEC))}</td>
-            <td>${radioCell(ver, id, "repeat", rich(REPEAT_SPEC))}</td>
+            <td>${radioCell(ver, id, "talk", rich(loc(row.talk)))}</td>
+            <td>${radioCell(ver, id, "lip", rich(loc(LIP_SPEC)))}</td>
+            <td>${radioCell(ver, id, "reply", rich(loc(REPLY_SPEC)))}</td>
+            <td>${radioCell(ver, id, "repeat", rich(loc(REPEAT_SPEC)))}</td>
             <td>${durationCell(ver, id)}</td>
-            <td>${radioCell(ver, id, "action", rich(row.action))}</td>
-            <td>${radioCell(ver, id, "tts", rich(row.tts))}</td>
-            <td>${radioCell(ver, id, "dino", rich(row.dino))}</td>
-            <td>${radioCell(ver, id, "exit", rich(EXIT_SPEC))}</td>
-            <td>${radioCell(ver, id, "coin", rich(row.coin))}</td>
+            <td>${radioCell(ver, id, "action", rich(loc(row.action)))}</td>
+            <td>${radioCell(ver, id, "tts", rich(loc(row.tts)))}</td>
+            <td>${radioCell(ver, id, "dino", rich(loc(row.dino)))}</td>
+            <td>${radioCell(ver, id, "exit", rich(loc(EXIT_SPEC)))}</td>
+            <td>${radioCell(ver, id, "coin", rich(loc(row.coin)))}</td>
           </tr>`;
         }).join("");
         return `<section>
-          <h2 id="${sec.id}">${sec.title}</h2>
-          ${notes[sec.id] ? `<div class="callout warn">${notes[sec.id]}</div>` : ""}
+          <h2 id="${sec.id}">${escapeHtml(loc(sec.title))}</h2>
+          ${notes[sec.id] ? `<div class="callout warn">${escapeHtml(loc(notes[sec.id]))}</div>` : ""}
           <div class="table-wrap"><table class="spec">
             <colgroup>
               <col style="width:56px" />
@@ -1042,9 +1473,9 @@
               <col style="width:200px" />
             </colgroup>
             <thead><tr>
-              <th>序</th><th>Template</th><th>ID</th><th>课件</th>
-              <th>老师开口</th><th>口型匹配</th><th>回应合理</th><th>不出现对话重复现象</th><th>环节耗时</th>
-              <th>老师动作</th><th>TTS</th><th>Dino</th><th>退出 / 收口</th><th>金币</th>
+              <th>${t("colSeq")}</th><th>${t("colTemplate")}</th><th>${t("colId")}</th><th>${loc("课件")}</th>
+              <th>${loc("老师开口")}</th><th>${loc("口型匹配")}</th><th>${loc("回应合理")}</th><th>${loc("不出现对话重复现象")}</th><th>${loc("环节耗时")}</th>
+              <th>${loc("老师动作")}</th><th>TTS</th><th>Dino</th><th>${loc("退出 / 收口")}</th><th>${loc("金币")}</th>
             </tr></thead>
             <tbody>${rowsHtml}</tbody>
           </table></div>
@@ -1061,11 +1492,11 @@
         const note = notes[item.key] || "";
         const prefix = escapeHtml("qa-" + ver + "-global-" + item.key);
         return `<tr>
-          <td>${i + 1}. ${escapeHtml(item.title)}</td>
-          <td>${escapeHtml(item.how)}</td>
+          <td>${i + 1}. ${escapeHtml(loc(item.title))}</td>
+          <td>${escapeHtml(loc(item.how))}</td>
           <td>
             ${radioPair(prefix, status, `data-global="${item.key}"`)}
-            <textarea class="fail-note" data-global-note="${item.key}" rows="3" placeholder="未达成原因" ${status === "fail" ? "" : "hidden"}>${escapeHtml(note)}</textarea>
+            <textarea class="fail-note" data-global-note="${item.key}" rows="3" placeholder="${escapeHtml(loc("未达成原因"))}" ${status === "fail" ? "" : "hidden"}>${escapeHtml(note)}</textarea>
           </td>
         </tr>`;
       }).join("");
@@ -1076,12 +1507,12 @@
       if (!viewing) {
         const pub = canPublish();
         document.getElementById("topStats").innerHTML =
-          `<span>旧 ${fmtScore(pub.oldScore)}/${fmtScore(maxScoreOf("old"))}</span><span>新 ${fmtScore(pub.newScore)}/${fmtScore(maxScoreOf("neu"))}</span><span class="${pub.ok ? "ok" : "bad"}">${pub.ok ? "可发布" : "不可发布"}</span>`;
+          `<span>${t("oldShort")} ${fmtScore(pub.oldScore)}/${fmtScore(maxScoreOf("old"))}</span><span>${t("newShort")} ${fmtScore(pub.newScore)}/${fmtScore(maxScoreOf("neu"))}</span><span class="${pub.ok ? "ok" : "bad"}">${pub.ok ? t("canPublish") : t("cannotPublish")}</span>`;
         return;
       }
       const got = scoreOf(viewing);
       document.getElementById("topStats").innerHTML =
-        `<span><b>${fmtScore(got)}</b> / ${fmtScore(maxScore())} 分</span><span>${cur().versions[viewing].label}</span>`;
+        `<span><b>${fmtScore(got)}</b> / ${fmtScore(maxScore())} ${t("points")}</span><span>${cur().versions[viewing].label}</span>`;
     }
 
     function renderCompare() {
@@ -1090,18 +1521,19 @@
       const pub = canPublish();
       const item = course();
       document.getElementById("compare-course").textContent =
-        "当前对比：" + item.short + " · " + item.name + " · V1 vs V2";
+        t("comparing", { course: loc(item.short), name: item.name });
       const oldName = escapeHtml(cur().versions.old.label);
       const newName = escapeHtml(cur().versions.neu.label);
       const oldMax = maxScoreOf("old");
       const newMax = maxScoreOf("neu");
       document.getElementById("scoreSummary").innerHTML = `
-        <tr><td>${oldName}</td><td>${fmtScore(oldScore)}</td><td>${fmtScore(oldMax)}</td><td>${oldMax ? Math.round(oldScore / oldMax * 100) : 0}%</td><td>对照基准</td></tr>
+        <tr><td>${oldName}</td><td>${fmtScore(oldScore)}</td><td>${fmtScore(oldMax)}</td><td>${oldMax ? Math.round(oldScore / oldMax * 100) : 0}%</td><td>${t("baseline")}</td></tr>
         <tr><td>${newName}</td><td>${fmtScore(newScore)}</td><td>${fmtScore(newMax)}</td><td>${newMax ? Math.round(newScore / newMax * 100) : 0}%</td><td class="${verdict(oldScore, newScore).cls}">${verdict(oldScore, newScore).text} ${newScore - oldScore >= 0 ? "+" : ""}${fmtScore(newScore - oldScore)}</td></tr>
       `;
+      const extra = cur().threshold ? t("publishLine", { n: cur().threshold }) : "";
       document.getElementById("publishBox").innerHTML = pub.ok
-        ? `<div class="note"><b>可以发布 ${newName}。</b> ${newName} ${fmtScore(newScore)} 分高于 ${oldName} ${fmtScore(oldScore)} 分，且四条红线全部通过${cur().threshold ? "，并达到上线分数线 " + cur().threshold : ""}。</div>`
-        : `<div class="callout bad"><b>${newName} 还不能发布。</b> ${pub.blocks.join("；")}。当前 ${newName} ${fmtScore(newScore)} 分，${oldName} ${fmtScore(oldScore)} 分。</div>`;
+        ? `<div class="note"><b>${t("publishOk", { name: newName })}</b> ${t("publishOkBody", { neu: newName, neuScore: fmtScore(newScore), old: oldName, oldScore: fmtScore(oldScore), extra: extra })}</div>`
+        : `<div class="callout bad"><b>${t("publishNo", { name: newName })}</b> ${t("publishNoBody", { blocks: pub.blocks.join(lang === "en" ? "; " : "；"), neu: newName, neuScore: fmtScore(newScore), old: oldName, oldScore: fmtScore(oldScore) })}</div>`;
 
       ["redOldHead", "fieldOldHead", "globalOldHead"].forEach((id) => {
         const el = document.getElementById(id);
@@ -1117,7 +1549,7 @@
         const n = markStatus((cur().versions.neu.globals || {})[item.key]) === "pass" ? 1 : 0;
         const v = verdict(o, n);
         return `<tr>
-          <td>${escapeHtml(item.title)}</td><td>1</td><td>${o}</td><td>${n}</td>
+          <td>${escapeHtml(loc(item.title))}</td><td>1</td><td>${o}</td><td>${n}</td>
           <td>${n - o >= 0 ? "+" : ""}${n - o}</td>
           <td class="${v.cls}">${v.text}</td>
         </tr>`;
@@ -1127,13 +1559,13 @@
         const opt = (ver) => {
           const cur = redlineStatus(ver, item.key);
           return ["untested", "pass", "fail"].map((value) => {
-            const label = value === "pass" ? "通过" : value === "fail" ? "不通过" : "未测";
+            const label = value === "pass" ? loc("通过") : value === "fail" ? loc("不通过") : loc("未测");
             return `<option value="${value}" ${cur === value ? "selected" : ""}>${label}</option>`;
           }).join("");
         };
         return `<tr>
-          <td>${item.title}</td>
-          <td>${item.how}</td>
+          <td>${escapeHtml(loc(item.title))}</td>
+          <td>${escapeHtml(loc(item.how))}</td>
           <td><select data-redline="${item.key}" data-ver="old">${opt("old")}</select></td>
           <td><select data-redline="${item.key}" data-ver="neu">${opt("neu")}</select></td>
         </tr>`;
@@ -1146,7 +1578,7 @@
         const n = scoreOf("neu", neuIds, [field.key]);
         const v = verdict(o, n);
         return `<tr>
-          <td>${field.label}</td><td>${oldIds.length} / ${neuIds.length}</td><td>${fmtScore(o)}</td><td>${fmtScore(n)}</td>
+          <td>${escapeHtml(loc(field.label))}</td><td>${oldIds.length} / ${neuIds.length}</td><td>${fmtScore(o)}</td><td>${fmtScore(n)}</td>
           <td>${n - o >= 0 ? "+" : ""}${fmtScore(n - o)}</td>
           <td class="${v.cls}">${v.text}</td>
         </tr>`;
@@ -1157,7 +1589,7 @@
     function renderLevelTabs() {
       document.getElementById("level-tabs").innerHTML = LEVEL_IDS.map((id) => {
         const item = COURSES[id];
-        return `<button type="button" class="tab${state.level === id ? " active" : ""}" data-level="${id}">${item.short}</button>`;
+        return `<button type="button" class="tab${state.level === id ? " active" : ""}" data-level="${id}">${escapeHtml(loc(item.short))}</button>`;
       }).join("");
     }
 
@@ -1166,7 +1598,7 @@
       const item = course();
       if (item.note) {
         note.hidden = false;
-        note.textContent = item.note;
+        note.textContent = loc(item.note);
       } else {
         note.hidden = true;
         note.textContent = "";
@@ -1174,6 +1606,7 @@
     }
 
     function applyView() {
+      applyChrome();
       const compare = state.view === "compare";
       document.getElementById("workView").classList.toggle("hidden", compare);
       document.getElementById("compareView").classList.toggle("hidden", !compare);
@@ -1334,7 +1767,7 @@
       });
       if (!res.ok) {
         const text = await res.text();
-        throw new Error(text || "GitHub 上传失败");
+        throw new Error(text || t("uploadFail"));
       }
     }
 
@@ -1372,7 +1805,7 @@
     async function loadShareSnapshot() {
       const url = "https://raw.githubusercontent.com/" + GH_OWNER + "/" + GH_REPO + "/main/shares/" + SHARE_ID + "/manifest.json";
       const res = await fetch(url);
-      if (!res.ok) throw new Error("分享链接还没生效，或课件还在发布中。请稍后再打开。");
+      if (!res.ok) throw new Error("shareNotReady");
       const manifest = await res.json();
       (manifest.media || []).forEach((item) => {
         if (!mediaCache[item.level]) mediaCache[item.level] = { old: {}, neu: {} };
@@ -1387,14 +1820,14 @@
     function showSettings(extra) {
       const token = localStorage.getItem(TOKEN_KEY) || "";
       openModal(`
-        <h3>分享设置</h3>
-        <p class="lead">分享会把课件图发到 GitHub 仓库，生成填写链接。Token 只存在这台电脑，不会写进表格。</p>
+        <h3>${t("settingsTitle")}</h3>
+        <p class="lead">${t("settingsLead")}</p>
         ${extra ? `<p class="callout warn">${escapeHtml(extra)}</p>` : ""}
-        <p class="lead">GitHub Token 需要 repo 权限。账号：${GH_OWNER} / 仓库：${GH_REPO}</p>
-        <input id="tokenInput" class="share-link" type="password" placeholder="粘贴 GitHub Token" value="${escapeHtml(token)}" />
+        <p class="lead">${t("settingsRepo", { owner: GH_OWNER, repo: GH_REPO })}</p>
+        <input id="tokenInput" class="share-link" type="password" placeholder="${escapeHtml(t("tokenPh"))}" value="${escapeHtml(token)}" />
         <div class="actions">
-          <button type="button" data-close-modal>取消</button>
-          <button type="button" id="saveTokenBtn">保存</button>
+          <button type="button" data-close-modal>${t("cancel")}</button>
+          <button type="button" id="saveTokenBtn">${t("save")}</button>
         </div>
       `);
     }
@@ -1402,10 +1835,10 @@
     async function createShare() {
       const token = localStorage.getItem(TOKEN_KEY);
       if (!token) {
-        showSettings("先保存 GitHub Token，才能生成给别人用的链接。");
+        showSettings(t("needToken"));
         return;
       }
-      openModal(`<h3>正在生成分享链接</h3><p class="lead">正在打包并上传课件图，请稍候。</p>`);
+      openModal(`<h3>${t("sharingTitle")}</h3><p class="lead">${t("sharingLead")}</p>`);
       try {
         const items = await collectShareMedia();
         const id = Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
@@ -1443,24 +1876,29 @@
           btoa(unescape(encodeURIComponent(JSON.stringify(manifest, null, 2)))),
           "Add share manifest " + id
         );
-        const link = pagesBaseUrl() + "?share=" + id;
+        const link = pagesBaseUrl() + "?share=" + id + "&lang=" + lang;
         openModal(`
-          <h3>分享链接已生成</h3>
-          <p class="lead">别人打开后可以打分，但不能改课件图。刚发布时 GitHub 可能要等 1 分钟才看得到图。</p>
+          <h3>${t("shareReady")}</h3>
+          <p class="lead">${t("shareReadyLead")}</p>
           <input class="share-link" id="shareLinkInput" readonly value="${escapeHtml(link)}" />
           <div class="actions">
-            <button type="button" data-close-modal>关闭</button>
-            <button type="button" id="copyShareBtn">复制链接</button>
+            <button type="button" data-close-modal>${t("close")}</button>
+            <button type="button" id="copyShareBtn">${t("copyLink")}</button>
           </div>
         `);
       } catch (err) {
         const msg = String(err && err.message || err);
-        if (msg === "NO_TOKEN") showSettings("先保存 GitHub Token。");
-        else openModal(`<h3>分享失败</h3><p class="callout bad">${escapeHtml(msg)}</p><div class="actions"><button type="button" data-close-modal>关闭</button></div>`);
+        if (msg === "NO_TOKEN") showSettings(t("needTokenShort"));
+        else openModal(`<h3>${t("shareFail")}</h3><p class="callout bad">${escapeHtml(msg === "shareNotReady" ? t("shareNotReady") : msg)}</p><div class="actions"><button type="button" data-close-modal>${t("close")}</button></div>`);
       }
     }
 
     document.body.addEventListener("click", (e) => {
+      const langBtn = e.target.closest("[data-lang]");
+      if (langBtn && langBtn.dataset.lang) {
+        setLang(langBtn.dataset.lang);
+        return;
+      }
       if (e.target.id === "shareBtn") {
         createShare();
         return;
@@ -1624,7 +2062,8 @@
         if (banner) {
           banner.hidden = false;
           banner.className = "callout bad";
-          banner.textContent = err.message || "分享内容加载失败";
+          shareError = (err && err.message) || "shareLoadFail";
+          banner.textContent = t(shareError);
         }
       })
       .then(() => openDb())
@@ -1633,7 +2072,7 @@
         return FILL_MODE ? null : hydrateMedia();
       })
       .catch(() => null)
-      .finally(applyView);
+      .finally(() => { applyChrome(); applyView(); });
   </script>
 </body>
 </html>
