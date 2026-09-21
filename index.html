@@ -81,8 +81,8 @@
       border-radius: 8px;
     }
     table.spec {
-      width: 3360px;
-      min-width: 3360px;
+      width: 2920px;
+      min-width: 2920px;
       max-width: none;
       table-layout: fixed;
       border-collapse: collapse;
@@ -261,7 +261,7 @@
       </section>
       <nav id="section-nav"></nav>
       <div class="note">
-        全局项各 1 分。格子用单选：达成 / 未达成，默认都不选。选未达成会出现备注框，请写下原因。每一行的课件、开口、口型、回应、不重复、动作、TTS、Dino、退出、金币各 1 分；环节耗时：2 分钟以内 1 分，超过 2 分钟 0.5 分，超过 5 分钟 0 分。惊喜瞬间有则 +1 分，惊吓瞬间有则 −1 分。
+        全局项各 1 分。格子用单选：达成 / 未达成，默认都不选。选未达成会出现备注框，请写下原因。每一行的课件、开口、口型、回应、不重复、动作、TTS、Dino、退出、金币各 1 分；环节耗时：2 分钟以内 1 分，超过 2 分钟 0.5 分，超过 5 分钟 0 分。
       </div>
       <div id="sections"></div>
     </div>
@@ -310,7 +310,7 @@
       </div>
 
       <h2>按验收列对比</h2>
-      <p class="lead">同一列在全书上的得分，用来看开口、口型、回应、重复、耗时、Dino、金币、惊喜、惊吓等哪一类变好或变差。惊喜有则 +1，惊吓有则 −1。</p>
+      <p class="lead">同一列在全书上的得分，用来看开口、口型、回应、重复、耗时、Dino、金币等哪一类变好或变差。</p>
       <div class="table-wrap compare">
         <table>
           <thead>
@@ -332,8 +332,6 @@
     const REPLY_SPEC = "老师对学生的话有回应，且回应合理。没接住或答非所问则选未达成并写原因。学生本页未开口则保持不选。";
     const REPEAT_SPEC = "老师不出现同一问题重复问大于等于3次的情况。同一问 ≥3 次则选未达成并写原因。默认不选。";
     const DURATION_SPEC = "该环节耗时在 2 分钟以内得满分；超过 2 分钟得一半分；超过 5 分钟得 0 分。未测不选。";
-    const SURPRISE_SPEC = "这个环节让你眼前一亮，更喜欢这个课程了。有则选达成，加 1 分。没有选未达成或保持不选。";
-    const SCARE_SPEC = "这个环节吓到了你，让你想立即退出。有则选达成，扣 1 分。没有选未达成或保持不选。";
     const FIELDS = [
       { key: "media", label: "课件" },
       { key: "talk", label: "老师开口" },
@@ -346,10 +344,6 @@
       { key: "dino", label: "Dino" },
       { key: "exit", label: "退出 / 收口" },
       { key: "coin", label: "金币" },
-    ];
-    const OBSERVE = [
-      { key: "surprise", label: "惊喜瞬间", better: "more" },
-      { key: "scare", label: "惊吓瞬间", better: "less" },
     ];
 
     const L1_SECTIONS = [
@@ -727,11 +721,11 @@
       return GLOBALS.filter((item) => markStatus((cur().versions[ver].globals || {})[item.key]) === "pass").length;
     }
     function scoreKeys() {
-      return FIELDS.map((f) => f.key).concat(["surprise", "scare"]);
+      return FIELDS.map((f) => f.key);
     }
     function maxScoreOf(ver) {
       const n = rowIdsOf(ver).length;
-      return n * FIELDS.length + GLOBALS.length + n;
+      return n * FIELDS.length + GLOBALS.length;
     }
     function maxScore() {
       return maxScoreOf(activeVer());
@@ -873,7 +867,6 @@
         if (val === "half") return 0.5;
         return 0;
       }
-      if (key === "scare") return markStatus(val) === "pass" ? -1 : 0;
       return markStatus(val) === "pass" ? 1 : 0;
     }
 
@@ -1026,8 +1019,6 @@
             <td>${radioCell(ver, id, "dino", rich(row.dino))}</td>
             <td>${radioCell(ver, id, "exit", rich(EXIT_SPEC))}</td>
             <td>${radioCell(ver, id, "coin", rich(row.coin))}</td>
-            <td>${radioCell(ver, id, "surprise", rich(SURPRISE_SPEC))}</td>
-            <td>${radioCell(ver, id, "scare", rich(SCARE_SPEC))}</td>
           </tr>`;
         }).join("");
         return `<section>
@@ -1049,14 +1040,11 @@
               <col style="width:220px" />
               <col style="width:240px" />
               <col style="width:200px" />
-              <col style="width:220px" />
-              <col style="width:220px" />
             </colgroup>
             <thead><tr>
               <th>序</th><th>Template</th><th>ID</th><th>课件</th>
               <th>老师开口</th><th>口型匹配</th><th>回应合理</th><th>不出现对话重复现象</th><th>环节耗时</th>
               <th>老师动作</th><th>TTS</th><th>Dino</th><th>退出 / 收口</th><th>金币</th>
-              <th>惊喜瞬间</th><th>惊吓瞬间</th>
             </tr></thead>
             <tbody>${rowsHtml}</tbody>
           </table></div>
@@ -1163,18 +1151,7 @@
           <td class="${v.cls}">${v.text}</td>
         </tr>`;
       });
-      const observeRows = OBSERVE.map((item) => {
-        const max = item.key === "scare" ? 0 : Math.max(oldIds.length, neuIds.length);
-        const o = scoreOf("old", oldIds, [item.key]);
-        const n = scoreOf("neu", neuIds, [item.key]);
-        const v = verdict(o, n);
-        return `<tr>
-          <td>${item.label}${item.key === "scare" ? "（有则 −1）" : "（有则 +1）"}</td><td>${fmtScore(max)}</td><td>${fmtScore(o)}</td><td>${fmtScore(n)}</td>
-          <td>${n - o >= 0 ? "+" : ""}${fmtScore(n - o)}</td>
-          <td class="${v.cls}">${v.text}</td>
-        </tr>`;
-      });
-      document.getElementById("fieldCompare").innerHTML = fieldRows.concat(observeRows).join("");
+      document.getElementById("fieldCompare").innerHTML = fieldRows.join("");
     }
 
     function renderLevelTabs() {
