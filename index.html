@@ -197,6 +197,8 @@
     }
     body.fill-mode .owner-only { display: none !important; }
     body.fill-mode .media-actions { display: none !important; }
+    .owner-tools { display: none; gap: 8px; flex-wrap: wrap; }
+    body.owner-mode .owner-tools { display: flex; }
     #langBtnZh, #langBtnEn { min-width: 52px; }
     .modal-mask {
       position: fixed; inset: 0; background: rgba(31, 27, 22, 0.35);
@@ -372,7 +374,13 @@
         <p class="fill-banner" id="fill-banner" hidden data-i18n="fillBanner">你正在填写分享版验收表。可以打分和写备注，但不能改课件图。</p>
         <div class="top-foot">
           <div class="stats" id="topStats"></div>
-          <button type="button" id="submitScoreBtn" data-i18n="submitScore">提交评分</button>
+          <div class="tabs">
+            <div class="owner-tools">
+              <button type="button" id="settingsBtn" data-i18n="settings">课件设置</button>
+              <button type="button" id="publishCoursewareBtn" data-i18n="publishCourseware">发布课件图</button>
+            </div>
+            <button type="button" id="submitScoreBtn" data-i18n="submitScore">提交评分</button>
+          </div>
         </div>
       </div>
     </div>
@@ -754,7 +762,7 @@
     "viewCompare": "版本对比与发布",
     "verName": "版本名称",
     "share": "分享",
-    "settings": "分享设置",
+    "settings": "课件设置",
     "globalScore": "全局打分",
     "globalLead": "整节课只打一次，不按 template 拆。默认不选。",
     "colItem": "项目",
@@ -799,8 +807,8 @@
     "blockBeatLine": "V2 未达到上线分数线 {n}",
     "blockNoScore": "V2 还没有验收分数",
     "blockRed": "红线未清：{list}",
-    "settingsTitle": "分享设置",
-    "settingsLead": "分享会把课件图发到 GitHub 仓库，生成填写链接。Token 只存在这台电脑，不会写进表格。",
+    "settingsTitle": "课件维护设置",
+    "settingsLead": "只有维护人需要 Token。保存后，你上传的课件图可以发布到 GitHub，打分人打开普通链接就能看到图，但不能改图。",
     "settingsRepo": "GitHub Token 需要 repo 权限。账号：{owner} / 仓库：{repo}",
     "tokenPh": "粘贴 GitHub Token",
     "cancel": "取消",
@@ -827,6 +835,13 @@
     "submitOkLead": "已单独保存到 {path}。看板和导出都读这个目录里的文件。",
     "submitFail": "提交失败",
     "needTokenSubmit": "先保存有 repo 权限的 GitHub Token，才能把评分写进仓库。",
+    "publishCourseware": "发布课件图",
+    "publishWorking": "正在发布课件图",
+    "publishWorkingLead": "正在把当前课件图写到 GitHub 的 courseware 目录，请稍候。",
+    "publishMediaOk": "课件图已发布",
+    "publishMediaOkLead": "打分人刷新普通链接即可看到图。文件在 courseware/ 目录，共 {n} 张。",
+    "publishMediaFail": "发布课件图失败",
+    "needTokenPublish": "先保存有 repo 权限的 GitHub Token，才能发布课件图。",
     "sep": "、"
   },
   "en": {
@@ -848,7 +863,7 @@
     "viewCompare": "Compare & publish",
     "verName": "Version name",
     "share": "Share",
-    "settings": "Share settings",
+    "settings": "Courseware settings",
     "globalScore": "Whole-class score",
     "globalLead": "Score once for the whole class, not per template. Default: unselected.",
     "colItem": "Item",
@@ -893,8 +908,8 @@
     "blockBeatLine": "V2 has not reached the launch score line {n}",
     "blockNoScore": "V2 has no QA score yet",
     "blockRed": "Red lines still open: {list}",
-    "settingsTitle": "Share settings",
-    "settingsLead": "Share uploads courseware images to the GitHub repo and creates a fill-in link. The token stays on this computer and is not written into the sheet.",
+    "settingsTitle": "Courseware settings",
+    "settingsLead": "Only the courseware owner needs a token. After you save it, you can publish images to GitHub. Scorers opening the normal link can see the images but cannot change them.",
     "settingsRepo": "The GitHub token needs repo access. Account: {owner} / repo: {repo}",
     "tokenPh": "Paste GitHub token",
     "cancel": "Cancel",
@@ -921,6 +936,13 @@
     "submitOkLead": "Saved on its own at {path}. The dashboard and export will read files in that folder.",
     "submitFail": "Submit failed",
     "needTokenSubmit": "Save a GitHub token with repo access first, then this sheet can be written to the repo.",
+    "publishCourseware": "Publish images",
+    "publishWorking": "Publishing courseware",
+    "publishWorkingLead": "Writing courseware images to the GitHub courseware folder. Please wait.",
+    "publishMediaOk": "Courseware published",
+    "publishMediaOkLead": "Scorers can refresh the normal link to see the images. Files are in courseware/. Count: {n}.",
+    "publishMediaFail": "Could not publish courseware",
+    "needTokenPublish": "Save a GitHub token with repo access first, then you can publish courseware images.",
     "sep": ", "
   }
 };
@@ -986,8 +1008,11 @@
       document.getElementById("setup-mask").hidden = true;
       document.getElementById("app-wrap").classList.remove("hidden");
       applyChrome();
-      applyView();
-      hydrateMedia();
+      Promise.resolve()
+        .then(() => FILL_MODE ? null : loadPublishedCourseware())
+        .then(() => OWNER_MODE ? hydrateMedia() : null)
+        .then(() => applyView())
+        .catch(() => applyView());
     }
     function t(key, vars) {
       const table = (I18N[lang] && I18N[lang][key] != null) ? I18N[lang] : I18N.zh;
@@ -1143,6 +1168,9 @@
     const TOKEN_KEY = "trial-qa-github-token";
     const SHARE_ID = new URLSearchParams(location.search).get("share") || "";
     const FILL_MODE = !!SHARE_ID;
+    const OWNER_MODE = !FILL_MODE && new URLSearchParams(location.search).get("owner") === "1";
+    const COURSEWARE_DIR = "courseware";
+    const COURSEWARE_RAW = "https://raw.githubusercontent.com/" + GH_OWNER + "/" + GH_REPO + "/main/" + COURSEWARE_DIR + "/";
     const SHARE_STORE_PREFIX = "trial-qa-share-fill-";
     const LEVEL_IDS = ["L1", "L2", "L3", "L4"];
 
@@ -2076,7 +2104,7 @@
     }
 
     async function onUpload(rowId, file) {
-      if (FILL_MODE) return;
+      if (FILL_MODE || !OWNER_MODE) return;
       const ver = state.view === "neu" ? "neu" : "old";
       await setMedia(ver, rowId, { blob: file, type: file.type, name: file.name });
       if (slot(ver)[rowId] && slot(ver)[rowId].url) {
@@ -2087,7 +2115,7 @@
     }
 
     async function onClear(rowId) {
-      if (FILL_MODE) return;
+      if (FILL_MODE || !OWNER_MODE) return;
       const ver = state.view === "neu" ? "neu" : "old";
       await delMedia(ver, rowId);
       if (slot(ver)[rowId] && slot(ver)[rowId].url) {
@@ -2099,6 +2127,106 @@
 
     let modalBusy = false;
     let pendingSubmit = false;
+    let pendingPublish = false;
+
+    function coursewareFileName(level, ver, rowId, ext) {
+      return [level, ver, rowId].join("__").replace(/[^A-Za-z0-9._-]/g, "_") + ext;
+    }
+
+    async function loadPublishedCourseware() {
+      const res = await fetch(COURSEWARE_RAW + "manifest.json?t=" + Date.now());
+      if (!res.ok) return;
+      const manifest = await res.json();
+      (manifest.media || []).forEach((item) => {
+        if (!mediaCache[item.level]) mediaCache[item.level] = { old: {}, neu: {} };
+        const cur = mediaCache[item.level][item.ver] && mediaCache[item.level][item.ver][item.rowId];
+        if (cur && !cur.published) return;
+        mediaCache[item.level][item.ver][item.rowId] = {
+          url: COURSEWARE_RAW + item.file,
+          type: item.type,
+          name: item.name,
+          published: true,
+        };
+      });
+    }
+
+    async function publishCourseware() {
+      const token = localStorage.getItem(TOKEN_KEY);
+      if (!token) {
+        pendingPublish = true;
+        showSettings(t("needTokenPublish"));
+        return;
+      }
+      modalBusy = true;
+      openModal(`<h3>${t("publishWorking")}</h3><p class="lead">${t("publishWorkingLead")}</p>`);
+      try {
+        let existing = { media: [] };
+        try {
+          const res = await fetch(COURSEWARE_RAW + "manifest.json?t=" + Date.now());
+          if (res.ok) existing = await res.json();
+        } catch (err) {}
+        const byKey = {};
+        (existing.media || []).forEach((item) => {
+          byKey[item.level + ":" + item.ver + ":" + item.rowId] = item;
+        });
+        const items = await collectShareMedia();
+        for (let i = 0; i < items.length; i++) {
+          const item = items[i];
+          let blob = item.blob;
+          let type = item.type || "application/octet-stream";
+          let ext = ".bin";
+          if (String(type).startsWith("image/")) {
+            blob = await compressImage(blob);
+            type = blob.type || "image/jpeg";
+            ext = ".jpg";
+          } else if (String(type).startsWith("video/")) {
+            if (blob.size > 3 * 1024 * 1024) continue;
+            ext = ".mp4";
+          } else {
+            continue;
+          }
+          const file = coursewareFileName(item.level, item.ver, item.rowId, ext);
+          const b64 = await blobToBase64(blob);
+          await githubPut(COURSEWARE_DIR + "/" + file, b64, "Update courseware " + file);
+          byKey[item.level + ":" + item.ver + ":" + item.rowId] = {
+            level: item.level,
+            ver: item.ver,
+            rowId: item.rowId,
+            file: file,
+            type: type,
+            name: item.name || file,
+          };
+        }
+        const media = Object.keys(byKey).sort().map((k) => byKey[k]);
+        const manifest = {
+          schema: "trial-qa-courseware-v1",
+          updatedAt: new Date().toISOString(),
+          media: media,
+        };
+        await githubPut(
+          COURSEWARE_DIR + "/manifest.json",
+          btoa(unescape(encodeURIComponent(JSON.stringify(manifest, null, 2)))),
+          "Update courseware manifest"
+        );
+        modalBusy = false;
+        openModal(`
+          <h3>${t("publishMediaOk")}</h3>
+          <p class="lead">${t("publishMediaOkLead", { n: media.length })}</p>
+          <div class="actions">
+            <button type="button" data-close-modal>${t("close")}</button>
+          </div>
+        `);
+      } catch (err) {
+        modalBusy = false;
+        const msg = String(err && err.message || err);
+        if (msg === "NO_TOKEN") {
+          pendingPublish = true;
+          showSettings(t("needTokenPublish"));
+          return;
+        }
+        openModal(`<h3>${t("publishMediaFail")}</h3><p class="callout bad">${escapeHtml(msg)}</p><div class="actions"><button type="button" data-close-modal>${t("close")}</button></div>`);
+      }
+    }
 
     function closeModal() {
       if (modalBusy) return;
@@ -2510,6 +2638,10 @@
         showSubmitConfirm();
         return;
       }
+      if (e.target.id === "publishCoursewareBtn") {
+        publishCourseware();
+        return;
+      }
       if (e.target.id === "confirmSubmitBtn") {
         submitScore();
         return;
@@ -2526,10 +2658,13 @@
         const value = (document.getElementById("tokenInput") || {}).value || "";
         if (value) localStorage.setItem(TOKEN_KEY, value.trim());
         else localStorage.removeItem(TOKEN_KEY);
-        const retry = pendingSubmit && !!value;
+        const retrySubmit = pendingSubmit && !!value;
+        const retryPublish = pendingPublish && !!value;
         pendingSubmit = false;
+        pendingPublish = false;
         closeModal();
-        if (retry) submitScore();
+        if (retryPublish) publishCourseware();
+        else if (retrySubmit) submitScore();
         return;
       }
       if (e.target.id === "copyShareBtn") {
@@ -2637,14 +2772,15 @@
       }
     });
 
-    document.body.classList.toggle("fill-mode", FILL_MODE);
+    document.body.classList.toggle("owner-mode", OWNER_MODE);
+    document.body.classList.toggle("fill-mode", FILL_MODE || !OWNER_MODE);
     if (FILL_MODE) {
       const banner = document.getElementById("fill-banner");
       if (banner) banner.hidden = false;
     }
 
     Promise.resolve()
-      .then(() => FILL_MODE ? loadShareSnapshot() : null)
+      .then(() => FILL_MODE ? loadShareSnapshot() : loadPublishedCourseware())
       .catch((err) => {
         const banner = document.getElementById("fill-banner");
         if (banner) {
@@ -2657,7 +2793,7 @@
       .then(() => openDb())
       .then((opened) => {
         db = opened;
-        return FILL_MODE ? null : hydrateMedia();
+        return OWNER_MODE ? hydrateMedia() : null;
       })
       .catch(() => null)
       .finally(() => {
