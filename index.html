@@ -692,6 +692,7 @@
   "进入后立刻邀请戳 climb 泡泡，不新开教学问答。": "Invite the student to pop the climb bubble right away. Do not start a new teaching Q&A.",
   "进入后邀请说 climb。宽认 climb / clime / kaim。最多再听 2 次。": "Invite the student to say climb. Accept climb / clime / kaim. Listen 2 more times at most.",
   "老师这里不说话。": "The teacher does not speak here.",
+  "老师不开口": "The teacher does not speak.",
   "老师在进入练习时不说话，结束练习时根据学生作答给出正负反馈": "The teacher stays silent when entering the practice, then gives positive or negative feedback from the student's answer when it ends.",
   "[TEACHER_LISTEN]。宽认 climb / clime / kaim。对了鼓掌后结束；2 次未过也示范一次后 [TEMPLATE_FINISH]。": "[TEACHER_LISTEN]. Accept climb / clime / kaim. If correct, applaud and end. After 2 misses, model once and still [TEMPLATE_FINISH].",
   "邀请说 climb 的 TTS 完整；示范音必须是 climb。": "Play the full say-climb TTS. The model audio must be climb.",
@@ -1467,7 +1468,7 @@
       }),
       "18": Object.assign({}, L1_ROWS["18"], { tid: "photo_time", talk: "邀请拍照。" }),
       "19": Object.assign({}, L1_ROWS["19"], { talk: "Wow, amazing! It's gift time, let's open it![NO_OP]" }),
-      "20": Object.assign({}, L1_ROWS["20"]),
+      "20": Object.assign({}, L1_ROWS["20"], { talk: "老师不开口" }),
     };
 
     const COURSES = {
