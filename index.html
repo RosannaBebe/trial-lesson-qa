@@ -1005,8 +1005,8 @@
       if (!state.levels[rater.level]) state.levels[rater.level] = blankLevel();
       state.level = rater.level;
       state.view = rater.view;
+      resetSheetScores();
       saveRater();
-      saveState();
       boardOpen = true;
       document.getElementById("setup-mask").classList.add("hidden");
       document.getElementById("setup-mask").hidden = true;
@@ -1563,6 +1563,22 @@
         L4: blankLevel(),
       },
     });
+
+    function resetSheetScores() {
+      if (!state.levels[state.level]) state.levels[state.level] = blankLevel();
+      const ver = state.view === "neu" ? "neu" : "old";
+      const label = ((cur().versions[ver] || {}).label) || (ver === "neu" ? "V2" : "V1");
+      cur().versions[ver] = {
+        label: label,
+        checks: {},
+        notes: {},
+        cellNotes: {},
+        globalNotes: {},
+        redlines: blankRedlines(),
+        globals: {},
+      };
+      saveState();
+    }
 
     let state = loadState();
     let db = null;
@@ -2396,6 +2412,8 @@
           path = "submissions/" + payload.id + ".json";
           await githubCreate(path, jsonToB64(payload), "Add score submission " + payload.id);
         }
+        resetSheetScores();
+        applyView();
         modalBusy = false;
         openModal(`
           <h3>${t("submitOk")}</h3>
