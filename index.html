@@ -215,31 +215,120 @@
     .modal h3 { margin: 0 0 10px; font-size: 18px; }
     .modal .actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 14px; flex-wrap: wrap; }
     .share-link { width: 100%; }
+    .setup-mask {
+      position: fixed; inset: 0; background: rgba(31, 27, 22, 0.45);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 30; padding: 20px;
+    }
+    .setup-mask.hidden { display: none; }
+    .setup-modal { width: min(440px, 100%); }
+    .setup-field { margin: 0 0 14px; }
+    .setup-field > span {
+      display: block; margin: 0 0 6px; color: var(--muted); font-size: 13px;
+    }
+    .setup-field input[type="text"] { width: 100%; }
+    .setup-error { color: var(--bad-ink); margin: 0 0 10px; font-size: 13px; }
+    .setup-modal .actions { justify-content: space-between; align-items: center; }
+    #setupOk { background: var(--ink); color: #fff; border-color: var(--ink); }
+    .top-row {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      margin: 0 0 16px;
+    }
+    .class-player {
+      width: 667px;
+      max-width: 100%;
+      flex: 0 0 667px;
+    }
+    .class-frame {
+      width: 667px;
+      max-width: 100%;
+      height: 375px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #111;
+    }
+    .class-frame iframe { display: block; width: 100%; height: 100%; border: 0; }
+    .class-open {
+      display: inline-block;
+      margin: 8px 0 0;
+      color: var(--accent);
+      font-size: 12px;
+    }
+    .top-main { flex: 1; min-width: 0; }
+    .rater-line { color: var(--muted); margin: 0 0 10px; }
+    @media (max-width: 980px) {
+      .top-row { flex-direction: column; }
+      .class-player, .class-frame { flex-basis: auto; width: 100%; }
+      .class-frame { height: 56.4vw; max-height: 375px; }
+    }
     @media print {
-      .bar, nav, .media-actions, .file-btn { display: none !important; }
+      .bar, nav, .media-actions, .file-btn, .class-player, .setup-mask { display: none !important; }
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <h1 data-i18n="title">体验课 上线前验收表</h1>
-    <p class="fill-banner" id="fill-banner" hidden data-i18n="fillBanner">你正在填写分享版验收表。可以打分和写备注，但不能改课件图。</p>
-    <nav class="tabs level-tabs" id="level-tabs" aria-label="体验课 Level"></nav>
-    <p class="callout warn" id="course-note" hidden></p>
-
-    <div class="bar">
-      <div class="tabs" id="tabs">
-        <button class="tab active" data-view="old" type="button" data-i18n="viewV1">V1 验收</button>
-        <button class="tab" data-view="neu" type="button" data-i18n="viewV2">V2 验收</button>
-        <button class="tab" data-view="compare" type="button" data-i18n="viewCompare">版本对比与发布</button>
-        <span class="name-row" id="nameRow">
-          <input id="verName" type="text" data-i18n-placeholder="verName" placeholder="版本名称" />
-        </span>
+  <div class="setup-mask" id="setup-mask">
+    <div class="modal setup-modal">
+      <h3 data-i18n="setupTitle">开始打分</h3>
+      <p class="lead" data-i18n="setupLead">请先填写姓名，再选择体验课 Level 和版本。</p>
+      <label class="setup-field">
+        <span data-i18n="setupName">姓名</span>
+        <input id="setupName" type="text" autocomplete="name" autofocus data-i18n-placeholder="setupNamePh" placeholder="请输入你的名字" />
+      </label>
+      <div class="setup-field">
+        <span data-i18n="setupLevel">体验课 Level</span>
+        <div class="tabs" id="setupLevels">
+          <button type="button" class="tab" data-setup-level="L1">L1</button>
+          <button type="button" class="tab" data-setup-level="L2">L2</button>
+          <button type="button" class="tab" data-setup-level="L3">L3</button>
+          <button type="button" class="tab" data-setup-level="L4">L4</button>
+        </div>
       </div>
-      <div class="stats" id="topStats"></div>
-      <div class="tabs">
-        <button type="button" class="tab" id="langBtnZh" data-lang="zh">中文</button>
-        <button type="button" class="tab" id="langBtnEn" data-lang="en">EN</button>
+      <div class="setup-field hidden" id="setupVerField">
+        <span data-i18n="setupVer">版本</span>
+        <div class="tabs" id="setupVers">
+          <button type="button" class="tab" data-setup-ver="old">V1</button>
+          <button type="button" class="tab" data-setup-ver="neu">V2</button>
+        </div>
+      </div>
+      <p class="setup-error hidden" id="setupErr" data-i18n="setupNeed">请填写姓名，并选择 Level 和版本。</p>
+      <div class="actions">
+        <div class="tabs">
+          <button type="button" class="tab" data-lang="zh">中文</button>
+          <button type="button" class="tab" data-lang="en">EN</button>
+        </div>
+        <button type="button" id="setupOk" data-i18n="setupOk">确定</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap hidden" id="app-wrap">
+    <div class="top-row">
+      <div class="class-player">
+        <div class="class-frame">
+          <iframe
+            title="trial class player"
+            src="https://test-class.mydinoai.com/dinoclass/test/signature-test/"
+            allow="autoplay; microphone; camera; fullscreen; clipboard-read; clipboard-write"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+        <a class="class-open" href="https://test-class.mydinoai.com/dinoclass/test/signature-test/" target="_blank" rel="noopener" data-i18n="openClass">新窗口打开看课</a>
+      </div>
+      <div class="top-main">
+        <h1 data-i18n="title">体验课 上线前验收表</h1>
+        <p class="rater-line" id="raterLine"></p>
+        <p class="fill-banner" id="fill-banner" hidden data-i18n="fillBanner">你正在填写分享版验收表。可以打分和写备注，但不能改课件图。</p>
+        <div class="bar">
+          <div class="stats" id="topStats"></div>
+          <div class="tabs">
+            <button type="button" class="tab" id="langBtnZh" data-lang="zh">中文</button>
+            <button type="button" class="tab" id="langBtnEn" data-lang="en">EN</button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -601,6 +690,16 @@
     const I18N = {
   "zh": {
     "title": "体验课 上线前验收表",
+    "setupTitle": "开始打分",
+    "setupLead": "请先填写姓名，再选择体验课 Level 和版本。",
+    "setupName": "姓名",
+    "setupNamePh": "请输入你的名字",
+    "setupLevel": "体验课 Level",
+    "setupVer": "版本",
+    "setupOk": "确定",
+    "setupNeed": "请填写姓名，并选择 Level 和版本。",
+    "openClass": "新窗口打开看课",
+    "raterLine": "{name} · {level} · {ver}",
     "fillBanner": "你正在填写分享版验收表。可以打分和写备注，但不能改课件图。",
     "levelNav": "体验课 Level",
     "viewV1": "V1 验收",
@@ -675,6 +774,16 @@
   },
   "en": {
     "title": "Trial lesson pre-launch QA",
+    "setupTitle": "Start scoring",
+    "setupLead": "Enter your name, then choose the trial level and version.",
+    "setupName": "Name",
+    "setupNamePh": "Your name",
+    "setupLevel": "Trial level",
+    "setupVer": "Version",
+    "setupOk": "Continue",
+    "setupNeed": "Enter your name and choose a level and version.",
+    "openClass": "Open class in a new window",
+    "raterLine": "{name} · {level} · {ver}",
     "fillBanner": "You are filling a shared QA sheet. You can score and comment, but you cannot change courseware images.",
     "levelNav": "Trial lesson level",
     "viewV1": "V1 review",
@@ -759,6 +868,60 @@
     }
     let lang = readLang();
     let shareError = "";
+    const SETUP_KEY = "trial-qa-rater";
+    let boardOpen = false;
+    let rater = { name: "", level: "", view: "" };
+    function loadRater() {
+      try {
+        const raw = JSON.parse(localStorage.getItem(SETUP_KEY) || "{}");
+        return {
+          name: raw.name || "",
+          level: ["L1", "L2", "L3", "L4"].indexOf(raw.level) >= 0 ? raw.level : "",
+          view: raw.view === "neu" || raw.view === "old" ? raw.view : "",
+        };
+      } catch (err) {
+        return { name: "", level: "", view: "" };
+      }
+    }
+    function saveRater() {
+      try { localStorage.setItem(SETUP_KEY, JSON.stringify(rater)); } catch (err) {}
+    }
+    function setupComplete() {
+      return !!(String(rater.name || "").trim() && rater.level && (rater.view === "old" || rater.view === "neu"));
+    }
+    function syncSetupForm() {
+      const nameEl = document.getElementById("setupName");
+      if (nameEl && !nameEl.value) nameEl.value = rater.name || "";
+      document.querySelectorAll("[data-setup-level]").forEach((btn) => {
+        btn.classList.toggle("active", btn.dataset.setupLevel === rater.level);
+      });
+      document.querySelectorAll("[data-setup-ver]").forEach((btn) => {
+        btn.classList.toggle("active", btn.dataset.setupVer === rater.view);
+      });
+      const verField = document.getElementById("setupVerField");
+      if (verField) verField.classList.toggle("hidden", !rater.level);
+    }
+    function enterBoard() {
+      rater.name = String((document.getElementById("setupName") || {}).value || rater.name || "").trim();
+      const err = document.getElementById("setupErr");
+      if (!setupComplete()) {
+        if (err) err.classList.remove("hidden");
+        return;
+      }
+      if (err) err.classList.add("hidden");
+      if (!state.levels[rater.level]) state.levels[rater.level] = blankLevel();
+      state.level = rater.level;
+      state.view = rater.view;
+      saveRater();
+      saveState();
+      boardOpen = true;
+      document.getElementById("setup-mask").classList.add("hidden");
+      document.getElementById("setup-mask").hidden = true;
+      document.getElementById("app-wrap").classList.remove("hidden");
+      applyChrome();
+      applyView();
+      hydrateMedia();
+    }
     function t(key, vars) {
       const table = (I18N[lang] && I18N[lang][key] != null) ? I18N[lang] : I18N.zh;
       let s = table[key];
@@ -787,15 +950,20 @@
       document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
         el.placeholder = t(el.dataset.i18nPlaceholder);
       });
-      const zhBtn = document.getElementById("langBtnZh");
-      const enBtn = document.getElementById("langBtnEn");
-      if (zhBtn) zhBtn.classList.toggle("active", lang === "zh");
-      if (enBtn) enBtn.classList.toggle("active", lang === "en");
-      const nav = document.getElementById("level-tabs");
-      if (nav) nav.setAttribute("aria-label", t("levelNav"));
+      document.querySelectorAll("[data-lang]").forEach((btn) => {
+        btn.classList.toggle("active", btn.dataset.lang === lang);
+      });
       const banner = document.getElementById("fill-banner");
       if (banner && shareError) banner.textContent = t(shareError);
       else if (banner && FILL_MODE) banner.textContent = t("fillBanner");
+      const raterLine = document.getElementById("raterLine");
+      if (raterLine && rater.name) {
+        raterLine.textContent = t("raterLine", {
+          name: rater.name,
+          level: rater.level,
+          ver: rater.view === "neu" ? "V2" : "V1",
+        });
+      }
     }
     function setLang(next) {
       if (next !== "en" && next !== "zh") return;
@@ -807,7 +975,7 @@
         history.replaceState(null, "", u);
       } catch (err) {}
       applyChrome();
-      applyView();
+      if (boardOpen) applyView();
     }
     const EXIT_SPEC = "逻辑侧需要抛正确的[NEXT_STEP]/[TEMPLATE_FINISH]";
     const LOAD_SPEC = "图片/视频资源加载迅速，未出现loading。出现长时间 loading、白屏或资源出不来则选未达成并写原因。默认不选。";
@@ -1445,6 +1613,7 @@
       localStorage.setItem(activeStore(), JSON.stringify({
         level: state.level,
         view: state.view,
+        rater: rater.name || "",
         radioDefaultFixed: true,
         levels: state.levels,
       }));
@@ -1801,45 +1970,18 @@
       document.getElementById("fieldCompare").innerHTML = fieldRows.join("");
     }
 
-    function renderLevelTabs() {
-      document.getElementById("level-tabs").innerHTML = LEVEL_IDS.map((id) => {
-        const item = COURSES[id];
-        return `<button type="button" class="tab${state.level === id ? " active" : ""}" data-level="${id}">${escapeHtml(loc(item.short))}</button>`;
-      }).join("");
-    }
-
-    function renderCourseMeta() {
-      const note = document.getElementById("course-note");
-      const item = course();
-      if (item.note) {
-        note.hidden = false;
-        note.textContent = loc(item.note);
-      } else {
-        note.hidden = true;
-        note.textContent = "";
-      }
-    }
+    function renderLevelTabs() {}
+    function renderCourseMeta() {}
 
     function applyView() {
+      if (!boardOpen) return;
       applyChrome();
-      const compare = state.view === "compare";
-      document.getElementById("workView").classList.toggle("hidden", compare);
-      document.getElementById("compareView").classList.toggle("hidden", !compare);
-      document.getElementById("nameRow").classList.toggle("hidden", compare);
-      renderLevelTabs();
-      renderCourseMeta();
-      document.querySelectorAll("#tabs .tab").forEach((btn) => {
-        btn.classList.toggle("active", btn.dataset.view === state.view);
-      });
-      if (!compare) {
-        const ver = state.view === "neu" ? "neu" : "old";
-        document.getElementById("verName").value = cur().versions[ver].label;
-        renderGlobals();
-        renderSections();
-      } else {
-        document.getElementById("threshold").value = cur().threshold;
-        renderCompare();
-      }
+      if (state.view === "compare") state.view = "old";
+      document.getElementById("workView").classList.remove("hidden");
+      const compareView = document.getElementById("compareView");
+      if (compareView) compareView.classList.add("hidden");
+      renderGlobals();
+      renderSections();
       renderTop();
       requestAnimationFrame(() => {
         document.querySelectorAll(".choice").forEach((box) => {
@@ -2114,6 +2256,22 @@
         setLang(langBtn.dataset.lang);
         return;
       }
+      const setupLevel = e.target.closest("[data-setup-level]");
+      if (setupLevel) {
+        rater.level = setupLevel.dataset.setupLevel;
+        syncSetupForm();
+        return;
+      }
+      const setupVer = e.target.closest("[data-setup-ver]");
+      if (setupVer) {
+        rater.view = setupVer.dataset.setupVer;
+        syncSetupForm();
+        return;
+      }
+      if (e.target.id === "setupOk") {
+        enterBoard();
+        return;
+      }
       if (e.target.id === "shareBtn") {
         createShare();
         return;
@@ -2139,22 +2297,6 @@
       }
       if (e.target.closest("[data-close-modal]") || e.target.id === "modal-mask") {
         if (e.target.id === "modal-mask" || e.target.closest("[data-close-modal]")) closeModal();
-        return;
-      }
-      const levelTab = e.target.closest("[data-level]");
-      if (levelTab) {
-        state.level = levelTab.dataset.level;
-        saveState();
-        if (state.view !== "compare") hydrateMedia().then(applyView);
-        else applyView();
-        return;
-      }
-      const tab = e.target.closest("#tabs [data-view]");
-      if (tab) {
-        state.view = tab.dataset.view;
-        saveState();
-        if (state.view !== "compare") hydrateMedia().then(applyView);
-        else applyView();
         return;
       }
       const clear = e.target.closest("[data-clear]");
@@ -2264,6 +2406,13 @@
       }
     });
 
+    document.getElementById("setupName").addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        enterBoard();
+      }
+    });
+
     document.body.classList.toggle("fill-mode", FILL_MODE);
     if (FILL_MODE) {
       const banner = document.getElementById("fill-banner");
@@ -2287,7 +2436,13 @@
         return FILL_MODE ? null : hydrateMedia();
       })
       .catch(() => null)
-      .finally(() => { applyChrome(); applyView(); });
+      .finally(() => {
+        rater = Object.assign(rater, loadRater());
+        const nameEl = document.getElementById("setupName");
+        if (nameEl) nameEl.value = rater.name || "";
+        syncSetupForm();
+        applyChrome();
+      });
   </script>
 </body>
 </html>
