@@ -232,6 +232,25 @@
     .setup-error { color: var(--bad-ink); margin: 0 0 10px; font-size: 13px; }
     .setup-modal .actions { justify-content: space-between; align-items: center; }
     #setupOk, #confirmSubmitBtn, #submitScoreBtn { background: var(--ink); color: #fff; border-color: var(--ink); }
+    .toast {
+      position: fixed;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 80;
+      background: #2d2924;
+      color: #fffdf8;
+      padding: 10px 16px;
+      border-radius: 8px;
+      max-width: min(520px, calc(100% - 32px));
+      box-shadow: 0 8px 24px rgba(31, 27, 22, 0.18);
+    }
+    .toast.hidden { display: none; }
+    .cell-miss {
+      outline: 2px solid var(--bad-ink);
+      outline-offset: -2px;
+      background: var(--bad-bg);
+    }
     .top-row {
       flex: 0 0 auto;
       position: relative;
@@ -390,6 +409,7 @@
     <div class="modal-mask hidden" id="modal-mask" hidden>
       <div class="modal" id="modal"></div>
     </div>
+    <div id="toast" class="toast hidden" role="status"></div>
 
     <div class="board-scroll" id="board-scroll">
     <div id="workView">
@@ -872,6 +892,7 @@
     "submitOkLead": "已单独保存到 {path}。看板和导出都读这个目录里的文件。",
     "submitFail": "提交失败",
     "needTokenSubmit": "提交会把这一次评分写到 GitHub 仓库。这台电脑还没有保存 Token，所以还不能提交。这和分享课件不是一回事。",
+    "submitIncomplete": "还有未填写的评分项目，请先完成全部判定。",
     "submitTokenTitle": "提交到 GitHub",
     "submitTokenLead": "浏览器不能直接写仓库，需要先在这台电脑保存一个有 repo 权限的 Token。保存一次后，再点提交就不会再问。Token 只存在这台电脑。",
     "publishCourseware": "发布课件图",
@@ -977,6 +998,7 @@
     "submitOkLead": "Saved on its own at {path}. The dashboard and export will read files in that folder.",
     "submitFail": "Submit failed",
     "needTokenSubmit": "Submit writes this score sheet to the GitHub repo. This computer does not have a token yet, so it cannot submit. This is not the old share-courseware flow.",
+    "submitIncomplete": "Some score items are still blank. Fill every required cell first.",
     "submitTokenTitle": "Submit to GitHub",
     "submitTokenLead": "The browser cannot write the repo by itself. Save a token with repo access on this computer once. After that, Submit will not ask again. The token stays on this computer.",
     "publishCourseware": "Publish images",
@@ -1956,7 +1978,7 @@
       const status = markStatus(cur().versions[ver].checks[rowId + ":" + key]);
       const prefix = escapeHtml("qa-" + ver + "-" + rowId + "-" + key);
       const attrs = `data-row="${rowId}" data-field="${key}"`;
-      return `<div class="cell">
+      return `<div class="cell" id="qa-cell-${escapeHtml(rowId)}-${escapeHtml(key)}">
         <p>${html}</p>
         ${radioPair(prefix, status, attrs)}
       </div>`;
@@ -1966,7 +1988,7 @@
       const val = cur().versions[ver].checks[rowId + ":duration"] || "";
       const opt = (value, label) =>
         `<option value="${value}" ${val === value ? "selected" : ""}>${label}</option>`;
-      return `<div class="cell"><p>${rich(loc(DURATION_SPEC))}</p><select data-row="${rowId}" data-field="duration">
+      return `<div class="cell" id="qa-cell-${escapeHtml(rowId)}-duration"><p>${rich(loc(DURATION_SPEC))}</p><select data-row="${rowId}" data-field="duration">
         ${opt("", loc("未测"))}
         ${opt("ok", loc("≤2 分钟 · 1 分"))}
         ${opt("half", loc("超过 2 分钟 · 0.5 分"))}
@@ -2068,7 +2090,9 @@
           <td>${i + 1}. ${escapeHtml(loc(item.title))}</td>
           <td>${escapeHtml(loc(item.how))}</td>
           <td>
-            ${radioPair(prefix, status, `data-global="${item.key}"`)}
+            <div id="qa-cell-global-${escapeHtml(item.key)}">
+              ${radioPair(prefix, status, `data-global="${item.key}"`)}
+            </div>
           </td>
         </tr>`;
       }).join("");
@@ -2441,7 +2465,83 @@
       };
     }
 
+    function isFieldFilled(checks, rowId, field) {
+      if (field.key === "duration") {
+        const val = checks[rowId + ":duration"] || "";
+        return val === "ok" || val === "half" || val === "fail";
+      }
+      const status = markStatus(checks[rowId + ":" + field.key]);
+      return status === "pass" || status === "fail";
+    }
+
+    function firstUnfilled() {
+      const ver = activeVer();
+      const checks = cur().versions[ver].checks || {};
+      const globals = cur().versions[ver].globals || {};
+      for (let i = 0; i < GLOBALS.length; i += 1) {
+        const g = GLOBALS[i];
+        const status = markStatus(globals[g.key]);
+        if (status !== "pass" && status !== "fail") {
+          return { id: "qa-cell-global-" + g.key };
+        }
+      }
+      const secs = sections();
+      for (let s = 0; s < secs.length; s += 1) {
+        const rowIds = secs[s].rows || [];
+        for (let r = 0; r < rowIds.length; r += 1) {
+          const rowId = rowIds[r];
+          const row = rows()[rowId];
+          if (!row) continue;
+          for (let f = 0; f < FIELDS.length; f += 1) {
+            const field = FIELDS[f];
+            if (!fieldApplies(row, field.key)) continue;
+            if (!isFieldFilled(checks, rowId, field)) {
+              return { id: "qa-cell-" + rowId + "-" + field.key };
+            }
+          }
+        }
+      }
+      return null;
+    }
+
+    let toastTimer = 0;
+    function showToast(msg) {
+      const el = document.getElementById("toast");
+      if (!el) return;
+      el.textContent = msg;
+      el.classList.remove("hidden");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => el.classList.add("hidden"), 3200);
+    }
+
+    function focusUnfilled(target) {
+      document.querySelectorAll(".cell-miss").forEach((n) => n.classList.remove("cell-miss"));
+      const el = target && document.getElementById(target.id);
+      if (!el) return;
+      el.classList.add("cell-miss");
+      const wrap = el.closest(".table-wrap");
+      if (wrap) {
+        const er = el.getBoundingClientRect();
+        const wr = wrap.getBoundingClientRect();
+        wrap.scrollLeft += er.left - wr.left - Math.max(16, (wr.width - er.width) / 2);
+      }
+      const board = document.getElementById("board-scroll");
+      if (board) {
+        const er = el.getBoundingClientRect();
+        const br = board.getBoundingClientRect();
+        board.scrollTop += er.top - br.top - 20;
+      }
+      const input = el.querySelector("input[type=radio], select");
+      if (input && input.focus) input.focus();
+    }
+
     function showSubmitConfirm() {
+      const miss = firstUnfilled();
+      if (miss) {
+        showToast(t("submitIncomplete"));
+        focusUnfilled(miss);
+        return;
+      }
       const ver = activeVer();
       openModal(`
         <h3>${t("submitConfirmTitle")}</h3>
@@ -2475,6 +2575,12 @@
     }
 
     async function submitScore() {
+      const miss = firstUnfilled();
+      if (miss) {
+        showToast(t("submitIncomplete"));
+        focusUnfilled(miss);
+        return;
+      }
       const token = localStorage.getItem(TOKEN_KEY);
       if (!token) {
         pendingSubmit = true;
