@@ -1336,7 +1336,7 @@
       "1b": Object.assign({}, L1_ROWS["1b"], { tid: "lead-in-template" }),
       "1c": Object.assign({}, L1_ROWS["1c"], {
         tid: "lead-in-template",
-        talk: "视频结束后按当页短问只问 1 次，最多等 3 秒。禁止长段叙述后再追问。",
+        talk: "询问一次 yes or no 的问题，然后进入下一个视频的介绍。",
       }),
       "2": Object.assign({}, L1_ROWS["2"]),
       "3": {
@@ -1935,7 +1935,7 @@
             <td>${escapeHtml(loc(row.name))}</td>
             <td>${mediaCell(ver, id)}</td>
             <td>${radioCell(ver, id, "load", rich(loc(LOAD_SPEC)))}</td>
-            <td>${radioCell(ver, id, "talk", rich(loc(row.talk)))}</td>
+            <td>${radioCell(ver, id, "talk", rich(loc(row.talk)).replace(/\n/g, "<br>"))}</td>
             <td>${radioCell(ver, id, "lip", rich(loc(LIP_SPEC)))}</td>
             <td>${radioCell(ver, id, "avsync", rich(loc(AVSYNC_SPEC)))}</td>
             <td>${radioCell(ver, id, "reply", rich(loc(REPLY_SPEC)))}</td>
