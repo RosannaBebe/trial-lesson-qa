@@ -77,8 +77,8 @@
       border-radius: 8px;
     }
     table.spec {
-      width: 3600px;
-      min-width: 3600px;
+      width: 3380px;
+      min-width: 3380px;
       max-width: none;
       table-layout: fixed;
       border-collapse: collapse;
@@ -1809,7 +1809,6 @@
           return `<tr>
             <td>${seq}</td>
             <td>${escapeHtml(loc(row.name))}</td>
-            <td><code>${escapeHtml(loc(row.tid))}</code></td>
             <td>${mediaCell(ver, id)}</td>
             <td>${radioCell(ver, id, "load", rich(loc(LOAD_SPEC)))}</td>
             <td>${radioCell(ver, id, "talk", rich(loc(row.talk)))}</td>
@@ -1833,7 +1832,6 @@
             <colgroup>
               <col style="width:56px" />
               <col style="width:140px" />
-              <col style="width:220px" />
               <col style="width:200px" />
               <col style="width:220px" />
               <col style="width:260px" />
@@ -1850,7 +1848,7 @@
               <col style="width:200px" />
             </colgroup>
             <thead><tr>
-              <th>${t("colNo")}</th><th>${t("colTemplate")}</th><th>${t("colId")}</th><th>${loc("课件")}</th>
+              <th>${t("colNo")}</th><th>${t("colTemplate")}</th><th>${loc("课件")}</th>
               <th>${loc("资源加载")}</th><th>${loc("老师开口")}</th><th>${loc("口型匹配")}</th><th>${loc("音画同步（老师/视频文件音画同步）")}</th><th>${loc("回应合理")}</th><th>${loc("学生说话（ASR）")}</th><th>${loc("不出现对话重复现象")}</th><th>${loc("环节耗时")}</th>
               <th>${loc("老师动作")}</th><th>TTS</th><th>Dino</th><th>${loc("退出 / 收口")}</th><th>${loc("金币")}</th>
             </tr></thead>
