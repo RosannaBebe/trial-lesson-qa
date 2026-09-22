@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>体验课评分看板</title>
+  <style>
+    :root {
+      --bg: #f6f4ef;
+      --paper: #fffdf8;
+      --ink: #1f1b16;
+      --muted: #5c564c;
+      --line: #e4ddd0;
+      --head: #2d2924;
+      --accent: #8a4b1f;
+      --ok: #2a4336;
+      --ok-bg: #eef4f0;
+      --warn-bg: #fff4e5;
+      --warn-ink: #6a3e00;
+      --bad-bg: #f8ecec;
+      --bad-ink: #6b2a2a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--bg);
+      font: 14px/1.55 "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", sans-serif;
+    }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 20px 20px 80px; }
+    h1 { margin: 0 0 6px; font-size: 24px; letter-spacing: -0.02em; }
+    h2 { margin: 28px 0 8px; font-size: 18px; }
+    .lead { color: var(--muted); margin: 0 0 14px; }
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin: 0 0 18px;
+    }
+    .tabs { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .tab, button, a.btn {
+      border: 1px solid var(--line);
+      background: var(--paper);
+      color: var(--ink);
+      padding: 6px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      font: inherit;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .tab.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+    #refreshBtn { background: var(--ink); color: #fff; border-color: var(--ink); }
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      margin: 0 0 22px;
+    }
+    .kpi {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+    .kpi span { display: block; color: var(--muted); font-size: 12px; }
+    .kpi b { display: block; font-size: 22px; margin-top: 4px; letter-spacing: -0.03em; }
+    .kpi em { font-style: normal; color: var(--muted); font-size: 12px; font-weight: 400; }
+    .table-wrap {
+      overflow-x: auto;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 720px;
+    }
+    th, td {
+      text-align: left;
+      vertical-align: top;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+    }
+    th { background: #f3eee4; color: var(--head); font-size: 13px; font-weight: 600; white-space: nowrap; }
+    tr:last-child td { border-bottom: 0; }
+    tr.clickable { cursor: pointer; }
+    tr.clickable:hover td { background: #faf7f1; }
+    tr.selected td { background: #eef4f0; }
+    .ok { color: var(--ok); }
+    .bad { color: var(--bad-ink); }
+    .warn { color: var(--warn-ink); }
+    .muted { color: var(--muted); }
+    .pill {
+      display: inline-block;
+      padding: 1px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      background: #f0ebe2;
+    }
+    .pill.ok { background: var(--ok-bg); color: var(--ok); }
+    .pill.bad { background: var(--bad-bg); color: var(--bad-ink); }
+    .pill.warn { background: var(--warn-bg); color: var(--warn-ink); }
+    .empty, .status {
+      padding: 18px 16px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--muted);
+    }
+    .status.bad { background: var(--bad-bg); color: var(--bad-ink); }
+    .filters { display: flex; flex-direction: column; gap: 10px; margin: 0 0 16px; }
+    .chip { font-size: 12px; color: var(--muted); }
+    footer { margin-top: 28px; color: var(--muted); font-size: 12px; }
+    @media (max-width: 900px) {
+      .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .top { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <h1 id="title">体验课评分看板</h1>
+        <p class="lead" id="lead">读取大家提交到 GitHub 的评分，按课程对照未达成项。</p>
+      </div>
+      <div class="tabs">
+        <button type="button" class="tab" id="langZh" data-lang="zh">中文</button>
+        <button type="button" class="tab" id="langEn" data-lang="en">EN</button>
+        <a class="btn" id="scoreLink" href="./">去打分</a>
+        <button type="button" id="refreshBtn">刷新</button>
+      </div>
+    </div>
+
+    <div class="filters">
+      <div>
+        <div class="chip" id="levelLabel">课程</div>
+        <div class="tabs" id="levelTabs"></div>
+      </div>
+      <div>
+        <div class="chip" id="verLabel">版本</div>
+        <div class="tabs" id="verTabs"></div>
+      </div>
+    </div>
+
+    <div id="status" class="status">正在读取提交…</div>
+    <div id="board" hidden>
+      <div class="kpis" id="kpis"></div>
+      <h2 id="raterTitle">打分人</h2>
+      <p class="lead" id="raterLead">点一行看这个人填过的格子。同一个人多次提交会分开显示。</p>
+      <div class="table-wrap" id="raterWrap"></div>
+      <h2 id="failTitle">未达成集中项</h2>
+      <p class="lead" id="failLead">同一格被越多人判未达成，越需要先改。</p>
+      <div class="table-wrap" id="failWrap"></div>
+      <h2 id="rowTitle">环节覆盖</h2>
+      <p class="lead" id="rowLead">看每一拍有没有人打到，以及这一拍里未达成有多少。</p>
+      <div class="table-wrap" id="rowWrap"></div>
+      <div id="detailBox"></div>
+    </div>
+    <footer id="foot">数据来自 submissions/ · 新提交后点刷新，GitHub 偶尔要等半分钟</footer>
+  </div>
+
+  <script>
+    const GH_OWNER = "RosannaBebe";
+    const GH_REPO = "trial-lesson-qa";
+    const TOKEN_KEY = "trial-qa-github-token";
+    const I18N = {
+      zh: {
+        title: "体验课评分看板",
+        lead: "读取大家提交到 GitHub 的评分，按课程对照未达成项。",
+        scoreLink: "去打分",
+        refresh: "刷新",
+        level: "课程",
+        ver: "版本",
+        all: "全部",
+        loading: "正在读取提交…",
+        empty: "这门课还没有提交。打开打分表提交后，再回到这里刷新。",
+        loadFail: "读不到提交。GitHub 接口失败：{msg}",
+        submitN: "提交份数",
+        raterN: "打分人数",
+        avgFilled: "已填平均分",
+        pace: "课堂节奏达成",
+        failN: "未达成格子",
+        of: "{a} / {b}",
+        raterTitle: "打分人",
+        raterLead: "点一行看这个人填过的格子。同一个人多次提交会分开显示。",
+        failTitle: "未达成集中项",
+        failLead: "同一格被越多人判未达成，越需要先改。",
+        rowTitle: "环节覆盖",
+        rowLead: "看每一拍有没有人打到，以及这一拍里未达成有多少。",
+        colRater: "打分人",
+        colTime: "提交时间",
+        colCourse: "课程",
+        colScore: "总分",
+        colFilled: "已填格子",
+        colPace: "课堂节奏",
+        colFail: "未达成",
+        colResult: "判定",
+        colNo: "序号",
+        colBeat: "环节",
+        colField: "检查项",
+        colWhoFail: "判未达成",
+        colWhoPass: "判达成",
+        colCover: "有人打到",
+        colFailCells: "未达成格",
+        pass: "达成",
+        fail: "未达成",
+        half: "超时 0.5",
+        unset: "未选",
+        detail: "{name} 已填项",
+        noneFail: "这门课目前没有未达成格子。",
+        foot: "数据来自 submissions/ · 新提交后点刷新，GitHub 偶尔要等半分钟",
+      },
+      en: {
+        title: "Trial lesson score board",
+        lead: "Reads everyone’s GitHub submissions and compares not-met cells by course.",
+        scoreLink: "Score a class",
+        refresh: "Refresh",
+        level: "Course",
+        ver: "Version",
+        all: "All",
+        loading: "Loading submissions…",
+        empty: "No submissions for this course yet. Score a sheet, then refresh.",
+        loadFail: "Could not read submissions. GitHub error: {msg}",
+        submitN: "Submissions",
+        raterN: "Raters",
+        avgFilled: "Avg filled score",
+        pace: "Pace met",
+        failN: "Not-met cells",
+        of: "{a} / {b}",
+        raterTitle: "Raters",
+        raterLead: "Click a row to see that person’s filled cells. Repeat submits stay separate.",
+        failTitle: "Not-met hotspots",
+        failLead: "Cells more people mark Not met should be fixed first.",
+        rowTitle: "Beat coverage",
+        rowLead: "See which beats anyone scored, and how many Not-met cells sit on that beat.",
+        colRater: "Rater",
+        colTime: "Submitted",
+        colCourse: "Course",
+        colScore: "Total",
+        colFilled: "Filled cells",
+        colPace: "Class pacing",
+        colFail: "Not met",
+        colResult: "Result",
+        colNo: "#",
+        colBeat: "Beat",
+        colField: "Check",
+        colWhoFail: "Not met by",
+        colWhoPass: "Met by",
+        colCover: "Scored",
+        colFailCells: "Not-met cells",
+        pass: "Met",
+        fail: "Not met",
+        half: "Over 2 min · 0.5",
+        unset: "Blank",
+        detail: "Filled cells · {name}",
+        noneFail: "No Not-met cells on this course yet.",
+        foot: "Source: submissions/ · Refresh after a new submit. GitHub may take about 30 seconds.",
+      },
+    };
+
+    const params = new URLSearchParams(location.search);
+    const state = {
+      lang: localStorage.getItem("trial-qa-lang") === "en" ? "en" : "zh",
+      level: params.get("level") || "L3",
+      ver: params.get("ver") || "V2",
+      selectedId: "",
+      all: [],
+    };
+
+    function t(key, vars) {
+      let s = (I18N[state.lang] || I18N.zh)[key] || key;
+      Object.keys(vars || {}).forEach((k) => { s = s.replace("{" + k + "}", vars[k]); });
+      return s;
+    }
+    function escapeHtml(s) {
+      return String(s == null ? "" : s)
+        .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+    function isFilled(r) { return r && r !== "unselected"; }
+    function isFail(r) { return r === "fail"; }
+    function isPass(r) { return r === "pass" || r === "ok"; }
+    function isHalf(r) { return r === "half"; }
+    function resultLabel(r) {
+      if (isPass(r)) return t("pass");
+      if (isFail(r)) return t("fail");
+      if (isHalf(r)) return t("half");
+      return t("unset");
+    }
+    function resultCls(r) {
+      if (isPass(r)) return "ok";
+      if (isFail(r)) return "bad";
+      if (isHalf(r)) return "warn";
+      return "";
+    }
+    function paceOf(sub) {
+      const g = (sub.globals || []).find((x) => x.key === "pace");
+      return g ? g.result : "unselected";
+    }
+    function filledItems(sub) {
+      return (sub.items || []).filter((i) => isFilled(i.result));
+    }
+    function failItems(sub) {
+      return (sub.items || []).filter((i) => isFail(i.result));
+    }
+    function filledScore(sub) {
+      let n = 0;
+      filledItems(sub).forEach((i) => { n += Number(i.points || 0); });
+      (sub.globals || []).forEach((g) => {
+        if (isFilled(g.result)) n += Number(g.points || 0);
+      });
+      return n;
+    }
+    function fmtScore(n) {
+      const x = Number(n || 0);
+      return Number.isInteger(x) ? String(x) : String(Math.round(x * 10) / 10);
+    }
+    function fmtTime(iso) {
+      if (!iso) return "—";
+      return new Intl.DateTimeFormat(state.lang === "en" ? "en-US" : "zh-CN", {
+        timeZone: "Asia/Shanghai",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+      }).format(new Date(iso));
+    }
+    function courseKey(sub) {
+      return (sub.level || "") + " " + (sub.version || "");
+    }
+    function filtered() {
+      return state.all.filter((s) => {
+        if (state.level !== "ALL" && s.level !== state.level) return false;
+        if (state.ver !== "ALL" && s.version !== state.ver) return false;
+        return true;
+      }).sort((a, b) => String(b.submittedAt).localeCompare(String(a.submittedAt)));
+    }
+
+    function applyChrome() {
+      document.documentElement.lang = state.lang === "en" ? "en" : "zh-CN";
+      document.getElementById("title").textContent = t("title");
+      document.getElementById("lead").textContent = t("lead");
+      document.getElementById("scoreLink").textContent = t("scoreLink");
+      document.getElementById("refreshBtn").textContent = t("refresh");
+      document.getElementById("levelLabel").textContent = t("level");
+      document.getElementById("verLabel").textContent = t("ver");
+      document.getElementById("raterTitle").textContent = t("raterTitle");
+      document.getElementById("raterLead").textContent = t("raterLead");
+      document.getElementById("failTitle").textContent = t("failTitle");
+      document.getElementById("failLead").textContent = t("failLead");
+      document.getElementById("rowTitle").textContent = t("rowTitle");
+      document.getElementById("rowLead").textContent = t("rowLead");
+      document.getElementById("foot").textContent = t("foot");
+      document.getElementById("langZh").classList.toggle("active", state.lang === "zh");
+      document.getElementById("langEn").classList.toggle("active", state.lang === "en");
+      document.title = t("title");
+    }
+
+    function renderFilters() {
+      const levels = ["ALL", "L1", "L2", "L3", "L4"];
+      const vers = ["ALL", "V1", "V2"];
+      document.getElementById("levelTabs").innerHTML = levels.map((lv) =>
+        `<button type="button" class="tab${state.level === lv ? " active" : ""}" data-level="${lv}">${lv === "ALL" ? t("all") : lv}</button>`
+      ).join("");
+      document.getElementById("verTabs").innerHTML = vers.map((v) =>
+        `<button type="button" class="tab${state.ver === v ? " active" : ""}" data-ver="${v}">${v === "ALL" ? t("all") : v}</button>`
+      ).join("");
+    }
+
+    function renderKpis(list) {
+      const raters = new Set(list.map((s) => s.rater || "—"));
+      const pacePass = list.filter((s) => isPass(paceOf(s))).length;
+      const failTotal = list.reduce((n, s) => n + failItems(s).length, 0);
+      const avg = list.length ? list.reduce((n, s) => n + filledScore(s), 0) / list.length : 0;
+      document.getElementById("kpis").innerHTML = [
+        [t("submitN"), list.length],
+        [t("raterN"), raters.size],
+        [t("avgFilled"), fmtScore(avg)],
+        [t("pace"), t("of", { a: pacePass, b: list.length })],
+        [t("failN"), failTotal],
+      ].map((row, i) => `<div class="kpi"><span>${escapeHtml(row[0])}</span><b>${escapeHtml(String(row[1]))}</b></div>`).join("");
+    }
+
+    function renderRaters(list) {
+      if (!list.length) {
+        document.getElementById("raterWrap").innerHTML = `<div class="empty">${escapeHtml(t("empty"))}</div>`;
+        return;
+      }
+      const rows = list.map((s) => {
+        const filled = filledItems(s).length;
+        const total = (s.items || []).length;
+        const fails = failItems(s).length;
+        const pace = paceOf(s);
+        const sel = state.selectedId === s.id ? " selected" : "";
+        return `<tr class="clickable${sel}" data-id="${escapeHtml(s.id)}">
+          <td>${escapeHtml(s.rater || "—")}</td>
+          <td>${escapeHtml(fmtTime(s.submittedAt))}</td>
+          <td>${escapeHtml(courseKey(s))}<div class="muted">${escapeHtml((s.course && s.course.name) || "")}</div></td>
+          <td>${fmtScore(s.score)} / ${fmtScore(s.maxScore)}</td>
+          <td>${filled} / ${total}</td>
+          <td><span class="pill ${resultCls(pace)}">${escapeHtml(resultLabel(pace))}</span></td>
+          <td class="${fails ? "bad" : "muted"}">${fails}</td>
+        </tr>`;
+      }).join("");
+      document.getElementById("raterWrap").innerHTML = `<table>
+        <thead><tr>
+          <th>${t("colRater")}</th><th>${t("colTime")}</th><th>${t("colCourse")}</th>
+          <th>${t("colScore")}</th><th>${t("colFilled")}</th><th>${t("colPace")}</th><th>${t("colFail")}</th>
+        </tr></thead><tbody>${rows}</tbody></table>`;
+    }
+
+    function failKey(item) {
+      return [item.seq, item.rowId, item.template, item.field].join("|");
+    }
+
+    function renderFails(list) {
+      const map = {};
+      list.forEach((s) => {
+        (s.items || []).forEach((item) => {
+          if (!isFilled(item.result)) return;
+          const key = failKey(item);
+          if (!map[key]) {
+            map[key] = {
+              seq: item.seq,
+              template: item.template,
+              field: item.fieldLabel || item.field,
+              fail: [],
+              pass: [],
+              half: [],
+            };
+          }
+          if (isFail(item.result)) map[key].fail.push(s.rater || "—");
+          else if (isHalf(item.result)) map[key].half.push(s.rater || "—");
+          else if (isPass(item.result)) map[key].pass.push(s.rater || "—");
+        });
+      });
+      const rows = Object.values(map)
+        .filter((x) => x.fail.length)
+        .sort((a, b) => b.fail.length - a.fail.length || a.seq - b.seq);
+      if (!rows.length) {
+        document.getElementById("failWrap").innerHTML = `<div class="empty">${escapeHtml(t("noneFail"))}</div>`;
+        return;
+      }
+      document.getElementById("failWrap").innerHTML = `<table>
+        <thead><tr>
+          <th>${t("colNo")}</th><th>${t("colBeat")}</th><th>${t("colField")}</th>
+          <th>${t("colWhoFail")}</th><th>${t("colWhoPass")}</th>
+        </tr></thead>
+        <tbody>${rows.map((r) => `<tr>
+          <td>${r.seq}</td>
+          <td>${escapeHtml(r.template || "")}</td>
+          <td>${escapeHtml(r.field || "")}</td>
+          <td class="bad">${escapeHtml(r.fail.join("、"))}</td>
+          <td class="ok">${escapeHtml(r.pass.join("、") || "—")}</td>
+        </tr>`).join("")}</tbody>
+      </table>`;
+    }
+
+    function renderRows(list) {
+      const map = {};
+      list.forEach((s) => {
+        (s.rows || []).forEach((row) => {
+          const key = String(row.seq) + ":" + row.rowId;
+          if (!map[key]) {
+            map[key] = { seq: row.seq, name: row.template, covered: 0, fails: 0 };
+          }
+          const fields = row.fields || {};
+          const any = Object.keys(fields).some((k) => isFilled(fields[k]));
+          if (any) map[key].covered += 1;
+          Object.keys(fields).forEach((k) => {
+            if (isFail(fields[k])) map[key].fails += 1;
+          });
+        });
+      });
+      const rows = Object.values(map).sort((a, b) => a.seq - b.seq);
+      if (!rows.length) {
+        document.getElementById("rowWrap").innerHTML = `<div class="empty">${escapeHtml(t("empty"))}</div>`;
+        return;
+      }
+      document.getElementById("rowWrap").innerHTML = `<table>
+        <thead><tr>
+          <th>${t("colNo")}</th><th>${t("colBeat")}</th><th>${t("colCover")}</th><th>${t("colFailCells")}</th>
+        </tr></thead>
+        <tbody>${rows.map((r) => `<tr>
+          <td>${r.seq}</td>
+          <td>${escapeHtml(r.name || "")}</td>
+          <td>${r.covered} / ${list.length}</td>
+          <td class="${r.fails ? "bad" : "muted"}">${r.fails}</td>
+        </tr>`).join("")}</tbody>
+      </table>`;
+    }
+
+    function renderDetail(list) {
+      const box = document.getElementById("detailBox");
+      const sub = list.find((s) => s.id === state.selectedId);
+      if (!sub) {
+        box.innerHTML = "";
+        return;
+      }
+      const items = filledItems(sub);
+      const globals = (sub.globals || []).filter((g) => isFilled(g.result));
+      const rows = items.map((i) => `<tr>
+        <td>${i.seq}</td>
+        <td>${escapeHtml(i.template || "")}</td>
+        <td>${escapeHtml(i.fieldLabel || i.field)}</td>
+        <td><span class="pill ${resultCls(i.result)}">${escapeHtml(resultLabel(i.result))}</span></td>
+      </tr>`).join("");
+      box.innerHTML = `<h2>${escapeHtml(t("detail", { name: sub.rater || "—" }))}</h2>
+        <div class="table-wrap"><table>
+          <thead><tr><th>${t("colNo")}</th><th>${t("colBeat")}</th><th>${t("colField")}</th><th>${t("colResult")}</th></tr></thead>
+          <tbody>
+            ${globals.map((g) => `<tr>
+              <td>—</td><td>${escapeHtml(g.title || g.key)}</td><td>${escapeHtml(g.title || g.key)}</td>
+              <td><span class="pill ${resultCls(g.result)}">${escapeHtml(resultLabel(g.result))}</span></td>
+            </tr>`).join("")}
+            ${rows}
+          </tbody>
+        </table></div>`;
+    }
+
+    function render() {
+      applyChrome();
+      renderFilters();
+      const list = filtered();
+      const status = document.getElementById("status");
+      const board = document.getElementById("board");
+      if (!state.all.length) {
+        status.hidden = false;
+        status.className = "empty";
+        status.textContent = t("empty");
+        board.hidden = true;
+        return;
+      }
+      if (!list.length) {
+        status.hidden = false;
+        status.className = "empty";
+        status.textContent = t("empty");
+        board.hidden = true;
+        return;
+      }
+      status.hidden = true;
+      board.hidden = false;
+      if (state.selectedId && !list.some((s) => s.id === state.selectedId)) state.selectedId = "";
+      renderKpis(list);
+      renderRaters(list);
+      renderFails(list);
+      renderRows(list);
+      renderDetail(list);
+    }
+
+    async function loadSubmissions() {
+      const status = document.getElementById("status");
+      const board = document.getElementById("board");
+      status.hidden = false;
+      status.className = "status";
+      status.textContent = t("loading");
+      board.hidden = true;
+      const headers = { Accept: "application/vnd.github+json" };
+      const token = localStorage.getItem(TOKEN_KEY);
+      if (token) headers.Authorization = "Bearer " + token;
+      const listRes = await fetch(
+        "https://api.github.com/repos/" + GH_OWNER + "/" + GH_REPO + "/contents/submissions?ts=" + Date.now(),
+        { headers }
+      );
+      if (!listRes.ok) {
+        const msg = await listRes.text();
+        throw new Error(msg.slice(0, 180) || String(listRes.status));
+      }
+      const files = (await listRes.json()).filter((x) => x && x.type === "file" && /\.json$/i.test(x.name));
+      const payloads = await Promise.all(files.map(async (f) => {
+        const url = f.download_url + (f.download_url.indexOf("?") >= 0 ? "&" : "?") + "ts=" + Date.now();
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(f.name + " " + res.status);
+        return res.json();
+      }));
+      state.all = payloads.filter((p) => p && p.schema === "trial-qa-submission-v1");
+    }
+
+    async function boot() {
+      applyChrome();
+      renderFilters();
+      try {
+        await loadSubmissions();
+        render();
+      } catch (err) {
+        document.getElementById("status").hidden = false;
+        document.getElementById("status").className = "status bad";
+        document.getElementById("status").textContent = t("loadFail", { msg: String(err && err.message || err) });
+        document.getElementById("board").hidden = true;
+      }
+    }
+
+    document.addEventListener("click", (e) => {
+      const langBtn = e.target.closest("[data-lang]");
+      if (langBtn) {
+        state.lang = langBtn.getAttribute("data-lang") === "en" ? "en" : "zh";
+        localStorage.setItem("trial-qa-lang", state.lang);
+        render();
+        return;
+      }
+      const lv = e.target.closest("[data-level]");
+      if (lv) {
+        state.level = lv.getAttribute("data-level");
+        const u = new URL(location.href);
+        if (state.level === "ALL") u.searchParams.delete("level");
+        else u.searchParams.set("level", state.level);
+        history.replaceState(null, "", u);
+        render();
+        return;
+      }
+      const ver = e.target.closest("[data-ver]");
+      if (ver) {
+        state.ver = ver.getAttribute("data-ver");
+        const u = new URL(location.href);
+        if (state.ver === "ALL") u.searchParams.delete("ver");
+        else u.searchParams.set("ver", state.ver);
+        history.replaceState(null, "", u);
+        render();
+        return;
+      }
+      if (e.target.id === "refreshBtn") {
+        boot();
+        return;
+      }
+      const tr = e.target.closest("tr[data-id]");
+      if (tr) {
+        const id = tr.getAttribute("data-id");
+        state.selectedId = state.selectedId === id ? "" : id;
+        render();
+      }
+    });
+
+    boot();
+  </script>
+</body>
+</html>

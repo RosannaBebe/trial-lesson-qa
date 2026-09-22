@@ -379,6 +379,7 @@
               <button type="button" id="settingsBtn" data-i18n="settings">课件设置</button>
               <button type="button" id="publishCoursewareBtn" data-i18n="publishCourseware">发布课件图</button>
             </div>
+            <button type="button" id="boardBtn" data-i18n="openBoard">评分看板</button>
             <button type="button" id="submitScoreBtn" data-i18n="submitScore">提交评分</button>
           </div>
         </div>
@@ -854,6 +855,8 @@
     "uploadFail": "GitHub 上传失败",
     "shareNotReady": "分享链接还没生效，或课件还在发布中。请稍后再打开。",
     "shareLoadFail": "分享内容加载失败",
+    "openBoard": "评分看板",
+    "viewBoard": "查看看板",
     "submitScore": "提交评分",
     "submitConfirmTitle": "确定提交这份评分？",
     "submitConfirmLead": "将单独保存这一次：{name} · {level} · {ver} · {score}/{max} 分。不会覆盖别人或你之前的提交。",
@@ -957,6 +960,8 @@
     "uploadFail": "GitHub upload failed",
     "shareNotReady": "This share link is not live yet, or the courseware is still publishing. Try again in a minute.",
     "shareLoadFail": "Could not load the shared sheet",
+    "openBoard": "Score board",
+    "viewBoard": "Open board",
     "submitScore": "Submit score",
     "submitConfirmTitle": "Submit this score sheet?",
     "submitConfirmLead": "This save is one snapshot only: {name} · {level} · {ver} · {score}/{max}. It will not overwrite anyone else’s or your earlier submissions.",
@@ -2454,6 +2459,7 @@
           <h3>${t("submitOk")}</h3>
           <p class="lead">${t("submitOkLead", { path: path })}</p>
           <div class="actions">
+            <a class="tab" href="board.html?level=${encodeURIComponent(payload.level || "")}&ver=${encodeURIComponent(payload.version || "")}">${t("viewBoard")}</a>
             <button type="button" data-close-modal>${t("close")}</button>
           </div>
         `);
@@ -2691,6 +2697,10 @@
       }
       if (e.target.id === "setupOk") {
         enterBoard();
+        return;
+      }
+      if (e.target.id === "boardBtn") {
+        location.href = "board.html?level=" + encodeURIComponent(rater.level || state.level || "L3") + "&ver=" + encodeURIComponent(activeVer() === "neu" ? "V2" : "V1");
         return;
       }
       if (e.target.id === "submitScoreBtn") {
