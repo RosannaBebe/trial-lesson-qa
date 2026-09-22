@@ -128,13 +128,6 @@
     }
     .check input { width: 16px; height: 16px; accent-color: var(--ok); }
     .choice { display: flex; flex-wrap: wrap; gap: 8px 14px; margin: 0 0 8px; }
-    .cell textarea.fail-note,
-    td textarea.fail-note {
-      width: 100%;
-      min-height: 72px;
-      margin-top: 4px;
-      resize: vertical;
-    }
     .media {
       width: 100%;
       min-height: 88px;
@@ -339,7 +332,7 @@
     <div id="workView">
       <section id="global">
         <h2 data-i18n="globalScore">全局打分</h2>
-        <p class="lead" data-i18n="globalLead">整节课只打一次，不按 template 拆。默认不选。选「未达成」必须写下原因。</p>
+        <p class="lead" data-i18n="globalLead">整节课只打一次，不按 template 拆。默认不选。</p>
         <div class="table-wrap">
           <table class="global">
             <thead>
@@ -351,7 +344,7 @@
       </section>
       <nav id="section-nav"></nav>
       <div class="note" data-i18n="scoreNote">
-        全局项各 1 分。格子用单选：达成 / 未达成，默认都不选。选未达成会出现备注框，请写下原因。每一行的课件、开口、口型、回应、不重复、动作、TTS、Dino、退出、金币各 1 分；环节耗时：2 分钟以内 1 分，超过 2 分钟 0.5 分，超过 5 分钟 0 分。
+        全局项各 1 分。格子用单选：达成 / 未达成，默认都不选。每一行的课件、开口、口型、回应、不重复、动作、TTS、Dino、退出、金币各 1 分；环节耗时：2 分钟以内 1 分，超过 2 分钟 0.5 分，超过 5 分钟 0 分。
       </div>
       <div id="sections"></div>
     </div>
@@ -709,11 +702,11 @@
     "share": "分享",
     "settings": "分享设置",
     "globalScore": "全局打分",
-    "globalLead": "整节课只打一次，不按 template 拆。默认不选。选「未达成」必须写下原因。",
+    "globalLead": "整节课只打一次，不按 template 拆。默认不选。",
     "colItem": "项目",
     "colHow": "怎么判",
     "colVerdict": "判定",
-    "scoreNote": "全局项各 1 分。格子用单选：达成 / 未达成，默认都不选。选未达成会出现备注框，请写下原因。每一行的课件、资源加载、开口、口型、音画同步、回应、ASR、不重复、动作、TTS、Dino、退出、金币各 1 分；环节耗时：2 分钟以内 1 分，超过 2 分钟 0.5 分，超过 5 分钟 0 分。",
+    "scoreNote": "全局项各 1 分。格子用单选：达成 / 未达成，默认都不选。每一行的课件、资源加载、开口、口型、音画同步、回应、ASR、不重复、动作、TTS、Dino、退出、金币各 1 分；环节耗时：2 分钟以内 1 分，超过 2 分钟 0.5 分，超过 5 分钟 0 分。",
     "compareGlobal": "全局打分对比",
     "compareGlobalLead": "整节课项，V1 / V2 分开看。",
     "colMax": "满分",
@@ -793,11 +786,11 @@
     "share": "Share",
     "settings": "Share settings",
     "globalScore": "Whole-class score",
-    "globalLead": "Score once for the whole class, not per template. Default: unselected. If you mark Not met, you must write why.",
+    "globalLead": "Score once for the whole class, not per template. Default: unselected.",
     "colItem": "Item",
     "colHow": "How to judge",
     "colVerdict": "Result",
-    "scoreNote": "Each whole-class item is 1 point. Cells use Met / Not met and start unselected. Not met shows a note box — write why. On each row, courseware, resource load, talk, lip sync, A/V sync, response, ASR, no-repeat, action, TTS, Dino, exit, and coins are 1 point each. Duration: 1 point within 2 minutes, 0.5 over 2 minutes, 0 over 5 minutes.",
+    "scoreNote": "Each whole-class item is 1 point. Cells use Met / Not met and start unselected. On each row, courseware, resource load, talk, lip sync, A/V sync, response, ASR, no-repeat, action, TTS, Dino, exit, and coins are 1 point each. Duration: 1 point within 2 minutes, 0.5 over 2 minutes, 0 over 5 minutes.",
     "compareGlobal": "Whole-class compare",
     "compareGlobalLead": "Whole-class items, V1 and V2 separately.",
     "colMax": "Max",
@@ -1759,13 +1752,11 @@
 
     function radioCell(ver, rowId, key, html) {
       const status = markStatus(cur().versions[ver].checks[rowId + ":" + key]);
-      const note = ((cur().versions[ver].cellNotes || {})[rowId + ":" + key] || "");
       const prefix = escapeHtml("qa-" + ver + "-" + rowId + "-" + key);
       const attrs = `data-row="${rowId}" data-field="${key}"`;
       return `<div class="cell">
         <p>${html}</p>
         ${radioPair(prefix, status, attrs)}
-        <textarea class="fail-note" data-cell-note="${rowId}" data-field="${key}" rows="3" placeholder="${escapeHtml(loc("未达成原因"))}" ${status === "fail" ? "" : "hidden"}>${escapeHtml(note)}</textarea>
       </div>`;
     }
 
@@ -1870,17 +1861,14 @@
     function renderGlobals() {
       const ver = state.view === "neu" ? "neu" : "old";
       const marks = cur().versions[ver].globals || {};
-      const notes = cur().versions[ver].globalNotes || {};
       document.getElementById("global-items").innerHTML = GLOBALS.map((item, i) => {
         const status = markStatus(marks[item.key]);
-        const note = notes[item.key] || "";
         const prefix = escapeHtml("qa-" + ver + "-global-" + item.key);
         return `<tr>
           <td>${i + 1}. ${escapeHtml(loc(item.title))}</td>
           <td>${escapeHtml(loc(item.how))}</td>
           <td>
             ${radioPair(prefix, status, `data-global="${item.key}"`)}
-            <textarea class="fail-note" data-global-note="${item.key}" rows="3" placeholder="${escapeHtml(loc("未达成原因"))}" ${status === "fail" ? "" : "hidden"}>${escapeHtml(note)}</textarea>
           </td>
         </tr>`;
       }).join("");
@@ -2317,15 +2305,10 @@
         if (!cur().versions[ver].globals) cur().versions[ver].globals = {};
         if (value) cur().versions[ver].globals[radio.dataset.global] = value;
         else delete cur().versions[ver].globals[radio.dataset.global];
-        const ta = radio.closest("td") && radio.closest("td").querySelector("textarea.fail-note");
-        if (ta) ta.hidden = value !== "fail";
       } else {
         const key = radio.dataset.row + ":" + radio.dataset.field;
         if (value) cur().versions[ver].checks[key] = value;
         else delete cur().versions[ver].checks[key];
-        const cell = radio.closest(".cell");
-        const ta = cell && cell.querySelector("textarea.fail-note");
-        if (ta) ta.hidden = value !== "fail";
       }
       saveState();
       renderTop();
@@ -2380,22 +2363,6 @@
         saveState();
         renderCompare();
         renderTop();
-      }
-      const cellNote = e.target.closest("textarea[data-cell-note]");
-      if (cellNote) {
-        const ver = state.view === "neu" ? "neu" : "old";
-        if (!cur().versions[ver].cellNotes) cur().versions[ver].cellNotes = {};
-        cur().versions[ver].cellNotes[cellNote.dataset.cellNote + ":" + cellNote.dataset.field] = cellNote.value;
-        saveState();
-        return;
-      }
-      const globalNote = e.target.closest("textarea[data-global-note]");
-      if (globalNote) {
-        const ver = state.view === "neu" ? "neu" : "old";
-        if (!cur().versions[ver].globalNotes) cur().versions[ver].globalNotes = {};
-        cur().versions[ver].globalNotes[globalNote.dataset.globalNote] = globalNote.value;
-        saveState();
-        return;
       }
       const note = e.target.closest("textarea[data-note]");
       if (note) {
