@@ -181,7 +181,7 @@
         loadFail: "读不到提交。GitHub 接口失败：{msg}",
         submitN: "提交份数",
         raterN: "打分人数",
-        avgFilled: "已填平均分",
+        avgFilled: "平均分（换算为百分制）",
         pace: "课堂节奏达成",
         failN: "未达成格子",
         of: "{a} / {b}",
@@ -227,7 +227,7 @@
         loadFail: "Could not read submissions. GitHub error: {msg}",
         submitN: "Submissions",
         raterN: "Raters",
-        avgFilled: "Avg filled score",
+        avgFilled: "Average (out of 100)",
         pace: "Pace met",
         failN: "Not-met cells",
         of: "{a} / {b}",
@@ -315,6 +315,12 @@
       });
       return n;
     }
+    function percentScore(sub) {
+      const max = Number(sub && sub.maxScore);
+      const got = sub && sub.score != null ? Number(sub.score) : filledScore(sub);
+      const denom = max > 0 ? max : 226;
+      return denom ? (got / denom) * 100 : 0;
+    }
     function fmtScore(n) {
       const x = Number(n || 0);
       return Number.isInteger(x) ? String(x) : String(Math.round(x * 10) / 10);
@@ -376,7 +382,7 @@
       const raters = new Set(list.map((s) => s.rater || "—"));
       const pacePass = list.filter((s) => isPass(paceOf(s))).length;
       const failTotal = list.reduce((n, s) => n + failItems(s).length, 0);
-      const avg = list.length ? list.reduce((n, s) => n + filledScore(s), 0) / list.length : 0;
+      const avg = list.length ? list.reduce((n, s) => n + percentScore(s), 0) / list.length : 0;
       document.getElementById("kpis").innerHTML = [
         [t("submitN"), list.length],
         [t("raterN"), raters.size],

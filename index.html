@@ -1400,7 +1400,7 @@
         talk: "询问一次 yes or no 的问题，然后进入下一个视频的介绍。",
         tts: "yes or no 问句完整播完。下一个视频介绍的 TTS 完整播完。",
       }),
-      "2": Object.assign({}, L1_ROWS["2"]),
+      "2": Object.assign({}, L1_ROWS["2"], { skipLip: true }),
       "3": {
         name: "教 climb",
         tid: "word_teach_image_l3l4#1",
@@ -1535,7 +1535,7 @@
       }),
       "18": Object.assign({}, L1_ROWS["18"], { tid: "photo_time", talk: "邀请拍照。", tts: "邀请拍照的 TTS 完整播完。", dino: "不出现 Dino 助手", action: "", skipDialogue: true, skipAction: true }),
       "19": Object.assign({}, L1_ROWS["19"], { talk: "Wow, amazing! It's gift time, let's open it![NO_OP]", tts: "Wow, amazing! It's gift time, let's open it! 完整播完，嘴动有声，音色=本课老师。不打断开箱。", dino: "不出现 Dino 助手", coin: "打开宝箱，获得金币，如果用户不选择一直停留在这里", action: "", skipDialogue: true, skipAction: true }),
-      "20": Object.assign({}, L1_ROWS["20"], { talk: "老师不开口", coin: "弹出金币与经验结算与反馈问卷", action: "", skipDialogue: true, skipAction: true }),
+      "20": Object.assign({}, L1_ROWS["20"], { talk: "老师不开口", coin: "弹出金币与经验结算与反馈问卷", action: "", skipDialogue: true, skipAction: true, skipAvsync: true }),
     };
 
     const COURSES = {
@@ -1728,7 +1728,9 @@
     }
     function fieldApplies(row, key) {
       if (!row) return true;
-      if (row.skipDialogue && (key === "lip" || key === "avsync" || key === "reply" || key === "asr" || key === "repeat")) return false;
+      if (row.skipLip && key === "lip") return false;
+      if (row.skipAvsync && key === "avsync") return false;
+      if (row.skipDialogue && (key === "lip" || key === "reply" || key === "asr" || key === "repeat")) return false;
       if (row.skipAction && key === "action") return false;
       return true;
     }
