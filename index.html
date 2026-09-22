@@ -2937,6 +2937,8 @@
       }
       exclusiveCheck(radio);
       setRadioMark(radio, radio.value);
+      const marked = radio.closest(".cell-miss");
+      if (marked) marked.classList.remove("cell-miss");
     });
 
     document.body.addEventListener("change", (e) => {
@@ -2946,6 +2948,8 @@
         cur().versions[ver].checks[duration.dataset.row + ":duration"] = duration.value;
         saveState();
         renderTop();
+        const marked = duration.closest(".cell-miss");
+        if (marked) marked.classList.remove("cell-miss");
         return;
       }
       const upload = e.target.closest("input[data-upload]");
