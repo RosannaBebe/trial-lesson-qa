@@ -31,16 +31,12 @@
     h1 { margin: 0 0 6px; font-size: 24px; letter-spacing: -0.02em; }
     .meta { color: var(--muted); margin: 0 0 16px; }
     .bar {
-      position: sticky; top: 0; z-index: 5;
-      background: var(--bg);
-      padding: 10px 0 12px;
+      padding: 10px 0 0;
       display: flex;
       justify-content: space-between;
       gap: 16px;
       align-items: center;
       flex-wrap: wrap;
-      border-bottom: 1px solid var(--line);
-      margin-bottom: 16px;
     }
     .tabs { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
     .level-tabs { margin: 0 0 10px; }
@@ -224,10 +220,16 @@
     .setup-modal .actions { justify-content: space-between; align-items: center; }
     #setupOk { background: var(--ink); color: #fff; border-color: var(--ink); }
     .top-row {
+      position: sticky;
+      top: 0;
+      z-index: 8;
       display: flex;
       gap: 16px;
       align-items: flex-start;
-      margin: 0 0 16px;
+      margin: -24px -20px 16px;
+      padding: 16px 20px 12px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
     }
     .class-player {
       width: 667px;
