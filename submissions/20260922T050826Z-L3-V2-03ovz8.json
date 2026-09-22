@@ -12,7 +12,7 @@
     "lessonId": "734",
     "sn": "TRIAL-LV3-UN1-LS0"
   },
-  "score": 155,
+  "score": 225,
   "maxScore": 226,
   "globals": [
     {
@@ -29,16 +29,16 @@
       "section": "1. 导入 + 外层视频",
       "template": "导入 · pre-video",
       "fields": {
-        "media": "unselected",
-        "load": "unselected",
+        "media": "pass",
+        "load": "pass",
         "talk": "pass",
         "lip": "fail",
-        "avsync": "unselected",
-        "reply": "unselected",
-        "asr": "unselected",
+        "avsync": "pass",
+        "reply": "pass",
+        "asr": "pass",
         "repeat": "pass",
         "duration": "ok",
-        "action": "unselected",
+        "action": "pass",
         "tts": "pass",
         "dino": "pass",
         "exit": "pass",
@@ -51,15 +51,15 @@
       "section": "1. 导入 + 外层视频",
       "template": "导入 · 内嵌视频",
       "fields": {
-        "media": "unselected",
+        "media": "pass",
         "load": "pass",
         "talk": "pass",
         "duration": "ok",
         "action": "pass",
-        "tts": "unselected",
+        "tts": "pass",
         "dino": "pass",
         "exit": "pass",
-        "coin": "unselected"
+        "coin": "pass"
       }
     },
     {
@@ -68,7 +68,7 @@
       "section": "1. 导入 + 外层视频",
       "template": "导入 · post-video",
       "fields": {
-        "media": "unselected",
+        "media": "pass",
         "load": "pass",
         "talk": "pass",
         "lip": "pass",
@@ -80,8 +80,8 @@
         "action": "pass",
         "tts": "pass",
         "dino": "pass",
-        "exit": "unselected",
-        "coin": "unselected"
+        "exit": "pass",
+        "coin": "pass"
       }
     },
     {
@@ -90,8 +90,8 @@
       "section": "1. 导入 + 外层视频",
       "template": "视频",
       "fields": {
-        "media": "unselected",
-        "load": "unselected",
+        "media": "pass",
+        "load": "pass",
         "talk": "pass",
         "lip": "pass",
         "avsync": "pass",
@@ -99,11 +99,11 @@
         "asr": "pass",
         "repeat": "pass",
         "duration": "ok",
-        "action": "unselected",
+        "action": "pass",
         "tts": "pass",
         "dino": "pass",
         "exit": "pass",
-        "coin": "unselected"
+        "coin": "pass"
       }
     },
     {
@@ -112,77 +112,7 @@
       "section": "2. Climb 教学环节 → 宝箱 1",
       "template": "教 climb",
       "fields": {
-        "media": "unselected",
-        "load": "pass",
-        "talk": "unselected",
-        "lip": "unselected",
-        "avsync": "unselected",
-        "reply": "unselected",
-        "asr": "unselected",
-        "repeat": "unselected",
-        "duration": "unselected",
-        "action": "unselected",
-        "tts": "unselected",
-        "dino": "unselected",
-        "exit": "unselected",
-        "coin": "unselected"
-      }
-    },
-    {
-      "seq": 6,
-      "rowId": "4",
-      "section": "2. Climb 教学环节 → 宝箱 1",
-      "template": "泡 climb",
-      "fields": {
-        "media": "unselected",
-        "load": "pass",
-        "talk": "pass",
-        "duration": "unselected",
-        "tts": "unselected",
-        "dino": "unselected",
-        "exit": "unselected",
-        "coin": "unselected"
-      }
-    },
-    {
-      "seq": 7,
-      "rowId": "5",
-      "section": "2. Climb 教学环节 → 宝箱 1",
-      "template": "测 climb",
-      "fields": {
-        "media": "unselected",
-        "load": "pass",
-        "talk": "pass",
-        "duration": "unselected",
-        "tts": "unselected",
-        "dino": "unselected",
-        "exit": "unselected",
-        "coin": "unselected"
-      }
-    },
-    {
-      "seq": 8,
-      "rowId": "6",
-      "section": "2. Climb 教学环节 → 宝箱 1",
-      "template": "宝箱 1",
-      "fields": {
-        "media": "unselected",
-        "load": "pass",
-        "talk": "pass",
-        "duration": "unselected",
-        "tts": "unselected",
-        "dino": "unselected",
-        "exit": "unselected",
-        "coin": "unselected"
-      }
-    },
-    {
-      "seq": 9,
-      "rowId": "7",
-      "section": "3. Jump 教学环节",
-      "template": "教 jump",
-      "fields": {
-        "media": "unselected",
+        "media": "pass",
         "load": "pass",
         "talk": "pass",
         "lip": "pass",
@@ -191,11 +121,81 @@
         "asr": "pass",
         "repeat": "pass",
         "duration": "ok",
-        "action": "unselected",
+        "action": "pass",
         "tts": "pass",
         "dino": "pass",
         "exit": "pass",
-        "coin": "unselected"
+        "coin": "pass"
+      }
+    },
+    {
+      "seq": 6,
+      "rowId": "4",
+      "section": "2. Climb 教学环节 → 宝箱 1",
+      "template": "泡 climb",
+      "fields": {
+        "media": "pass",
+        "load": "pass",
+        "talk": "pass",
+        "duration": "ok",
+        "tts": "pass",
+        "dino": "pass",
+        "exit": "pass",
+        "coin": "pass"
+      }
+    },
+    {
+      "seq": 7,
+      "rowId": "5",
+      "section": "2. Climb 教学环节 → 宝箱 1",
+      "template": "测 climb",
+      "fields": {
+        "media": "pass",
+        "load": "pass",
+        "talk": "pass",
+        "duration": "ok",
+        "tts": "pass",
+        "dino": "pass",
+        "exit": "pass",
+        "coin": "pass"
+      }
+    },
+    {
+      "seq": 8,
+      "rowId": "6",
+      "section": "2. Climb 教学环节 → 宝箱 1",
+      "template": "宝箱 1",
+      "fields": {
+        "media": "pass",
+        "load": "pass",
+        "talk": "pass",
+        "duration": "ok",
+        "tts": "pass",
+        "dino": "pass",
+        "exit": "pass",
+        "coin": "pass"
+      }
+    },
+    {
+      "seq": 9,
+      "rowId": "7",
+      "section": "3. Jump 教学环节",
+      "template": "教 jump",
+      "fields": {
+        "media": "pass",
+        "load": "pass",
+        "talk": "pass",
+        "lip": "pass",
+        "avsync": "pass",
+        "reply": "pass",
+        "asr": "pass",
+        "repeat": "pass",
+        "duration": "ok",
+        "action": "pass",
+        "tts": "pass",
+        "dino": "pass",
+        "exit": "pass",
+        "coin": "pass"
       }
     },
     {
@@ -204,7 +204,7 @@
       "section": "3. Jump 教学环节",
       "template": "泡 jump",
       "fields": {
-        "media": "unselected",
+        "media": "pass",
         "load": "pass",
         "talk": "pass",
         "duration": "ok",
@@ -220,7 +220,7 @@
       "section": "3. Jump 教学环节",
       "template": "测 jump",
       "fields": {
-        "media": "unselected",
+        "media": "pass",
         "load": "pass",
         "talk": "pass",
         "duration": "ok",
@@ -236,7 +236,7 @@
       "section": "4. Fly 教学环节 → 宝箱 2",
       "template": "教 fly",
       "fields": {
-        "media": "unselected",
+        "media": "pass",
         "load": "pass",
         "talk": "pass",
         "lip": "pass",
@@ -245,11 +245,11 @@
         "asr": "pass",
         "repeat": "pass",
         "duration": "ok",
-        "action": "unselected",
+        "action": "pass",
         "tts": "pass",
         "dino": "pass",
         "exit": "pass",
-        "coin": "unselected"
+        "coin": "pass"
       }
     },
     {
@@ -258,7 +258,7 @@
       "section": "4. Fly 教学环节 → 宝箱 2",
       "template": "泡 fly",
       "fields": {
-        "media": "unselected",
+        "media": "pass",
         "load": "pass",
         "talk": "pass",
         "duration": "ok",
@@ -274,7 +274,7 @@
       "section": "4. Fly 教学环节 → 宝箱 2",
       "template": "测 fly",
       "fields": {
-        "media": "unselected",
+        "media": "pass",
         "load": "pass",
         "talk": "pass",
         "duration": "ok",
@@ -290,7 +290,7 @@
       "section": "4. Fly 教学环节 → 宝箱 2",
       "template": "宝箱 2",
       "fields": {
-        "media": "unselected",
+        "media": "pass",
         "load": "pass",
         "talk": "pass",
         "duration": "ok",
@@ -306,7 +306,7 @@
       "section": "5. 句子段",
       "template": "句子教学",
       "fields": {
-        "media": "unselected",
+        "media": "pass",
         "load": "pass",
         "talk": "pass",
         "lip": "pass",
@@ -319,7 +319,7 @@
         "tts": "pass",
         "dino": "pass",
         "exit": "pass",
-        "coin": "unselected"
+        "coin": "pass"
       }
     },
     {
@@ -328,14 +328,14 @@
       "section": "5. 句子段",
       "template": "听选图",
       "fields": {
-        "media": "unselected",
+        "media": "pass",
         "load": "pass",
         "talk": "pass",
         "duration": "ok",
         "tts": "pass",
         "dino": "pass",
         "exit": "pass",
-        "coin": "unselected"
+        "coin": "pass"
       }
     },
     {
@@ -344,14 +344,14 @@
       "section": "5. 句子段",
       "template": "句子口语",
       "fields": {
-        "media": "unselected",
+        "media": "pass",
         "load": "pass",
         "talk": "pass",
         "duration": "ok",
         "tts": "pass",
         "dino": "pass",
         "exit": "pass",
-        "coin": "unselected"
+        "coin": "pass"
       }
     },
     {
@@ -360,7 +360,7 @@
       "section": "6. 收尾 → 完课",
       "template": "收尾视频",
       "fields": {
-        "media": "unselected",
+        "media": "pass",
         "load": "pass",
         "talk": "pass",
         "lip": "pass",
@@ -373,7 +373,7 @@
         "tts": "pass",
         "dino": "pass",
         "exit": "pass",
-        "coin": "unselected"
+        "coin": "pass"
       }
     },
     {
@@ -382,14 +382,14 @@
       "section": "6. 收尾 → 完课",
       "template": "拍照",
       "fields": {
-        "media": "unselected",
+        "media": "pass",
         "load": "pass",
         "talk": "pass",
         "duration": "ok",
         "tts": "pass",
         "dino": "pass",
         "exit": "pass",
-        "coin": "unselected"
+        "coin": "pass"
       }
     },
     {
@@ -398,7 +398,7 @@
       "section": "6. 收尾 → 完课",
       "template": "宝箱 3",
       "fields": {
-        "media": "unselected",
+        "media": "pass",
         "load": "pass",
         "talk": "pass",
         "duration": "ok",
@@ -414,7 +414,7 @@
       "section": "6. 收尾 → 完课",
       "template": "完课",
       "fields": {
-        "media": "unselected",
+        "media": "pass",
         "load": "pass",
         "talk": "pass",
         "duration": "ok",
@@ -433,8 +433,8 @@
       "template": "导入 · pre-video",
       "field": "media",
       "fieldLabel": "课件",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 1,
@@ -443,8 +443,8 @@
       "template": "导入 · pre-video",
       "field": "load",
       "fieldLabel": "资源加载",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 1,
@@ -473,8 +473,8 @@
       "template": "导入 · pre-video",
       "field": "avsync",
       "fieldLabel": "音画同步（老师/视频文件音画同步）",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 1,
@@ -483,8 +483,8 @@
       "template": "导入 · pre-video",
       "field": "reply",
       "fieldLabel": "回应合理",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 1,
@@ -493,8 +493,8 @@
       "template": "导入 · pre-video",
       "field": "asr",
       "fieldLabel": "学生说话（ASR）",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 1,
@@ -523,8 +523,8 @@
       "template": "导入 · pre-video",
       "field": "action",
       "fieldLabel": "老师动作",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 1,
@@ -573,8 +573,8 @@
       "template": "导入 · 内嵌视频",
       "field": "media",
       "fieldLabel": "课件",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 2,
@@ -623,8 +623,8 @@
       "template": "导入 · 内嵌视频",
       "field": "tts",
       "fieldLabel": "TTS",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 2,
@@ -653,8 +653,8 @@
       "template": "导入 · 内嵌视频",
       "field": "coin",
       "fieldLabel": "金币",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 3,
@@ -663,8 +663,8 @@
       "template": "导入 · post-video",
       "field": "media",
       "fieldLabel": "课件",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 3,
@@ -783,8 +783,8 @@
       "template": "导入 · post-video",
       "field": "exit",
       "fieldLabel": "退出 / 收口",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 3,
@@ -793,8 +793,8 @@
       "template": "导入 · post-video",
       "field": "coin",
       "fieldLabel": "金币",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 4,
@@ -803,8 +803,8 @@
       "template": "视频",
       "field": "media",
       "fieldLabel": "课件",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 4,
@@ -813,8 +813,8 @@
       "template": "视频",
       "field": "load",
       "fieldLabel": "资源加载",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 4,
@@ -893,16 +893,6 @@
       "template": "视频",
       "field": "action",
       "fieldLabel": "老师动作",
-      "result": "unselected",
-      "points": 0
-    },
-    {
-      "seq": 4,
-      "rowId": "2",
-      "section": "1. 导入 + 外层视频",
-      "template": "视频",
-      "field": "tts",
-      "fieldLabel": "TTS",
       "result": "pass",
       "points": 1
     },
@@ -911,6 +901,16 @@
       "rowId": "2",
       "section": "1. 导入 + 外层视频",
       "template": "视频",
+      "field": "tts",
+      "fieldLabel": "TTS",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 4,
+      "rowId": "2",
+      "section": "1. 导入 + 外层视频",
+      "template": "视频",
       "field": "dino",
       "fieldLabel": "Dino",
       "result": "pass",
@@ -933,8 +933,8 @@
       "template": "视频",
       "field": "coin",
       "fieldLabel": "金币",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 5,
@@ -943,8 +943,8 @@
       "template": "教 climb",
       "field": "media",
       "fieldLabel": "课件",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 5,
@@ -963,8 +963,8 @@
       "template": "教 climb",
       "field": "talk",
       "fieldLabel": "老师开口",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 5,
@@ -973,8 +973,8 @@
       "template": "教 climb",
       "field": "lip",
       "fieldLabel": "口型匹配",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 5,
@@ -983,8 +983,8 @@
       "template": "教 climb",
       "field": "avsync",
       "fieldLabel": "音画同步（老师/视频文件音画同步）",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 5,
@@ -993,8 +993,8 @@
       "template": "教 climb",
       "field": "reply",
       "fieldLabel": "回应合理",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 5,
@@ -1003,8 +1003,8 @@
       "template": "教 climb",
       "field": "asr",
       "fieldLabel": "学生说话（ASR）",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 5,
@@ -1013,8 +1013,8 @@
       "template": "教 climb",
       "field": "repeat",
       "fieldLabel": "不出现对话重复现象",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 5,
@@ -1023,8 +1023,8 @@
       "template": "教 climb",
       "field": "duration",
       "fieldLabel": "环节耗时",
-      "result": "unselected",
-      "points": 0
+      "result": "ok",
+      "points": 1
     },
     {
       "seq": 5,
@@ -1033,8 +1033,8 @@
       "template": "教 climb",
       "field": "action",
       "fieldLabel": "老师动作",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 5,
@@ -1043,8 +1043,8 @@
       "template": "教 climb",
       "field": "tts",
       "fieldLabel": "TTS",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 5,
@@ -1053,8 +1053,8 @@
       "template": "教 climb",
       "field": "dino",
       "fieldLabel": "Dino",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 5,
@@ -1063,8 +1063,8 @@
       "template": "教 climb",
       "field": "exit",
       "fieldLabel": "退出 / 收口",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 5,
@@ -1073,8 +1073,8 @@
       "template": "教 climb",
       "field": "coin",
       "fieldLabel": "金币",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 6,
@@ -1083,8 +1083,8 @@
       "template": "泡 climb",
       "field": "media",
       "fieldLabel": "课件",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 6,
@@ -1113,8 +1113,8 @@
       "template": "泡 climb",
       "field": "duration",
       "fieldLabel": "环节耗时",
-      "result": "unselected",
-      "points": 0
+      "result": "ok",
+      "points": 1
     },
     {
       "seq": 6,
@@ -1123,8 +1123,8 @@
       "template": "泡 climb",
       "field": "tts",
       "fieldLabel": "TTS",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 6,
@@ -1133,8 +1133,8 @@
       "template": "泡 climb",
       "field": "dino",
       "fieldLabel": "Dino",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 6,
@@ -1143,8 +1143,8 @@
       "template": "泡 climb",
       "field": "exit",
       "fieldLabel": "退出 / 收口",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 6,
@@ -1153,8 +1153,8 @@
       "template": "泡 climb",
       "field": "coin",
       "fieldLabel": "金币",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 7,
@@ -1163,8 +1163,8 @@
       "template": "测 climb",
       "field": "media",
       "fieldLabel": "课件",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 7,
@@ -1193,8 +1193,8 @@
       "template": "测 climb",
       "field": "duration",
       "fieldLabel": "环节耗时",
-      "result": "unselected",
-      "points": 0
+      "result": "ok",
+      "points": 1
     },
     {
       "seq": 7,
@@ -1203,8 +1203,8 @@
       "template": "测 climb",
       "field": "tts",
       "fieldLabel": "TTS",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 7,
@@ -1213,8 +1213,8 @@
       "template": "测 climb",
       "field": "dino",
       "fieldLabel": "Dino",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 7,
@@ -1223,8 +1223,8 @@
       "template": "测 climb",
       "field": "exit",
       "fieldLabel": "退出 / 收口",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 7,
@@ -1233,8 +1233,8 @@
       "template": "测 climb",
       "field": "coin",
       "fieldLabel": "金币",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 8,
@@ -1243,8 +1243,8 @@
       "template": "宝箱 1",
       "field": "media",
       "fieldLabel": "课件",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 8,
@@ -1273,8 +1273,8 @@
       "template": "宝箱 1",
       "field": "duration",
       "fieldLabel": "环节耗时",
-      "result": "unselected",
-      "points": 0
+      "result": "ok",
+      "points": 1
     },
     {
       "seq": 8,
@@ -1283,8 +1283,8 @@
       "template": "宝箱 1",
       "field": "tts",
       "fieldLabel": "TTS",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 8,
@@ -1293,8 +1293,8 @@
       "template": "宝箱 1",
       "field": "dino",
       "fieldLabel": "Dino",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 8,
@@ -1303,8 +1303,8 @@
       "template": "宝箱 1",
       "field": "exit",
       "fieldLabel": "退出 / 收口",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 8,
@@ -1313,8 +1313,8 @@
       "template": "宝箱 1",
       "field": "coin",
       "fieldLabel": "金币",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 9,
@@ -1323,8 +1323,8 @@
       "template": "教 jump",
       "field": "media",
       "fieldLabel": "课件",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 9,
@@ -1413,8 +1413,8 @@
       "template": "教 jump",
       "field": "action",
       "fieldLabel": "老师动作",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 9,
@@ -1453,8 +1453,8 @@
       "template": "教 jump",
       "field": "coin",
       "fieldLabel": "金币",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 10,
@@ -1463,8 +1463,8 @@
       "template": "泡 jump",
       "field": "media",
       "fieldLabel": "课件",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 10,
@@ -1543,8 +1543,8 @@
       "template": "测 jump",
       "field": "media",
       "fieldLabel": "课件",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 11,
@@ -1623,8 +1623,8 @@
       "template": "教 fly",
       "field": "media",
       "fieldLabel": "课件",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 12,
@@ -1713,8 +1713,8 @@
       "template": "教 fly",
       "field": "action",
       "fieldLabel": "老师动作",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 12,
@@ -1753,8 +1753,8 @@
       "template": "教 fly",
       "field": "coin",
       "fieldLabel": "金币",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 13,
@@ -1763,8 +1763,8 @@
       "template": "泡 fly",
       "field": "media",
       "fieldLabel": "课件",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 13,
@@ -1843,8 +1843,8 @@
       "template": "测 fly",
       "field": "media",
       "fieldLabel": "课件",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 14,
@@ -1923,8 +1923,8 @@
       "template": "宝箱 2",
       "field": "media",
       "fieldLabel": "课件",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 15,
@@ -2003,8 +2003,8 @@
       "template": "句子教学",
       "field": "media",
       "fieldLabel": "课件",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 16,
@@ -2133,8 +2133,8 @@
       "template": "句子教学",
       "field": "coin",
       "fieldLabel": "金币",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 17,
@@ -2143,8 +2143,8 @@
       "template": "听选图",
       "field": "media",
       "fieldLabel": "课件",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 17,
@@ -2213,8 +2213,8 @@
       "template": "听选图",
       "field": "coin",
       "fieldLabel": "金币",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 18,
@@ -2223,8 +2223,8 @@
       "template": "句子口语",
       "field": "media",
       "fieldLabel": "课件",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 18,
@@ -2293,8 +2293,8 @@
       "template": "句子口语",
       "field": "coin",
       "fieldLabel": "金币",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 19,
@@ -2303,8 +2303,8 @@
       "template": "收尾视频",
       "field": "media",
       "fieldLabel": "课件",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 19,
@@ -2433,8 +2433,8 @@
       "template": "收尾视频",
       "field": "coin",
       "fieldLabel": "金币",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 20,
@@ -2443,8 +2443,8 @@
       "template": "拍照",
       "field": "media",
       "fieldLabel": "课件",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 20,
@@ -2513,8 +2513,8 @@
       "template": "拍照",
       "field": "coin",
       "fieldLabel": "金币",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 21,
@@ -2523,8 +2523,8 @@
       "template": "宝箱 3",
       "field": "media",
       "fieldLabel": "课件",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 21,
@@ -2603,8 +2603,8 @@
       "template": "完课",
       "field": "media",
       "fieldLabel": "课件",
-      "result": "unselected",
-      "points": 0
+      "result": "pass",
+      "points": 1
     },
     {
       "seq": 22,
