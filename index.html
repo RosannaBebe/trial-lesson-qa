@@ -1044,7 +1044,7 @@
       if (!state.levels[rater.level]) state.levels[rater.level] = blankLevel();
       state.level = rater.level;
       state.view = rater.view;
-      resetSheetScores();
+      saveState();
       saveRater();
       boardOpen = true;
       document.getElementById("setup-mask").classList.add("hidden");
