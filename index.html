@@ -740,6 +740,10 @@
   "打开龙蛋，获得奖励，如果用户不选择一直停留在这里": "Open the dragon egg and get the reward. If the user does not choose, stay on this page.",
   "打开宝箱，获得金币，如果用户不选择一直停留在这里": "Open the chest and get coins. If the user does not choose, stay on this page.",
   "弹出金币与经验结算与反馈问卷": "Show the coins-and-XP settlement and the feedback survey.",
+  "这里老师需要做出向上爬的动作": "The teacher needs to do a climbing-up motion here.",
+  "这里老师需要做出拖着飞行小鸟的动作": "The teacher needs to do the dragging-a-flying-bird motion here.",
+  "教句型：Can you climb? 与 I can climb。最多 3 轮。": "Teach the patterns Can you climb? and I can climb. 3 turns at most.",
+  "老师引入song time环节有Dino助手，当播放歌曲视频，Dino助手隐藏": "Dino appears when the teacher introduces song time, then hides while the song video plays.",
   "若本页含老师收口：按当页收口问句只问 1 次。任意回答后不再提问。然后播歌曲视频，片中不插话。": "If this page has a teacher close: ask this page’s close question once. After any answer, stop asking. Then play the song video with no teacher talk-over.",
   "若本页含老师收口：按当页收口问句只问 1 次。任意回答后不再提问。然后播歌曲视频。": "If this page has a teacher close: ask this page’s close question once. After any answer, stop asking. Then play the song video.",
   "L4 体验课": "L4 trial",
@@ -1367,7 +1371,7 @@
         talk: "1、打招呼，Hi hi {name}! I'm {teacher}! 询问不超过2次。任意语音（Hi / Okay / 本地语）或学生不回答都往下。\n2、介绍本节课内容。",
         tts: "打招呼句完整播完，嘴动有声，音色=本课老师。介绍本节课内容的 TTS 完整播完。",
       }),
-      "1b": Object.assign({}, L1_ROWS["1b"], { tid: "lead-in-template" }),
+      "1b": Object.assign({}, L1_ROWS["1b"], { tid: "lead-in-template", skipDialogue: true }),
       "1c": Object.assign({}, L1_ROWS["1c"], {
         tid: "lead-in-template",
         talk: "询问一次 yes or no 的问题，然后进入下一个视频的介绍。",
@@ -1378,7 +1382,7 @@
         name: "教 climb",
         tid: "word_teach_image_l3l4#1",
         talk: "本环节老师教授单词 climb，首句只说 1 次。本页老师的同一个问题最多问 3 轮。",
-        action: "指图、听、跟说 + [TEACHER_LISTEN]。学生说出任何像 climb 的音：短反馈后交接并 [TEMPLATE_FINISH]。第 3 轮无论是否说对都必须结束。",
+        action: "这里老师需要做出向上爬的动作",
         tts: "教授 climb 的首句完整播完，只说 1 次；同一问最多 3 轮，问句 TTS 完整。跟读召唤降调，禁止 Can you say climb?",
         dino: "仅帮助按钮。解释或带读 1 次后交还老师，带已解决。不替代老师打结束标签。",
         exit: EXIT_SPEC,
@@ -1388,58 +1392,67 @@
         name: "泡 climb",
         tid: "word_practice_bubble_image#1",
         talk: "老师在进入练习时不说话，结束练习时根据学生作答给出正负反馈",
-        action: "指向泡泡；学生点中目标泡泡给短反馈。点完本页目标数打 [TEMPLATE_FINISH]。",
+        action: "",
         tts: "进入时老师不播教学 TTS。结束时正负反馈 TTS 完整播完。Dino 音色本土语播报操作指导",
         dino: "不出现 Dino 助手",
         exit: EXIT_SPEC,
         coin: "一次答对5个金币，非1次答对3个金币，答错1个金币，不作答0个金币",
+        skipDialogue: true,
+        skipAction: true,
       },
       "5": {
         name: "测 climb",
         tid: "word_practice_oral_assessment#1",
         talk: "老师在进入练习时不说话，结束练习时根据学生作答给出正负反馈",
-        action: "[TEACHER_LISTEN]。宽认 climb / clime / kaim。对了鼓掌后结束；2 次未过也示范一次后 [TEMPLATE_FINISH]。",
+        action: "",
         tts: "进入时老师不播教学 TTS。结束时正负反馈 TTS 完整播完。",
         dino: "不出现 Dino 助手",
         exit: EXIT_SPEC,
         coin: "一次答对5个金币，非1次答对3个金币，答错1个金币，不作答0个金币",
+        skipDialogue: true,
+        skipAction: true,
       },
-      "6": Object.assign({}, L1_ROWS["6"], { talk: "Wow, amazing! It's gift time, let's open it![NO_OP]", tts: "Wow, amazing! It's gift time, let's open it! 完整播完，嘴动有声，音色=本课老师。不打断开箱。", dino: "不出现 Dino 助手", coin: "打开礼盒，获得相框，如果用户不选择一直停留在这里" }),
+      "6": Object.assign({}, L1_ROWS["6"], { talk: "Wow, amazing! It's gift time, let's open it![NO_OP]", tts: "Wow, amazing! It's gift time, let's open it! 完整播完，嘴动有声，音色=本课老师。不打断开箱。", dino: "不出现 Dino 助手", coin: "打开礼盒，获得相框，如果用户不选择一直停留在这里", action: "", skipDialogue: true, skipAction: true }),
       "7": {
         name: "教 jump",
         tid: "word_teach_image_l3l4#2",
         talk: "本环节老师教授单词 jump，首句只说 1 次。本页老师的同一个问题最多问 3 轮。",
-        action: "指图、听、跟说 + [TEACHER_LISTEN]。学生说出任何像 jump 的音：短反馈后交接并 [TEMPLATE_FINISH]。第 4 轮无论是否说对都必须结束。",
+        action: "",
         tts: "教授 jump 的首句完整播完，只说 1 次；同一问最多 3 轮，问句 TTS 完整。跟读召唤降调，禁止 Can you say jump?",
         dino: "同教 climb",
         exit: EXIT_SPEC,
         coin: "无",
+        skipAction: true,
       },
       "8": {
         name: "泡 jump",
         tid: "word_practice_bubble_image#2",
         talk: "老师在进入练习时不说话，结束练习时根据学生作答给出正负反馈",
-        action: "同泡 climb，目标换成 jump。",
+        action: "",
         tts: "进入时老师不播教学 TTS。结束时正负反馈 TTS 完整播完。",
         dino: "不出现 Dino 助手",
         exit: EXIT_SPEC,
         coin: "一次答对5个金币，非1次答对3个金币，答错1个金币，不作答0个金币",
+        skipDialogue: true,
+        skipAction: true,
       },
       "9": {
         name: "测 jump",
         tid: "word_practice_oral_assessment#2",
         talk: "老师在进入练习时不说话，结束练习时根据学生作答给出正负反馈",
-        action: "[TEACHER_LISTEN]，对或超时都 [TEMPLATE_FINISH]。",
+        action: "",
         tts: "进入时老师不播教学 TTS。结束时正负反馈 TTS 完整播完。",
         dino: "不出现 Dino 助手",
         exit: EXIT_SPEC,
         coin: "一次答对5个金币，非1次答对3个金币，答错1个金币，不作答0个金币",
+        skipDialogue: true,
+        skipAction: true,
       },
       "10": {
         name: "教 fly",
         tid: "word_teach_image_l3l4#3",
         talk: "本环节老师教授单词 fly，首句只说 1 次。本页老师的同一个问题最多问 3 轮。",
-        action: "指图、听、跟说 + [TEACHER_LISTEN]。学生说出任何像 fly 的音：短反馈后交接并 [TEMPLATE_FINISH]。第 4 轮无论是否说对都必须结束。",
+        action: "这里老师需要做出拖着飞行小鸟的动作",
         tts: "教授 fly 的首句完整播完，只说 1 次；同一问最多 3 轮，问句 TTS 完整。跟读召唤降调，禁止 Can you say fly?",
         dino: "同教 climb",
         exit: EXIT_SPEC,
@@ -1449,51 +1462,58 @@
         name: "泡 fly",
         tid: "word_practice_bubble_image#3",
         talk: "老师在进入练习时不说话，结束练习时根据学生作答给出正负反馈",
-        action: "同前两轮泡泡，目标换成 fly。",
+        action: "",
         tts: "进入时老师不播教学 TTS。结束时正负反馈 TTS 完整播完。",
         dino: "不出现 Dino 助手",
         exit: EXIT_SPEC,
         coin: "一次答对5个金币，非1次答对3个金币，答错1个金币，不作答0个金币",
+        skipDialogue: true,
+        skipAction: true,
       },
       "12": {
         name: "测 fly",
         tid: "word_practice_oral_assessment#3",
         talk: "老师在进入练习时不说话，结束练习时根据学生作答给出正负反馈",
-        action: "对或超时都结束。",
+        action: "",
         tts: "进入时老师不播教学 TTS。结束时正负反馈 TTS 完整播完。",
         dino: "不出现 Dino 助手",
         exit: EXIT_SPEC,
         coin: "一次答对5个金币，非1次答对3个金币，答错1个金币，不作答0个金币",
+        skipDialogue: true,
+        skipAction: true,
       },
-      "13": Object.assign({}, L1_ROWS["13"], { talk: "Wow, amazing! It's gift time, let's open it![NO_OP]", tts: "Wow, amazing! It's gift time, let's open it! 完整播完，嘴动有声，音色=本课老师。不打断开箱。", dino: "不出现 Dino 助手", coin: "打开龙蛋，获得奖励，如果用户不选择一直停留在这里" }),
+      "13": Object.assign({}, L1_ROWS["13"], { talk: "Wow, amazing! It's gift time, let's open it![NO_OP]", tts: "Wow, amazing! It's gift time, let's open it! 完整播完，嘴动有声，音色=本课老师。不打断开箱。", dino: "不出现 Dino 助手", coin: "打开龙蛋，获得奖励，如果用户不选择一直停留在这里", action: "", skipDialogue: true, skipAction: true }),
       "14": {
         name: "句子教学",
         tid: "sentence_teach_explain_trail",
-        talk: "按当页句型稿教 I can climb。Yes / No 都先接住，再请孩子说目标句，不能把 No 判失败。最多 3 轮。",
+        talk: "教句型：Can you climb? 与 I can climb。最多 3 轮。",
         action: "[TEACHER_LISTEN]；说对或半对后短祝贺。本页结束标签是 [NEXT_STEP]。完整句、can+climb、I can climb、任意明显尝试，最迟第 4 轮都要结束。",
         tts: "首句完整播完。I can climb 陈述降调，禁止 Can you say I can climb? 同一问最多 3 轮，问句 TTS 完整。",
         dino: "解释或示范 1 次后交还，带 sentence_resolved=true。禁止助教变成第二道口语门槛。",
         exit: EXIT_SPEC,
         coin: "无",
       },
-      "15": Object.assign({}, L1_ROWS["15"], { talk: "老师在进入练习时不说话，结束练习时根据学生作答给出正负反馈", tts: "进入时老师不播教学 TTS。结束时正负反馈 TTS 完整播完。题干音频完整播完再等点选。", dino: "不出现 Dino 助手" }),
+      "15": Object.assign({}, L1_ROWS["15"], { talk: "老师在进入练习时不说话，结束练习时根据学生作答给出正负反馈", tts: "进入时老师不播教学 TTS。结束时正负反馈 TTS 完整播完。题干音频完整播完再等点选。", dino: "不出现 Dino 助手", action: "", skipDialogue: true, skipAction: true }),
       "16": {
         name: "句子口语",
         tid: "sentence_practice_oral_assessment",
         talk: "老师在进入练习时不说话，结束练习时根据学生作答给出正负反馈",
-        action: "[TEACHER_LISTEN]。宽认 can + climb。对或超时都结束。",
+        action: "",
         tts: "进入时老师不播教学 TTS。结束时正负反馈 TTS 完整播完。",
         dino: "不出现 Dino 助手",
         exit: EXIT_SPEC,
         coin: "无",
+        skipDialogue: true,
+        skipAction: true,
       },
       "17": Object.assign({}, L1_ROWS["17"], {
         talk: "若本页含老师收口：按当页收口问句只问 1 次。任意回答后不再提问。然后播歌曲视频。",
         tts: "收口问句只播 1 次且完整播完；歌曲走视频音，不是老师 TTS。",
+        dino: "老师引入song time环节有Dino助手，当播放歌曲视频，Dino助手隐藏",
       }),
-      "18": Object.assign({}, L1_ROWS["18"], { tid: "photo_time", talk: "邀请拍照。", tts: "邀请拍照的 TTS 完整播完。", dino: "不出现 Dino 助手" }),
-      "19": Object.assign({}, L1_ROWS["19"], { talk: "Wow, amazing! It's gift time, let's open it![NO_OP]", tts: "Wow, amazing! It's gift time, let's open it! 完整播完，嘴动有声，音色=本课老师。不打断开箱。", dino: "不出现 Dino 助手", coin: "打开宝箱，获得金币，如果用户不选择一直停留在这里" }),
-      "20": Object.assign({}, L1_ROWS["20"], { talk: "老师不开口", coin: "弹出金币与经验结算与反馈问卷" }),
+      "18": Object.assign({}, L1_ROWS["18"], { tid: "photo_time", talk: "邀请拍照。", tts: "邀请拍照的 TTS 完整播完。", dino: "不出现 Dino 助手", action: "", skipDialogue: true, skipAction: true }),
+      "19": Object.assign({}, L1_ROWS["19"], { talk: "Wow, amazing! It's gift time, let's open it![NO_OP]", tts: "Wow, amazing! It's gift time, let's open it! 完整播完，嘴动有声，音色=本课老师。不打断开箱。", dino: "不出现 Dino 助手", coin: "打开宝箱，获得金币，如果用户不选择一直停留在这里", action: "", skipDialogue: true, skipAction: true }),
+      "20": Object.assign({}, L1_ROWS["20"], { talk: "老师不开口", coin: "弹出金币与经验结算与反馈问卷", action: "", skipDialogue: true, skipAction: true }),
     };
 
     const COURSES = {
@@ -1684,9 +1704,26 @@
     function scoreKeys() {
       return FIELDS.map((f) => f.key);
     }
+    function fieldApplies(row, key) {
+      if (!row) return true;
+      if (row.skipDialogue && (key === "lip" || key === "avsync" || key === "reply" || key === "asr" || key === "repeat")) return false;
+      if (row.skipAction && key === "action") return false;
+      return true;
+    }
+    function scoredCell(ver, row, rowId, key, html) {
+      if (!fieldApplies(row, key)) return "";
+      return radioCell(ver, rowId, key, html);
+    }
     function maxScoreOf(ver) {
-      const n = rowIdsOf(ver).length;
-      return n * FIELDS.length + GLOBALS.length;
+      const rowMap = packOf(ver).rows;
+      let n = GLOBALS.length;
+      rowIdsOf(ver).forEach((rowId) => {
+        const row = rowMap[rowId];
+        FIELDS.forEach((field) => {
+          if (fieldApplies(row, field.key)) n += 1;
+        });
+      });
+      return n;
     }
     function maxScore() {
       return maxScoreOf(activeVer());
@@ -1839,8 +1876,11 @@
     function scoreOf(ver, ids, fieldKeys) {
       const checks = cur().versions[ver].checks;
       let n = 0;
+      const rowMap = packOf(ver).rows;
       (ids || rowIdsOf(ver)).forEach((rowId) => {
+        const row = rowMap[rowId];
         (fieldKeys || scoreKeys()).forEach((key) => {
+          if (!fieldApplies(row, key)) return;
           n += cellScore(checks, rowId, key);
         });
       });
@@ -1972,13 +2012,13 @@
             <td>${mediaCell(ver, id)}</td>
             <td>${radioCell(ver, id, "load", rich(loc(LOAD_SPEC)))}</td>
             <td>${radioCell(ver, id, "talk", rich(loc(row.talk)).replace(/\n/g, "<br>"))}</td>
-            <td>${radioCell(ver, id, "lip", rich(loc(LIP_SPEC)))}</td>
-            <td>${radioCell(ver, id, "avsync", rich(loc(AVSYNC_SPEC)))}</td>
-            <td>${radioCell(ver, id, "reply", rich(loc(REPLY_SPEC)))}</td>
-            <td>${radioCell(ver, id, "asr", rich(loc(ASR_SPEC)))}</td>
-            <td>${radioCell(ver, id, "repeat", rich(loc(REPEAT_SPEC)))}</td>
+            <td>${scoredCell(ver, row, id, "lip", rich(loc(LIP_SPEC)))}</td>
+            <td>${scoredCell(ver, row, id, "avsync", rich(loc(AVSYNC_SPEC)))}</td>
+            <td>${scoredCell(ver, row, id, "reply", rich(loc(REPLY_SPEC)))}</td>
+            <td>${scoredCell(ver, row, id, "asr", rich(loc(ASR_SPEC)))}</td>
+            <td>${scoredCell(ver, row, id, "repeat", rich(loc(REPEAT_SPEC)))}</td>
             <td>${durationCell(ver, id)}</td>
-            <td>${radioCell(ver, id, "action", rich(loc(row.action)))}</td>
+            <td>${scoredCell(ver, row, id, "action", rich(loc(row.action)))}</td>
             <td>${radioCell(ver, id, "tts", rich(loc(row.tts)))}</td>
             <td>${radioCell(ver, id, "dino", rich(loc(row.dino)))}</td>
             <td>${radioCell(ver, id, "exit", rich(loc(EXIT_SPEC)))}</td>
@@ -2348,6 +2388,7 @@
           seq += 1;
           const fields = {};
           FIELDS.forEach((field) => {
+            if (!fieldApplies(row, field.key)) return;
             const result = fieldResult(checks, rowId, field);
             fields[field.key] = result || "unselected";
             itemsOut.push({
