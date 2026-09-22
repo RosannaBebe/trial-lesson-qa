@@ -692,6 +692,7 @@
   "进入后立刻邀请戳 climb 泡泡，不新开教学问答。": "Invite the student to pop the climb bubble right away. Do not start a new teaching Q&A.",
   "进入后邀请说 climb。宽认 climb / clime / kaim。最多再听 2 次。": "Invite the student to say climb. Accept climb / clime / kaim. Listen 2 more times at most.",
   "老师这里不说话。": "The teacher does not speak here.",
+  "老师在进入练习时不说话，结束练习时根据学生作答给出正负反馈": "The teacher stays silent when entering the practice, then gives positive or negative feedback from the student's answer when it ends.",
   "[TEACHER_LISTEN]。宽认 climb / clime / kaim。对了鼓掌后结束；2 次未过也示范一次后 [TEMPLATE_FINISH]。": "[TEACHER_LISTEN]. Accept climb / clime / kaim. If correct, applaud and end. After 2 misses, model once and still [TEMPLATE_FINISH].",
   "邀请说 climb 的 TTS 完整；示范音必须是 climb。": "Play the full say-climb TTS. The model audio must be climb.",
   "按当页目标词稿教 jump。首句只说 1 次。本页老师最多 4 轮。禁止另开新词。": "Teach jump from this page’s script. Say the first line once. Teacher has 4 turns at most. Do not open a new word.",
@@ -1361,7 +1362,7 @@
       "4": {
         name: "泡 climb",
         tid: "word_practice_bubble_image#1",
-        talk: "老师这里不说话。",
+        talk: "老师在进入练习时不说话，结束练习时根据学生作答给出正负反馈",
         action: "指向泡泡；学生点中目标泡泡给短反馈。点完本页目标数打 [TEMPLATE_FINISH]。",
         tts: "Dino 音色本土语播报操作指导",
         dino: "学生不会点时，Dino 最多指一次怎么点，然后交还。",
@@ -1371,7 +1372,7 @@
       "5": {
         name: "测 climb",
         tid: "word_practice_oral_assessment#1",
-        talk: "老师这里不说话。",
+        talk: "老师在进入练习时不说话，结束练习时根据学生作答给出正负反馈",
         action: "[TEACHER_LISTEN]。宽认 climb / clime / kaim。对了鼓掌后结束；2 次未过也示范一次后 [TEMPLATE_FINISH]。",
         tts: "邀请说 climb 的 TTS 完整；示范音必须是 climb。",
         dino: "最多带读 1 次，立刻交还。禁止把测评变成多轮纠音。",
@@ -1392,7 +1393,7 @@
       "8": {
         name: "泡 jump",
         tid: "word_practice_bubble_image#2",
-        talk: "老师这里不说话。",
+        talk: "老师在进入练习时不说话，结束练习时根据学生作答给出正负反馈",
         action: "同泡 climb，目标换成 jump。",
         tts: "邀请戳 jump 泡泡的 TTS 完整播完。",
         dino: "最多指 1 次",
@@ -1402,7 +1403,7 @@
       "9": {
         name: "测 jump",
         tid: "word_practice_oral_assessment#2",
-        talk: "老师这里不说话。",
+        talk: "老师在进入练习时不说话，结束练习时根据学生作答给出正负反馈",
         action: "[TEACHER_LISTEN]，对或超时都 [TEMPLATE_FINISH]。",
         tts: "邀请说 jump 的 TTS 完整；示范音必须是 jump。",
         dino: "带读 1 次后交还",
@@ -1422,7 +1423,7 @@
       "11": {
         name: "泡 fly",
         tid: "word_practice_bubble_image#3",
-        talk: "老师这里不说话。",
+        talk: "老师在进入练习时不说话，结束练习时根据学生作答给出正负反馈",
         action: "同前两轮泡泡，目标换成 fly。",
         tts: "邀请戳 fly 泡泡的 TTS 完整播完。",
         dino: "最多指 1 次",
@@ -1432,7 +1433,7 @@
       "12": {
         name: "测 fly",
         tid: "word_practice_oral_assessment#3",
-        talk: "老师这里不说话。",
+        talk: "老师在进入练习时不说话，结束练习时根据学生作答给出正负反馈",
         action: "对或超时都结束。",
         tts: "邀请说 fly 的 TTS 完整；示范音必须是 fly。",
         dino: "带读 1 次后交还",
@@ -1450,11 +1451,11 @@
         exit: EXIT_SPEC,
         coin: "无",
       },
-      "15": Object.assign({}, L1_ROWS["15"], { talk: "老师这里不说话。" }),
+      "15": Object.assign({}, L1_ROWS["15"], { talk: "老师在进入练习时不说话，结束练习时根据学生作答给出正负反馈" }),
       "16": {
         name: "句子口语",
         tid: "sentence_practice_oral_assessment",
-        talk: "老师这里不说话。",
+        talk: "老师在进入练习时不说话，结束练习时根据学生作答给出正负反馈",
         action: "[TEACHER_LISTEN]。宽认 can + climb。对或超时都结束。",
         tts: "邀请说 I can climb 的 TTS 完整；示范音必须是目标句。",
         dino: "带读 1 次后交还",
