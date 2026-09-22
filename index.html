@@ -124,6 +124,7 @@
     }
     .cell { display: block; }
     .cell p { margin: 0 0 10px; }
+    .cell.muted { color: var(--muted); }
     .check {
       display: inline-flex;
       align-items: center;
@@ -1711,7 +1712,7 @@
       return true;
     }
     function scoredCell(ver, row, rowId, key, html) {
-      if (!fieldApplies(row, key)) return "";
+      if (!fieldApplies(row, key)) return `<div class="cell muted">--</div>`;
       return radioCell(ver, rowId, key, html);
     }
     function maxScoreOf(ver) {
