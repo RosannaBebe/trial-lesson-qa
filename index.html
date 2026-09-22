@@ -21,13 +21,23 @@
       --bad-ink: #6b2a2a;
     }
     * { box-sizing: border-box; }
+    html, body { height: 100%; }
     body {
       margin: 0;
       color: var(--ink);
       background: var(--bg);
       font: 14px/1.55 "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", sans-serif;
+      overflow: hidden;
     }
-    .wrap { width: 100%; margin: 0 auto; padding: 24px 20px 80px; }
+    .wrap {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
     h1 { margin: 0 0 6px; font-size: 24px; letter-spacing: -0.02em; }
     .meta { color: var(--muted); margin: 0 0 16px; }
     .bar {
@@ -220,16 +230,22 @@
     .setup-modal .actions { justify-content: space-between; align-items: center; }
     #setupOk, #confirmSubmitBtn, #submitScoreBtn { background: var(--ink); color: #fff; border-color: var(--ink); }
     .top-row {
-      position: sticky;
-      top: 0;
+      flex: 0 0 auto;
+      position: relative;
       z-index: 8;
       display: flex;
       gap: 16px;
       align-items: flex-start;
-      margin: -24px -20px 16px;
-      padding: 16px 20px 12px;
+      margin: 0;
+      padding: 12px 20px;
       background: var(--bg);
       border-bottom: 1px solid var(--line);
+    }
+    .board-scroll {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow: auto;
+      padding: 16px 20px 80px;
     }
     .class-player {
       width: 667px;
@@ -288,6 +304,7 @@
       .top-foot { margin-top: 16px; }
     }
     @media print {
+      html, body, .wrap, .board-scroll { height: auto; overflow: visible; }
       .bar, nav, .media-actions, .file-btn, .class-player, .setup-mask { display: none !important; }
     }
   </style>
@@ -364,6 +381,7 @@
       <div class="modal" id="modal"></div>
     </div>
 
+    <div class="board-scroll" id="board-scroll">
     <div id="workView">
       <section id="global">
         <h2 data-i18n="globalScore">全局打分</h2>
@@ -442,6 +460,7 @@
     </div>
 
     <footer data-i18n="footer">文件：课程治理 / 体验课上线前验收表 · L1–L4 各自保存 V1 / V2 勾选与课件</footer>
+    </div>
   </div>
 
   <script>
