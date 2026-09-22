@@ -1,0 +1,2783 @@
+{
+  "schema": "trial-qa-submission-v1",
+  "id": "20260922T124927Z-L4-V2-xtbie0",
+  "submittedAt": "2026-09-22T12:49:27.114Z",
+  "rater": "Sun Jenny",
+  "level": "L4",
+  "version": "V2",
+  "versionKey": "neu",
+  "course": {
+    "id": "L4",
+    "name": "Magic Shop",
+    "lessonId": "733",
+    "sn": "TRIAL-LV4-UN1-LS0"
+  },
+  "score": 210,
+  "maxScore": 239,
+  "globals": [
+    {
+      "key": "pace",
+      "title": "课堂节奏",
+      "result": "pass",
+      "points": 1
+    }
+  ],
+  "rows": [
+    {
+      "seq": 1,
+      "rowId": "1",
+      "section": "1. 热身 → 视频",
+      "template": "热身",
+      "fields": {
+        "media": "pass",
+        "load": "pass",
+        "talk": "pass",
+        "lip": "pass",
+        "avsync": "pass",
+        "reply": "fail",
+        "asr": "pass",
+        "repeat": "pass",
+        "duration": "ok",
+        "action": "pass",
+        "tts": "pass",
+        "dino": "pass",
+        "exit": "pass",
+        "coin": "pass"
+      }
+    },
+    {
+      "seq": 2,
+      "rowId": "2",
+      "section": "1. 热身 → 视频",
+      "template": "奖励介绍",
+      "fields": {
+        "media": "pass",
+        "load": "pass",
+        "talk": "pass",
+        "lip": "pass",
+        "avsync": "pass",
+        "reply": "pass",
+        "asr": "pass",
+        "repeat": "pass",
+        "duration": "ok",
+        "action": "pass",
+        "tts": "pass",
+        "dino": "pass",
+        "exit": "pass",
+        "coin": "pass"
+      }
+    },
+    {
+      "seq": 3,
+      "rowId": "3",
+      "section": "1. 热身 → 视频",
+      "template": "故事导入",
+      "fields": {
+        "media": "pass",
+        "load": "pass",
+        "talk": "pass",
+        "lip": "pass",
+        "avsync": "pass",
+        "reply": "pass",
+        "asr": "pass",
+        "repeat": "pass",
+        "duration": "ok",
+        "action": "pass",
+        "tts": "pass",
+        "dino": "pass",
+        "exit": "pass",
+        "coin": "pass"
+      }
+    },
+    {
+      "seq": 4,
+      "rowId": "4",
+      "section": "1. 热身 → 视频",
+      "template": "视频",
+      "fields": {
+        "media": "pass",
+        "load": "pass",
+        "talk": "pass",
+        "lip": "fail",
+        "avsync": "pass",
+        "reply": "pass",
+        "asr": "pass",
+        "repeat": "pass",
+        "duration": "ok",
+        "action": "pass",
+        "tts": "fail",
+        "dino": "pass",
+        "exit": "pass",
+        "coin": "pass"
+      }
+    },
+    {
+      "seq": 5,
+      "rowId": "5",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "单词教学",
+      "fields": {
+        "media": "pass",
+        "load": "pass",
+        "talk": "pass",
+        "lip": "pass",
+        "avsync": "pass",
+        "reply": "pass",
+        "asr": "pass",
+        "repeat": "pass",
+        "duration": "ok",
+        "action": "pass",
+        "tts": "fail",
+        "dino": "pass",
+        "exit": "pass",
+        "coin": "pass"
+      }
+    },
+    {
+      "seq": 6,
+      "rowId": "6",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "气泡练习",
+      "fields": {
+        "media": "fail",
+        "load": "fail",
+        "talk": "fail",
+        "lip": "fail",
+        "avsync": "fail",
+        "reply": "fail",
+        "asr": "fail",
+        "repeat": "fail",
+        "duration": "ok",
+        "action": "fail",
+        "tts": "fail",
+        "dino": "fail",
+        "exit": "fail",
+        "coin": "fail"
+      }
+    },
+    {
+      "seq": 7,
+      "rowId": "7",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "选词练习",
+      "fields": {
+        "media": "pass",
+        "load": "pass",
+        "talk": "pass",
+        "lip": "pass",
+        "avsync": "pass",
+        "reply": "pass",
+        "asr": "pass",
+        "repeat": "pass",
+        "duration": "ok",
+        "action": "pass",
+        "tts": "pass",
+        "dino": "pass",
+        "exit": "pass",
+        "coin": "pass"
+      }
+    },
+    {
+      "seq": 8,
+      "rowId": "8",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "单词口测",
+      "fields": {
+        "media": "pass",
+        "load": "pass",
+        "talk": "pass",
+        "lip": "pass",
+        "avsync": "pass",
+        "reply": "pass",
+        "asr": "pass",
+        "repeat": "pass",
+        "duration": "ok",
+        "action": "pass",
+        "tts": "pass",
+        "dino": "pass",
+        "exit": "pass",
+        "coin": "pass"
+      }
+    },
+    {
+      "seq": 9,
+      "rowId": "9",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "奖励箱 1",
+      "fields": {
+        "media": "pass",
+        "load": "pass",
+        "talk": "pass",
+        "lip": "pass",
+        "avsync": "pass",
+        "reply": "pass",
+        "asr": "pass",
+        "repeat": "pass",
+        "duration": "ok",
+        "action": "pass",
+        "tts": "pass",
+        "dino": "pass",
+        "exit": "pass",
+        "coin": "pass"
+      }
+    },
+    {
+      "seq": 10,
+      "rowId": "10",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句型教学",
+      "fields": {
+        "media": "pass",
+        "load": "pass",
+        "talk": "pass",
+        "lip": "pass",
+        "avsync": "pass",
+        "reply": "pass",
+        "asr": "pass",
+        "repeat": "pass",
+        "duration": "ok",
+        "action": "pass",
+        "tts": "pass",
+        "dino": "pass",
+        "exit": "pass",
+        "coin": "pass"
+      }
+    },
+    {
+      "seq": 11,
+      "rowId": "11",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句子练习",
+      "fields": {
+        "media": "pass",
+        "load": "pass",
+        "talk": "pass",
+        "lip": "pass",
+        "avsync": "pass",
+        "reply": "pass",
+        "asr": "pass",
+        "repeat": "pass",
+        "duration": "ok",
+        "action": "pass",
+        "tts": "pass",
+        "dino": "pass",
+        "exit": "pass",
+        "coin": "pass"
+      }
+    },
+    {
+      "seq": 12,
+      "rowId": "12",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句子口测",
+      "fields": {
+        "media": "pass",
+        "load": "pass",
+        "talk": "pass",
+        "lip": "pass",
+        "avsync": "pass",
+        "reply": "pass",
+        "asr": "pass",
+        "repeat": "pass",
+        "duration": "ok",
+        "action": "pass",
+        "tts": "pass",
+        "dino": "pass",
+        "exit": "pass",
+        "coin": "pass"
+      }
+    },
+    {
+      "seq": 13,
+      "rowId": "13",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "奖励箱 2",
+      "fields": {
+        "media": "pass",
+        "load": "pass",
+        "talk": "pass",
+        "lip": "pass",
+        "avsync": "pass",
+        "reply": "pass",
+        "asr": "pass",
+        "repeat": "pass",
+        "duration": "ok",
+        "action": "pass",
+        "tts": "pass",
+        "dino": "pass",
+        "exit": "pass",
+        "coin": "pass"
+      }
+    },
+    {
+      "seq": 14,
+      "rowId": "14",
+      "section": "4. 收尾 → 完课",
+      "template": "总结视频",
+      "fields": {
+        "media": "pass",
+        "load": "pass",
+        "talk": "pass",
+        "lip": "pass",
+        "avsync": "pass",
+        "reply": "pass",
+        "asr": "pass",
+        "repeat": "pass",
+        "duration": "ok",
+        "action": "pass",
+        "tts": "pass",
+        "dino": "pass",
+        "exit": "pass",
+        "coin": "pass"
+      }
+    },
+    {
+      "seq": 15,
+      "rowId": "15",
+      "section": "4. 收尾 → 完课",
+      "template": "拍照",
+      "fields": {
+        "media": "pass",
+        "load": "pass",
+        "talk": "pass",
+        "lip": "pass",
+        "avsync": "pass",
+        "reply": "pass",
+        "asr": "pass",
+        "repeat": "pass",
+        "duration": "ok",
+        "action": "pass",
+        "tts": "pass",
+        "dino": "pass",
+        "exit": "pass",
+        "coin": "pass"
+      }
+    },
+    {
+      "seq": 16,
+      "rowId": "16",
+      "section": "4. 收尾 → 完课",
+      "template": "奖励箱 3",
+      "fields": {
+        "media": "pass",
+        "load": "pass",
+        "talk": "pass",
+        "lip": "pass",
+        "avsync": "pass",
+        "reply": "pass",
+        "asr": "pass",
+        "repeat": "pass",
+        "duration": "ok",
+        "action": "pass",
+        "tts": "pass",
+        "dino": "pass",
+        "exit": "pass",
+        "coin": "pass"
+      }
+    },
+    {
+      "seq": 17,
+      "rowId": "17",
+      "section": "4. 收尾 → 完课",
+      "template": "完课",
+      "fields": {
+        "media": "fail",
+        "load": "fail",
+        "talk": "fail",
+        "lip": "fail",
+        "avsync": "fail",
+        "reply": "fail",
+        "asr": "fail",
+        "repeat": "fail",
+        "duration": "ok",
+        "action": "fail",
+        "tts": "fail",
+        "dino": "fail",
+        "exit": "fail",
+        "coin": "pass"
+      }
+    }
+  ],
+  "items": [
+    {
+      "seq": 1,
+      "rowId": "1",
+      "section": "1. 热身 → 视频",
+      "template": "热身",
+      "field": "media",
+      "fieldLabel": "课件",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 1,
+      "rowId": "1",
+      "section": "1. 热身 → 视频",
+      "template": "热身",
+      "field": "load",
+      "fieldLabel": "资源加载",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 1,
+      "rowId": "1",
+      "section": "1. 热身 → 视频",
+      "template": "热身",
+      "field": "talk",
+      "fieldLabel": "老师开口",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 1,
+      "rowId": "1",
+      "section": "1. 热身 → 视频",
+      "template": "热身",
+      "field": "lip",
+      "fieldLabel": "口型匹配",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 1,
+      "rowId": "1",
+      "section": "1. 热身 → 视频",
+      "template": "热身",
+      "field": "avsync",
+      "fieldLabel": "音画同步（老师/视频文件音画同步）",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 1,
+      "rowId": "1",
+      "section": "1. 热身 → 视频",
+      "template": "热身",
+      "field": "reply",
+      "fieldLabel": "回应合理",
+      "result": "fail",
+      "points": 0
+    },
+    {
+      "seq": 1,
+      "rowId": "1",
+      "section": "1. 热身 → 视频",
+      "template": "热身",
+      "field": "asr",
+      "fieldLabel": "学生说话（ASR）",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 1,
+      "rowId": "1",
+      "section": "1. 热身 → 视频",
+      "template": "热身",
+      "field": "repeat",
+      "fieldLabel": "不出现对话重复现象",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 1,
+      "rowId": "1",
+      "section": "1. 热身 → 视频",
+      "template": "热身",
+      "field": "duration",
+      "fieldLabel": "环节耗时",
+      "result": "ok",
+      "points": 1
+    },
+    {
+      "seq": 1,
+      "rowId": "1",
+      "section": "1. 热身 → 视频",
+      "template": "热身",
+      "field": "action",
+      "fieldLabel": "老师动作",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 1,
+      "rowId": "1",
+      "section": "1. 热身 → 视频",
+      "template": "热身",
+      "field": "tts",
+      "fieldLabel": "TTS",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 1,
+      "rowId": "1",
+      "section": "1. 热身 → 视频",
+      "template": "热身",
+      "field": "dino",
+      "fieldLabel": "Dino",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 1,
+      "rowId": "1",
+      "section": "1. 热身 → 视频",
+      "template": "热身",
+      "field": "exit",
+      "fieldLabel": "退出 / 收口",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 1,
+      "rowId": "1",
+      "section": "1. 热身 → 视频",
+      "template": "热身",
+      "field": "coin",
+      "fieldLabel": "金币",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 2,
+      "rowId": "2",
+      "section": "1. 热身 → 视频",
+      "template": "奖励介绍",
+      "field": "media",
+      "fieldLabel": "课件",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 2,
+      "rowId": "2",
+      "section": "1. 热身 → 视频",
+      "template": "奖励介绍",
+      "field": "load",
+      "fieldLabel": "资源加载",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 2,
+      "rowId": "2",
+      "section": "1. 热身 → 视频",
+      "template": "奖励介绍",
+      "field": "talk",
+      "fieldLabel": "老师开口",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 2,
+      "rowId": "2",
+      "section": "1. 热身 → 视频",
+      "template": "奖励介绍",
+      "field": "lip",
+      "fieldLabel": "口型匹配",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 2,
+      "rowId": "2",
+      "section": "1. 热身 → 视频",
+      "template": "奖励介绍",
+      "field": "avsync",
+      "fieldLabel": "音画同步（老师/视频文件音画同步）",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 2,
+      "rowId": "2",
+      "section": "1. 热身 → 视频",
+      "template": "奖励介绍",
+      "field": "reply",
+      "fieldLabel": "回应合理",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 2,
+      "rowId": "2",
+      "section": "1. 热身 → 视频",
+      "template": "奖励介绍",
+      "field": "asr",
+      "fieldLabel": "学生说话（ASR）",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 2,
+      "rowId": "2",
+      "section": "1. 热身 → 视频",
+      "template": "奖励介绍",
+      "field": "repeat",
+      "fieldLabel": "不出现对话重复现象",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 2,
+      "rowId": "2",
+      "section": "1. 热身 → 视频",
+      "template": "奖励介绍",
+      "field": "duration",
+      "fieldLabel": "环节耗时",
+      "result": "ok",
+      "points": 1
+    },
+    {
+      "seq": 2,
+      "rowId": "2",
+      "section": "1. 热身 → 视频",
+      "template": "奖励介绍",
+      "field": "action",
+      "fieldLabel": "老师动作",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 2,
+      "rowId": "2",
+      "section": "1. 热身 → 视频",
+      "template": "奖励介绍",
+      "field": "tts",
+      "fieldLabel": "TTS",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 2,
+      "rowId": "2",
+      "section": "1. 热身 → 视频",
+      "template": "奖励介绍",
+      "field": "dino",
+      "fieldLabel": "Dino",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 2,
+      "rowId": "2",
+      "section": "1. 热身 → 视频",
+      "template": "奖励介绍",
+      "field": "exit",
+      "fieldLabel": "退出 / 收口",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 2,
+      "rowId": "2",
+      "section": "1. 热身 → 视频",
+      "template": "奖励介绍",
+      "field": "coin",
+      "fieldLabel": "金币",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 3,
+      "rowId": "3",
+      "section": "1. 热身 → 视频",
+      "template": "故事导入",
+      "field": "media",
+      "fieldLabel": "课件",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 3,
+      "rowId": "3",
+      "section": "1. 热身 → 视频",
+      "template": "故事导入",
+      "field": "load",
+      "fieldLabel": "资源加载",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 3,
+      "rowId": "3",
+      "section": "1. 热身 → 视频",
+      "template": "故事导入",
+      "field": "talk",
+      "fieldLabel": "老师开口",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 3,
+      "rowId": "3",
+      "section": "1. 热身 → 视频",
+      "template": "故事导入",
+      "field": "lip",
+      "fieldLabel": "口型匹配",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 3,
+      "rowId": "3",
+      "section": "1. 热身 → 视频",
+      "template": "故事导入",
+      "field": "avsync",
+      "fieldLabel": "音画同步（老师/视频文件音画同步）",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 3,
+      "rowId": "3",
+      "section": "1. 热身 → 视频",
+      "template": "故事导入",
+      "field": "reply",
+      "fieldLabel": "回应合理",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 3,
+      "rowId": "3",
+      "section": "1. 热身 → 视频",
+      "template": "故事导入",
+      "field": "asr",
+      "fieldLabel": "学生说话（ASR）",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 3,
+      "rowId": "3",
+      "section": "1. 热身 → 视频",
+      "template": "故事导入",
+      "field": "repeat",
+      "fieldLabel": "不出现对话重复现象",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 3,
+      "rowId": "3",
+      "section": "1. 热身 → 视频",
+      "template": "故事导入",
+      "field": "duration",
+      "fieldLabel": "环节耗时",
+      "result": "ok",
+      "points": 1
+    },
+    {
+      "seq": 3,
+      "rowId": "3",
+      "section": "1. 热身 → 视频",
+      "template": "故事导入",
+      "field": "action",
+      "fieldLabel": "老师动作",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 3,
+      "rowId": "3",
+      "section": "1. 热身 → 视频",
+      "template": "故事导入",
+      "field": "tts",
+      "fieldLabel": "TTS",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 3,
+      "rowId": "3",
+      "section": "1. 热身 → 视频",
+      "template": "故事导入",
+      "field": "dino",
+      "fieldLabel": "Dino",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 3,
+      "rowId": "3",
+      "section": "1. 热身 → 视频",
+      "template": "故事导入",
+      "field": "exit",
+      "fieldLabel": "退出 / 收口",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 3,
+      "rowId": "3",
+      "section": "1. 热身 → 视频",
+      "template": "故事导入",
+      "field": "coin",
+      "fieldLabel": "金币",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 4,
+      "rowId": "4",
+      "section": "1. 热身 → 视频",
+      "template": "视频",
+      "field": "media",
+      "fieldLabel": "课件",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 4,
+      "rowId": "4",
+      "section": "1. 热身 → 视频",
+      "template": "视频",
+      "field": "load",
+      "fieldLabel": "资源加载",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 4,
+      "rowId": "4",
+      "section": "1. 热身 → 视频",
+      "template": "视频",
+      "field": "talk",
+      "fieldLabel": "老师开口",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 4,
+      "rowId": "4",
+      "section": "1. 热身 → 视频",
+      "template": "视频",
+      "field": "lip",
+      "fieldLabel": "口型匹配",
+      "result": "fail",
+      "points": 0
+    },
+    {
+      "seq": 4,
+      "rowId": "4",
+      "section": "1. 热身 → 视频",
+      "template": "视频",
+      "field": "avsync",
+      "fieldLabel": "音画同步（老师/视频文件音画同步）",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 4,
+      "rowId": "4",
+      "section": "1. 热身 → 视频",
+      "template": "视频",
+      "field": "reply",
+      "fieldLabel": "回应合理",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 4,
+      "rowId": "4",
+      "section": "1. 热身 → 视频",
+      "template": "视频",
+      "field": "asr",
+      "fieldLabel": "学生说话（ASR）",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 4,
+      "rowId": "4",
+      "section": "1. 热身 → 视频",
+      "template": "视频",
+      "field": "repeat",
+      "fieldLabel": "不出现对话重复现象",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 4,
+      "rowId": "4",
+      "section": "1. 热身 → 视频",
+      "template": "视频",
+      "field": "duration",
+      "fieldLabel": "环节耗时",
+      "result": "ok",
+      "points": 1
+    },
+    {
+      "seq": 4,
+      "rowId": "4",
+      "section": "1. 热身 → 视频",
+      "template": "视频",
+      "field": "action",
+      "fieldLabel": "老师动作",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 4,
+      "rowId": "4",
+      "section": "1. 热身 → 视频",
+      "template": "视频",
+      "field": "tts",
+      "fieldLabel": "TTS",
+      "result": "fail",
+      "points": 0
+    },
+    {
+      "seq": 4,
+      "rowId": "4",
+      "section": "1. 热身 → 视频",
+      "template": "视频",
+      "field": "dino",
+      "fieldLabel": "Dino",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 4,
+      "rowId": "4",
+      "section": "1. 热身 → 视频",
+      "template": "视频",
+      "field": "exit",
+      "fieldLabel": "退出 / 收口",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 4,
+      "rowId": "4",
+      "section": "1. 热身 → 视频",
+      "template": "视频",
+      "field": "coin",
+      "fieldLabel": "金币",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 5,
+      "rowId": "5",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "单词教学",
+      "field": "media",
+      "fieldLabel": "课件",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 5,
+      "rowId": "5",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "单词教学",
+      "field": "load",
+      "fieldLabel": "资源加载",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 5,
+      "rowId": "5",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "单词教学",
+      "field": "talk",
+      "fieldLabel": "老师开口",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 5,
+      "rowId": "5",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "单词教学",
+      "field": "lip",
+      "fieldLabel": "口型匹配",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 5,
+      "rowId": "5",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "单词教学",
+      "field": "avsync",
+      "fieldLabel": "音画同步（老师/视频文件音画同步）",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 5,
+      "rowId": "5",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "单词教学",
+      "field": "reply",
+      "fieldLabel": "回应合理",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 5,
+      "rowId": "5",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "单词教学",
+      "field": "asr",
+      "fieldLabel": "学生说话（ASR）",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 5,
+      "rowId": "5",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "单词教学",
+      "field": "repeat",
+      "fieldLabel": "不出现对话重复现象",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 5,
+      "rowId": "5",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "单词教学",
+      "field": "duration",
+      "fieldLabel": "环节耗时",
+      "result": "ok",
+      "points": 1
+    },
+    {
+      "seq": 5,
+      "rowId": "5",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "单词教学",
+      "field": "action",
+      "fieldLabel": "老师动作",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 5,
+      "rowId": "5",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "单词教学",
+      "field": "tts",
+      "fieldLabel": "TTS",
+      "result": "fail",
+      "points": 0
+    },
+    {
+      "seq": 5,
+      "rowId": "5",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "单词教学",
+      "field": "dino",
+      "fieldLabel": "Dino",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 5,
+      "rowId": "5",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "单词教学",
+      "field": "exit",
+      "fieldLabel": "退出 / 收口",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 5,
+      "rowId": "5",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "单词教学",
+      "field": "coin",
+      "fieldLabel": "金币",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 6,
+      "rowId": "6",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "气泡练习",
+      "field": "media",
+      "fieldLabel": "课件",
+      "result": "fail",
+      "points": 0
+    },
+    {
+      "seq": 6,
+      "rowId": "6",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "气泡练习",
+      "field": "load",
+      "fieldLabel": "资源加载",
+      "result": "fail",
+      "points": 0
+    },
+    {
+      "seq": 6,
+      "rowId": "6",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "气泡练习",
+      "field": "talk",
+      "fieldLabel": "老师开口",
+      "result": "fail",
+      "points": 0
+    },
+    {
+      "seq": 6,
+      "rowId": "6",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "气泡练习",
+      "field": "lip",
+      "fieldLabel": "口型匹配",
+      "result": "fail",
+      "points": 0
+    },
+    {
+      "seq": 6,
+      "rowId": "6",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "气泡练习",
+      "field": "avsync",
+      "fieldLabel": "音画同步（老师/视频文件音画同步）",
+      "result": "fail",
+      "points": 0
+    },
+    {
+      "seq": 6,
+      "rowId": "6",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "气泡练习",
+      "field": "reply",
+      "fieldLabel": "回应合理",
+      "result": "fail",
+      "points": 0
+    },
+    {
+      "seq": 6,
+      "rowId": "6",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "气泡练习",
+      "field": "asr",
+      "fieldLabel": "学生说话（ASR）",
+      "result": "fail",
+      "points": 0
+    },
+    {
+      "seq": 6,
+      "rowId": "6",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "气泡练习",
+      "field": "repeat",
+      "fieldLabel": "不出现对话重复现象",
+      "result": "fail",
+      "points": 0
+    },
+    {
+      "seq": 6,
+      "rowId": "6",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "气泡练习",
+      "field": "duration",
+      "fieldLabel": "环节耗时",
+      "result": "ok",
+      "points": 1
+    },
+    {
+      "seq": 6,
+      "rowId": "6",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "气泡练习",
+      "field": "action",
+      "fieldLabel": "老师动作",
+      "result": "fail",
+      "points": 0
+    },
+    {
+      "seq": 6,
+      "rowId": "6",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "气泡练习",
+      "field": "tts",
+      "fieldLabel": "TTS",
+      "result": "fail",
+      "points": 0
+    },
+    {
+      "seq": 6,
+      "rowId": "6",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "气泡练习",
+      "field": "dino",
+      "fieldLabel": "Dino",
+      "result": "fail",
+      "points": 0
+    },
+    {
+      "seq": 6,
+      "rowId": "6",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "气泡练习",
+      "field": "exit",
+      "fieldLabel": "退出 / 收口",
+      "result": "fail",
+      "points": 0
+    },
+    {
+      "seq": 6,
+      "rowId": "6",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "气泡练习",
+      "field": "coin",
+      "fieldLabel": "金币",
+      "result": "fail",
+      "points": 0
+    },
+    {
+      "seq": 7,
+      "rowId": "7",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "选词练习",
+      "field": "media",
+      "fieldLabel": "课件",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 7,
+      "rowId": "7",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "选词练习",
+      "field": "load",
+      "fieldLabel": "资源加载",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 7,
+      "rowId": "7",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "选词练习",
+      "field": "talk",
+      "fieldLabel": "老师开口",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 7,
+      "rowId": "7",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "选词练习",
+      "field": "lip",
+      "fieldLabel": "口型匹配",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 7,
+      "rowId": "7",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "选词练习",
+      "field": "avsync",
+      "fieldLabel": "音画同步（老师/视频文件音画同步）",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 7,
+      "rowId": "7",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "选词练习",
+      "field": "reply",
+      "fieldLabel": "回应合理",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 7,
+      "rowId": "7",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "选词练习",
+      "field": "asr",
+      "fieldLabel": "学生说话（ASR）",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 7,
+      "rowId": "7",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "选词练习",
+      "field": "repeat",
+      "fieldLabel": "不出现对话重复现象",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 7,
+      "rowId": "7",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "选词练习",
+      "field": "duration",
+      "fieldLabel": "环节耗时",
+      "result": "ok",
+      "points": 1
+    },
+    {
+      "seq": 7,
+      "rowId": "7",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "选词练习",
+      "field": "action",
+      "fieldLabel": "老师动作",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 7,
+      "rowId": "7",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "选词练习",
+      "field": "tts",
+      "fieldLabel": "TTS",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 7,
+      "rowId": "7",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "选词练习",
+      "field": "dino",
+      "fieldLabel": "Dino",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 7,
+      "rowId": "7",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "选词练习",
+      "field": "exit",
+      "fieldLabel": "退出 / 收口",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 7,
+      "rowId": "7",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "选词练习",
+      "field": "coin",
+      "fieldLabel": "金币",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 8,
+      "rowId": "8",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "单词口测",
+      "field": "media",
+      "fieldLabel": "课件",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 8,
+      "rowId": "8",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "单词口测",
+      "field": "load",
+      "fieldLabel": "资源加载",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 8,
+      "rowId": "8",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "单词口测",
+      "field": "talk",
+      "fieldLabel": "老师开口",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 8,
+      "rowId": "8",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "单词口测",
+      "field": "lip",
+      "fieldLabel": "口型匹配",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 8,
+      "rowId": "8",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "单词口测",
+      "field": "avsync",
+      "fieldLabel": "音画同步（老师/视频文件音画同步）",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 8,
+      "rowId": "8",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "单词口测",
+      "field": "reply",
+      "fieldLabel": "回应合理",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 8,
+      "rowId": "8",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "单词口测",
+      "field": "asr",
+      "fieldLabel": "学生说话（ASR）",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 8,
+      "rowId": "8",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "单词口测",
+      "field": "repeat",
+      "fieldLabel": "不出现对话重复现象",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 8,
+      "rowId": "8",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "单词口测",
+      "field": "duration",
+      "fieldLabel": "环节耗时",
+      "result": "ok",
+      "points": 1
+    },
+    {
+      "seq": 8,
+      "rowId": "8",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "单词口测",
+      "field": "action",
+      "fieldLabel": "老师动作",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 8,
+      "rowId": "8",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "单词口测",
+      "field": "tts",
+      "fieldLabel": "TTS",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 8,
+      "rowId": "8",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "单词口测",
+      "field": "dino",
+      "fieldLabel": "Dino",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 8,
+      "rowId": "8",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "单词口测",
+      "field": "exit",
+      "fieldLabel": "退出 / 收口",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 8,
+      "rowId": "8",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "单词口测",
+      "field": "coin",
+      "fieldLabel": "金币",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 9,
+      "rowId": "9",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "奖励箱 1",
+      "field": "media",
+      "fieldLabel": "课件",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 9,
+      "rowId": "9",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "奖励箱 1",
+      "field": "load",
+      "fieldLabel": "资源加载",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 9,
+      "rowId": "9",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "奖励箱 1",
+      "field": "talk",
+      "fieldLabel": "老师开口",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 9,
+      "rowId": "9",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "奖励箱 1",
+      "field": "lip",
+      "fieldLabel": "口型匹配",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 9,
+      "rowId": "9",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "奖励箱 1",
+      "field": "avsync",
+      "fieldLabel": "音画同步（老师/视频文件音画同步）",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 9,
+      "rowId": "9",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "奖励箱 1",
+      "field": "reply",
+      "fieldLabel": "回应合理",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 9,
+      "rowId": "9",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "奖励箱 1",
+      "field": "asr",
+      "fieldLabel": "学生说话（ASR）",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 9,
+      "rowId": "9",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "奖励箱 1",
+      "field": "repeat",
+      "fieldLabel": "不出现对话重复现象",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 9,
+      "rowId": "9",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "奖励箱 1",
+      "field": "duration",
+      "fieldLabel": "环节耗时",
+      "result": "ok",
+      "points": 1
+    },
+    {
+      "seq": 9,
+      "rowId": "9",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "奖励箱 1",
+      "field": "action",
+      "fieldLabel": "老师动作",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 9,
+      "rowId": "9",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "奖励箱 1",
+      "field": "tts",
+      "fieldLabel": "TTS",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 9,
+      "rowId": "9",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "奖励箱 1",
+      "field": "dino",
+      "fieldLabel": "Dino",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 9,
+      "rowId": "9",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "奖励箱 1",
+      "field": "exit",
+      "fieldLabel": "退出 / 收口",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 9,
+      "rowId": "9",
+      "section": "2. 单词教学环节 → 宝箱 1",
+      "template": "奖励箱 1",
+      "field": "coin",
+      "fieldLabel": "金币",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 10,
+      "rowId": "10",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句型教学",
+      "field": "media",
+      "fieldLabel": "课件",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 10,
+      "rowId": "10",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句型教学",
+      "field": "load",
+      "fieldLabel": "资源加载",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 10,
+      "rowId": "10",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句型教学",
+      "field": "talk",
+      "fieldLabel": "老师开口",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 10,
+      "rowId": "10",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句型教学",
+      "field": "lip",
+      "fieldLabel": "口型匹配",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 10,
+      "rowId": "10",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句型教学",
+      "field": "avsync",
+      "fieldLabel": "音画同步（老师/视频文件音画同步）",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 10,
+      "rowId": "10",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句型教学",
+      "field": "reply",
+      "fieldLabel": "回应合理",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 10,
+      "rowId": "10",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句型教学",
+      "field": "asr",
+      "fieldLabel": "学生说话（ASR）",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 10,
+      "rowId": "10",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句型教学",
+      "field": "repeat",
+      "fieldLabel": "不出现对话重复现象",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 10,
+      "rowId": "10",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句型教学",
+      "field": "duration",
+      "fieldLabel": "环节耗时",
+      "result": "ok",
+      "points": 1
+    },
+    {
+      "seq": 10,
+      "rowId": "10",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句型教学",
+      "field": "action",
+      "fieldLabel": "老师动作",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 10,
+      "rowId": "10",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句型教学",
+      "field": "tts",
+      "fieldLabel": "TTS",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 10,
+      "rowId": "10",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句型教学",
+      "field": "dino",
+      "fieldLabel": "Dino",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 10,
+      "rowId": "10",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句型教学",
+      "field": "exit",
+      "fieldLabel": "退出 / 收口",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 10,
+      "rowId": "10",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句型教学",
+      "field": "coin",
+      "fieldLabel": "金币",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 11,
+      "rowId": "11",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句子练习",
+      "field": "media",
+      "fieldLabel": "课件",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 11,
+      "rowId": "11",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句子练习",
+      "field": "load",
+      "fieldLabel": "资源加载",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 11,
+      "rowId": "11",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句子练习",
+      "field": "talk",
+      "fieldLabel": "老师开口",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 11,
+      "rowId": "11",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句子练习",
+      "field": "lip",
+      "fieldLabel": "口型匹配",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 11,
+      "rowId": "11",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句子练习",
+      "field": "avsync",
+      "fieldLabel": "音画同步（老师/视频文件音画同步）",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 11,
+      "rowId": "11",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句子练习",
+      "field": "reply",
+      "fieldLabel": "回应合理",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 11,
+      "rowId": "11",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句子练习",
+      "field": "asr",
+      "fieldLabel": "学生说话（ASR）",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 11,
+      "rowId": "11",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句子练习",
+      "field": "repeat",
+      "fieldLabel": "不出现对话重复现象",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 11,
+      "rowId": "11",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句子练习",
+      "field": "duration",
+      "fieldLabel": "环节耗时",
+      "result": "ok",
+      "points": 1
+    },
+    {
+      "seq": 11,
+      "rowId": "11",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句子练习",
+      "field": "action",
+      "fieldLabel": "老师动作",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 11,
+      "rowId": "11",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句子练习",
+      "field": "tts",
+      "fieldLabel": "TTS",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 11,
+      "rowId": "11",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句子练习",
+      "field": "dino",
+      "fieldLabel": "Dino",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 11,
+      "rowId": "11",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句子练习",
+      "field": "exit",
+      "fieldLabel": "退出 / 收口",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 11,
+      "rowId": "11",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句子练习",
+      "field": "coin",
+      "fieldLabel": "金币",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 12,
+      "rowId": "12",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句子口测",
+      "field": "media",
+      "fieldLabel": "课件",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 12,
+      "rowId": "12",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句子口测",
+      "field": "load",
+      "fieldLabel": "资源加载",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 12,
+      "rowId": "12",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句子口测",
+      "field": "talk",
+      "fieldLabel": "老师开口",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 12,
+      "rowId": "12",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句子口测",
+      "field": "lip",
+      "fieldLabel": "口型匹配",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 12,
+      "rowId": "12",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句子口测",
+      "field": "avsync",
+      "fieldLabel": "音画同步（老师/视频文件音画同步）",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 12,
+      "rowId": "12",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句子口测",
+      "field": "reply",
+      "fieldLabel": "回应合理",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 12,
+      "rowId": "12",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句子口测",
+      "field": "asr",
+      "fieldLabel": "学生说话（ASR）",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 12,
+      "rowId": "12",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句子口测",
+      "field": "repeat",
+      "fieldLabel": "不出现对话重复现象",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 12,
+      "rowId": "12",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句子口测",
+      "field": "duration",
+      "fieldLabel": "环节耗时",
+      "result": "ok",
+      "points": 1
+    },
+    {
+      "seq": 12,
+      "rowId": "12",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句子口测",
+      "field": "action",
+      "fieldLabel": "老师动作",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 12,
+      "rowId": "12",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句子口测",
+      "field": "tts",
+      "fieldLabel": "TTS",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 12,
+      "rowId": "12",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句子口测",
+      "field": "dino",
+      "fieldLabel": "Dino",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 12,
+      "rowId": "12",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句子口测",
+      "field": "exit",
+      "fieldLabel": "退出 / 收口",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 12,
+      "rowId": "12",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "句子口测",
+      "field": "coin",
+      "fieldLabel": "金币",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 13,
+      "rowId": "13",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "奖励箱 2",
+      "field": "media",
+      "fieldLabel": "课件",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 13,
+      "rowId": "13",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "奖励箱 2",
+      "field": "load",
+      "fieldLabel": "资源加载",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 13,
+      "rowId": "13",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "奖励箱 2",
+      "field": "talk",
+      "fieldLabel": "老师开口",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 13,
+      "rowId": "13",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "奖励箱 2",
+      "field": "lip",
+      "fieldLabel": "口型匹配",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 13,
+      "rowId": "13",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "奖励箱 2",
+      "field": "avsync",
+      "fieldLabel": "音画同步（老师/视频文件音画同步）",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 13,
+      "rowId": "13",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "奖励箱 2",
+      "field": "reply",
+      "fieldLabel": "回应合理",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 13,
+      "rowId": "13",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "奖励箱 2",
+      "field": "asr",
+      "fieldLabel": "学生说话（ASR）",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 13,
+      "rowId": "13",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "奖励箱 2",
+      "field": "repeat",
+      "fieldLabel": "不出现对话重复现象",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 13,
+      "rowId": "13",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "奖励箱 2",
+      "field": "duration",
+      "fieldLabel": "环节耗时",
+      "result": "ok",
+      "points": 1
+    },
+    {
+      "seq": 13,
+      "rowId": "13",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "奖励箱 2",
+      "field": "action",
+      "fieldLabel": "老师动作",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 13,
+      "rowId": "13",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "奖励箱 2",
+      "field": "tts",
+      "fieldLabel": "TTS",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 13,
+      "rowId": "13",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "奖励箱 2",
+      "field": "dino",
+      "fieldLabel": "Dino",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 13,
+      "rowId": "13",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "奖励箱 2",
+      "field": "exit",
+      "fieldLabel": "退出 / 收口",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 13,
+      "rowId": "13",
+      "section": "3. 句子段 → 宝箱 2",
+      "template": "奖励箱 2",
+      "field": "coin",
+      "fieldLabel": "金币",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 14,
+      "rowId": "14",
+      "section": "4. 收尾 → 完课",
+      "template": "总结视频",
+      "field": "media",
+      "fieldLabel": "课件",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 14,
+      "rowId": "14",
+      "section": "4. 收尾 → 完课",
+      "template": "总结视频",
+      "field": "load",
+      "fieldLabel": "资源加载",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 14,
+      "rowId": "14",
+      "section": "4. 收尾 → 完课",
+      "template": "总结视频",
+      "field": "talk",
+      "fieldLabel": "老师开口",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 14,
+      "rowId": "14",
+      "section": "4. 收尾 → 完课",
+      "template": "总结视频",
+      "field": "lip",
+      "fieldLabel": "口型匹配",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 14,
+      "rowId": "14",
+      "section": "4. 收尾 → 完课",
+      "template": "总结视频",
+      "field": "avsync",
+      "fieldLabel": "音画同步（老师/视频文件音画同步）",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 14,
+      "rowId": "14",
+      "section": "4. 收尾 → 完课",
+      "template": "总结视频",
+      "field": "reply",
+      "fieldLabel": "回应合理",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 14,
+      "rowId": "14",
+      "section": "4. 收尾 → 完课",
+      "template": "总结视频",
+      "field": "asr",
+      "fieldLabel": "学生说话（ASR）",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 14,
+      "rowId": "14",
+      "section": "4. 收尾 → 完课",
+      "template": "总结视频",
+      "field": "repeat",
+      "fieldLabel": "不出现对话重复现象",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 14,
+      "rowId": "14",
+      "section": "4. 收尾 → 完课",
+      "template": "总结视频",
+      "field": "duration",
+      "fieldLabel": "环节耗时",
+      "result": "ok",
+      "points": 1
+    },
+    {
+      "seq": 14,
+      "rowId": "14",
+      "section": "4. 收尾 → 完课",
+      "template": "总结视频",
+      "field": "action",
+      "fieldLabel": "老师动作",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 14,
+      "rowId": "14",
+      "section": "4. 收尾 → 完课",
+      "template": "总结视频",
+      "field": "tts",
+      "fieldLabel": "TTS",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 14,
+      "rowId": "14",
+      "section": "4. 收尾 → 完课",
+      "template": "总结视频",
+      "field": "dino",
+      "fieldLabel": "Dino",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 14,
+      "rowId": "14",
+      "section": "4. 收尾 → 完课",
+      "template": "总结视频",
+      "field": "exit",
+      "fieldLabel": "退出 / 收口",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 14,
+      "rowId": "14",
+      "section": "4. 收尾 → 完课",
+      "template": "总结视频",
+      "field": "coin",
+      "fieldLabel": "金币",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 15,
+      "rowId": "15",
+      "section": "4. 收尾 → 完课",
+      "template": "拍照",
+      "field": "media",
+      "fieldLabel": "课件",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 15,
+      "rowId": "15",
+      "section": "4. 收尾 → 完课",
+      "template": "拍照",
+      "field": "load",
+      "fieldLabel": "资源加载",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 15,
+      "rowId": "15",
+      "section": "4. 收尾 → 完课",
+      "template": "拍照",
+      "field": "talk",
+      "fieldLabel": "老师开口",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 15,
+      "rowId": "15",
+      "section": "4. 收尾 → 完课",
+      "template": "拍照",
+      "field": "lip",
+      "fieldLabel": "口型匹配",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 15,
+      "rowId": "15",
+      "section": "4. 收尾 → 完课",
+      "template": "拍照",
+      "field": "avsync",
+      "fieldLabel": "音画同步（老师/视频文件音画同步）",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 15,
+      "rowId": "15",
+      "section": "4. 收尾 → 完课",
+      "template": "拍照",
+      "field": "reply",
+      "fieldLabel": "回应合理",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 15,
+      "rowId": "15",
+      "section": "4. 收尾 → 完课",
+      "template": "拍照",
+      "field": "asr",
+      "fieldLabel": "学生说话（ASR）",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 15,
+      "rowId": "15",
+      "section": "4. 收尾 → 完课",
+      "template": "拍照",
+      "field": "repeat",
+      "fieldLabel": "不出现对话重复现象",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 15,
+      "rowId": "15",
+      "section": "4. 收尾 → 完课",
+      "template": "拍照",
+      "field": "duration",
+      "fieldLabel": "环节耗时",
+      "result": "ok",
+      "points": 1
+    },
+    {
+      "seq": 15,
+      "rowId": "15",
+      "section": "4. 收尾 → 完课",
+      "template": "拍照",
+      "field": "action",
+      "fieldLabel": "老师动作",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 15,
+      "rowId": "15",
+      "section": "4. 收尾 → 完课",
+      "template": "拍照",
+      "field": "tts",
+      "fieldLabel": "TTS",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 15,
+      "rowId": "15",
+      "section": "4. 收尾 → 完课",
+      "template": "拍照",
+      "field": "dino",
+      "fieldLabel": "Dino",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 15,
+      "rowId": "15",
+      "section": "4. 收尾 → 完课",
+      "template": "拍照",
+      "field": "exit",
+      "fieldLabel": "退出 / 收口",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 15,
+      "rowId": "15",
+      "section": "4. 收尾 → 完课",
+      "template": "拍照",
+      "field": "coin",
+      "fieldLabel": "金币",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 16,
+      "rowId": "16",
+      "section": "4. 收尾 → 完课",
+      "template": "奖励箱 3",
+      "field": "media",
+      "fieldLabel": "课件",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 16,
+      "rowId": "16",
+      "section": "4. 收尾 → 完课",
+      "template": "奖励箱 3",
+      "field": "load",
+      "fieldLabel": "资源加载",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 16,
+      "rowId": "16",
+      "section": "4. 收尾 → 完课",
+      "template": "奖励箱 3",
+      "field": "talk",
+      "fieldLabel": "老师开口",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 16,
+      "rowId": "16",
+      "section": "4. 收尾 → 完课",
+      "template": "奖励箱 3",
+      "field": "lip",
+      "fieldLabel": "口型匹配",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 16,
+      "rowId": "16",
+      "section": "4. 收尾 → 完课",
+      "template": "奖励箱 3",
+      "field": "avsync",
+      "fieldLabel": "音画同步（老师/视频文件音画同步）",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 16,
+      "rowId": "16",
+      "section": "4. 收尾 → 完课",
+      "template": "奖励箱 3",
+      "field": "reply",
+      "fieldLabel": "回应合理",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 16,
+      "rowId": "16",
+      "section": "4. 收尾 → 完课",
+      "template": "奖励箱 3",
+      "field": "asr",
+      "fieldLabel": "学生说话（ASR）",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 16,
+      "rowId": "16",
+      "section": "4. 收尾 → 完课",
+      "template": "奖励箱 3",
+      "field": "repeat",
+      "fieldLabel": "不出现对话重复现象",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 16,
+      "rowId": "16",
+      "section": "4. 收尾 → 完课",
+      "template": "奖励箱 3",
+      "field": "duration",
+      "fieldLabel": "环节耗时",
+      "result": "ok",
+      "points": 1
+    },
+    {
+      "seq": 16,
+      "rowId": "16",
+      "section": "4. 收尾 → 完课",
+      "template": "奖励箱 3",
+      "field": "action",
+      "fieldLabel": "老师动作",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 16,
+      "rowId": "16",
+      "section": "4. 收尾 → 完课",
+      "template": "奖励箱 3",
+      "field": "tts",
+      "fieldLabel": "TTS",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 16,
+      "rowId": "16",
+      "section": "4. 收尾 → 完课",
+      "template": "奖励箱 3",
+      "field": "dino",
+      "fieldLabel": "Dino",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 16,
+      "rowId": "16",
+      "section": "4. 收尾 → 完课",
+      "template": "奖励箱 3",
+      "field": "exit",
+      "fieldLabel": "退出 / 收口",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 16,
+      "rowId": "16",
+      "section": "4. 收尾 → 完课",
+      "template": "奖励箱 3",
+      "field": "coin",
+      "fieldLabel": "金币",
+      "result": "pass",
+      "points": 1
+    },
+    {
+      "seq": 17,
+      "rowId": "17",
+      "section": "4. 收尾 → 完课",
+      "template": "完课",
+      "field": "media",
+      "fieldLabel": "课件",
+      "result": "fail",
+      "points": 0
+    },
+    {
+      "seq": 17,
+      "rowId": "17",
+      "section": "4. 收尾 → 完课",
+      "template": "完课",
+      "field": "load",
+      "fieldLabel": "资源加载",
+      "result": "fail",
+      "points": 0
+    },
+    {
+      "seq": 17,
+      "rowId": "17",
+      "section": "4. 收尾 → 完课",
+      "template": "完课",
+      "field": "talk",
+      "fieldLabel": "老师开口",
+      "result": "fail",
+      "points": 0
+    },
+    {
+      "seq": 17,
+      "rowId": "17",
+      "section": "4. 收尾 → 完课",
+      "template": "完课",
+      "field": "lip",
+      "fieldLabel": "口型匹配",
+      "result": "fail",
+      "points": 0
+    },
+    {
+      "seq": 17,
+      "rowId": "17",
+      "section": "4. 收尾 → 完课",
+      "template": "完课",
+      "field": "avsync",
+      "fieldLabel": "音画同步（老师/视频文件音画同步）",
+      "result": "fail",
+      "points": 0
+    },
+    {
+      "seq": 17,
+      "rowId": "17",
+      "section": "4. 收尾 → 完课",
+      "template": "完课",
+      "field": "reply",
+      "fieldLabel": "回应合理",
+      "result": "fail",
+      "points": 0
+    },
+    {
+      "seq": 17,
+      "rowId": "17",
+      "section": "4. 收尾 → 完课",
+      "template": "完课",
+      "field": "asr",
+      "fieldLabel": "学生说话（ASR）",
+      "result": "fail",
+      "points": 0
+    },
+    {
+      "seq": 17,
+      "rowId": "17",
+      "section": "4. 收尾 → 完课",
+      "template": "完课",
+      "field": "repeat",
+      "fieldLabel": "不出现对话重复现象",
+      "result": "fail",
+      "points": 0
+    },
+    {
+      "seq": 17,
+      "rowId": "17",
+      "section": "4. 收尾 → 完课",
+      "template": "完课",
+      "field": "duration",
+      "fieldLabel": "环节耗时",
+      "result": "ok",
+      "points": 1
+    },
+    {
+      "seq": 17,
+      "rowId": "17",
+      "section": "4. 收尾 → 完课",
+      "template": "完课",
+      "field": "action",
+      "fieldLabel": "老师动作",
+      "result": "fail",
+      "points": 0
+    },
+    {
+      "seq": 17,
+      "rowId": "17",
+      "section": "4. 收尾 → 完课",
+      "template": "完课",
+      "field": "tts",
+      "fieldLabel": "TTS",
+      "result": "fail",
+      "points": 0
+    },
+    {
+      "seq": 17,
+      "rowId": "17",
+      "section": "4. 收尾 → 完课",
+      "template": "完课",
+      "field": "dino",
+      "fieldLabel": "Dino",
+      "result": "fail",
+      "points": 0
+    },
+    {
+      "seq": 17,
+      "rowId": "17",
+      "section": "4. 收尾 → 完课",
+      "template": "完课",
+      "field": "exit",
+      "fieldLabel": "退出 / 收口",
+      "result": "fail",
+      "points": 0
+    },
+    {
+      "seq": 17,
+      "rowId": "17",
+      "section": "4. 收尾 → 完课",
+      "template": "完课",
+      "field": "coin",
+      "fieldLabel": "金币",
+      "result": "pass",
+      "points": 1
+    }
+  ]
+}
