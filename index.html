@@ -503,6 +503,7 @@
   "6. 收尾 → 完课": "6. Wrap-up → Complete",
   "导入 · pre-video": "Lead-in · pre-video",
   "进入后立刻一句：Hi hi {name}! I'm {teacher}! 只问 1 次。任意语音（Hi / Okay / 本地语）都算过。": "Right after enter, one line: Hi hi {name}! I'm {teacher}! Ask once. Any speech (Hi / Okay / local language) counts.",
+  "1、打招呼，Hi hi {name}! I'm {teacher}! 询问不超过2次。任意语音（Hi / Okay / 本地语）或学生不回答都往下。\n2、介绍本节课内容。": "1. Greet: Hi hi {name}! I'm {teacher}! Ask at most twice. Any speech (Hi / Okay / local language) or no answer — move on.\n2. Introduce this lesson.",
   "问候 + [TEACHER_LISTEN]；有语音或 3–4 秒无语音都打 [NEXT_STEP]。禁止再问 Are you happy。": "Greeting + [TEACHER_LISTEN]; speech or 3–4s of silence both fire [NEXT_STEP]. Do not ask Are you happy again.",
   "问候句完整播完，嘴动有声，音色=本课老师。": "Play the full greeting. Mouth moves with audio. Voice = this lesson’s teacher.",
   "默认不介入。若点帮助：示范 1 次 Hi 后立刻 BACK_TO_TEACHER，并带已解决。禁止循环纠正 Hi Max / Hi Matt。Dino 不能拦住翻页。": "Stay out by default. If Help is tapped: model Hi once, then BACK_TO_TEACHER with resolved. Do not loop-correct Hi Max / Hi Matt. Dino must not block the page turn.",
@@ -1328,7 +1329,10 @@
       { id: "s6", title: "6. 收尾 → 完课", rows: ["17", "18", "19", "20"] },
     ];
     const L3_V2_ROWS = {
-      "1a": Object.assign({}, L1_ROWS["1a"], { tid: "lead-in-template" }),
+      "1a": Object.assign({}, L1_ROWS["1a"], {
+        tid: "lead-in-template",
+        talk: "1、打招呼，Hi hi {name}! I'm {teacher}! 询问不超过2次。任意语音（Hi / Okay / 本地语）或学生不回答都往下。\n2、介绍本节课内容。",
+      }),
       "1b": Object.assign({}, L1_ROWS["1b"], { tid: "lead-in-template" }),
       "1c": Object.assign({}, L1_ROWS["1c"], {
         tid: "lead-in-template",
